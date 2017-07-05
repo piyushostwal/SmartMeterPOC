@@ -1,0 +1,65 @@
+﻿@model CustomerMetersModel
+@using Nop.Web.Models.Customer;
+@using Nop.Core;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts("My Account-My Meters");
+    //page class
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-customer-info-page");
+}
+@section left
+{
+    @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.Info })
+}
+@*<script>
+      $(".page-body").append("<ul></ul>");
+      for (var i in model) {
+          var li = "<li>";
+          $("ul").append(li.concat(arr[i]))
+      }
+    </script>*@
+<div class="page account-page customer-info-page">
+    <div class="page-title">
+        <h1>My Account - My Meters</h1>
+    </div>
+    <div class="page-body">
+        @*<ul>
+                <li>
+                <li>
+            </ul>*@
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            var validationSummary = Html.ValidationSummary(true);
+            if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+            {
+                <div class="message-error">@validationSummary</div>
+            }
+            <div class="fieldset">
+                <div class="title">
+                    <strong>Customer Meters</strong>
+                </div>
+                <table class="table-striped" border="1">
+                    <tr>
+                        <th>Meter ID</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="CustomerMeterDetails">@Model.meterId</a>
+                        </td>
+                        <td>
+                            Active
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+</div>
