@@ -1,0 +1,16 @@
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Description.txt
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\web.config
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Views\Configure.cshtml
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Views\_CreateOrUpdateRateByWeight.cshtml
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Views\AddRateByWeightPopup.cshtml
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Views\EditRateByWeightPopup.cshtml
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Views\_ByWeight.cshtml
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Views\_FixedRate.cshtml
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\logo.jpg
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Nop.Plugin.Shipping.FixedOrByWeight.dll.config
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Nop.Plugin.Shipping.FixedOrByWeight.dll
+D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.FixedOrByWeight\Nop.Plugin.Shipping.FixedOrByWeight.pdb
+D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.FixedOrByWeight\obj\Debug\Nop.Plugin.Shipping.FixedOrByWeight.csproj.App.config
+D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.FixedOrByWeight\obj\Debug\Nop.Plugin.Shipping.FixedOrByWeight.csprojResolveAssemblyReference.cache
+D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.FixedOrByWeight\obj\Debug\Nop.Plugin.Shipping.FixedOrByWeight.dll
+D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.FixedOrByWeight\obj\Debug\Nop.Plugin.Shipping.FixedOrByWeight.pdb
