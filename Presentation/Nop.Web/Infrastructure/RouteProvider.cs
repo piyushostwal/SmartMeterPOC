@@ -722,7 +722,7 @@ namespace Nop.Web.Infrastructure
 
             //Smartmeterlogs route
             routes.MapRoute("SmartMeters",
-                    "api",
+                    "api/smartmeters",
                     new { controller = "SmartMeterLog", action = "Get" },
                     new[] { "Nop.Web.Controllers" });
 

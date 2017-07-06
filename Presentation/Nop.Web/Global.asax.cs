@@ -98,6 +98,7 @@ namespace Nop.Web
 
             //Registering some regular mvc stuff
             AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(RegisterHTTPRoutes);
             RegisterRoutes(RouteTable.Routes);
             
             //fluent validation
