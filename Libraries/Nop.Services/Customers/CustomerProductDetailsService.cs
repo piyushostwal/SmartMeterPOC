@@ -60,9 +60,10 @@ namespace Nop.Services.Customers
             this._catalogSettings = catalogSettings;
         }
         #endregion
+
         #region methods
 
-        public virtual IPagedList<CustomerProductDetails> GetGetCustomerProductDetails(int customerId, int pageIndex = 0, int pageSize = int.MaxValue)
+        public virtual IPagedList<CustomerProductDetails> GetCustomerProductDetails(int customerId, int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _customerProductDetailsRepository.Table;
             query = query.Where(m => m.CustomerId == customerId);
