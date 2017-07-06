@@ -17,7 +17,7 @@ namespace Nop.Data.Mapping.Customers
             this.Property(c => c.BillPeriodFrom);
             this.Property(c => c.BillPeriodTo);
             this.Property(c => c.ConsumptionUnitReading);
-            this.Property(c => c.PreviousConsumptionUnitReading);
+            this.Property(c => c.PreviousConsumbptionUnitReading);
             this.Property(c => c.BillAmount);
             this.Property(c => c.BillDueDate);
             this.Property(c => c.BillPaymentDate);
