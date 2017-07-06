@@ -1,5 +1,9 @@
+**/**/obj
+**/**/bin
+**/**/Migrations
 *.suo
 *.user
+*.cache
 bin
 obj
 /Presentation/Nop.Web/Plugins/
