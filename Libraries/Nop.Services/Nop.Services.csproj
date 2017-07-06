@@ -210,7 +210,9 @@
     <Compile Include="Catalog\ProductAttributeParser.cs" />
     <Compile Include="Customers\Cache\CustomerCacheEventConsumer.cs" />
     <Compile Include="Customers\CustomerAttributeFormatter.cs" />
+    <Compile Include="Customers\CustomerBillUnitRateService.cs" />
     <Compile Include="Customers\ICustomerAttributeFormatter.cs" />
+    <Compile Include="Customers\ICustomerBillUnitRateService.cs" />
     <Compile Include="Discounts\DiscountForCaching.cs" />
     <Compile Include="ExportImport\Extensions.cs" />
     <Compile Include="Extensions.cs" />

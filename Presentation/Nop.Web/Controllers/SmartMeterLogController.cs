@@ -1,6 +1,7 @@
 ﻿using Nop.Core;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.SmartMeterLogs;
+using Nop.Services.Customers;
 using Nop.Services.Events;
 using Nop.Services.Localization;
 using Nop.Services.Messages;
@@ -22,6 +23,7 @@ namespace Nop.Web.Controllers
     {
         #region properties
         private readonly ISmartMeterLogService _smartMeterLogService;
+        private readonly ICustomerBillUnitRateService _customerBillUnitRateService;
         private readonly IWorkContext _workContext;
         private readonly IStoreContext _storeContext;
         private readonly ILocalizationService _localizationService;
@@ -47,7 +49,8 @@ namespace Nop.Web.Controllers
                 ISmartMeterLogModelFactory smartMeterLogModelFactory,
                 IEventPublisher eventPublisher,
                 LocalizationSettings localizationSettings,
-                CaptchaSettings captchaSettings)
+                CaptchaSettings captchaSettings,
+            ICustomerBillUnitRateService customerBillUnitRateService)
         {
             _smartMeterLogService = smartMeterLogService;
             _workContext = workContext;
@@ -60,6 +63,7 @@ namespace Nop.Web.Controllers
             _eventPublisher = eventPublisher;
             _localizationSettings = localizationSettings;
             _captchaSettings = captchaSettings;
+            _customerBillUnitRateService = customerBillUnitRateService;
         }
 
         #endregion
@@ -90,6 +94,14 @@ namespace Nop.Web.Controllers
             smartMeterLog.IsActive = smartMeterLogModel.IsActive;
             smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
             var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
+
+            var settingsData = _customerBillUnitRateService.GetBillingRateInformation();
+            if (settingsData != null)
+            {
+                data.TimeInterval = settingsData.TimeInterval;
+                data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
+            }
+
             return Ok(data);
         }
 

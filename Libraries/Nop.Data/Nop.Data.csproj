@@ -67,6 +67,7 @@
     <Compile Include="Mapping\Common\AddressAttributeMap.cs" />
     <Compile Include="Mapping\Common\AddressAttributeValueMap.cs" />
     <Compile Include="Mapping\Customers\CustomerBillingMap.cs" />
+    <Compile Include="Mapping\Customers\CustomerBillUnitRateMap.cs" />
     <Compile Include="Mapping\Customers\CustomerPasswordMap.cs" />
     <Compile Include="Mapping\Customers\CustomerProductDetailsMap.cs" />
     <Compile Include="Mapping\Forums\ForumPostVoteMap.cs" />
