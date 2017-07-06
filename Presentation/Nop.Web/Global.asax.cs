@@ -20,6 +20,10 @@ using Nop.Web.Framework.Mvc.Routes;
 using Nop.Web.Framework.Themes;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Mvc;
+using System.Web.Http;
+using System.Reflection;
+using Autofac;
+using Autofac.Integration.WebApi;
 
 namespace Nop.Web
 {
@@ -40,6 +44,33 @@ namespace Nop.Web
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "Nop.Web.Controllers" }
             );
+        }
+
+        public static void RegisterHTTPRoutes(HttpConfiguration config)
+        {
+            // TODO: Add any additional configuration code.
+
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            var builder = new ContainerBuilder();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            //Update existing, don't create a new container
+            builder.Update(EngineContext.Current.ContainerManager.Container);
+            //Feed the current container to the AutofacWebApiDependencyResolver
+            var resolver = new AutofacWebApiDependencyResolver(EngineContext.Current.ContainerManager.Container);
+            config.DependencyResolver = resolver;
+            // WebAPI when dealing with JSON & JavaScript!
+            // Setup json serialization to serialize classes to camel (std. Json format)
+            var formatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            formatter.SerializerSettings.ContractResolver =
+                new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
         }
 
         protected void Application_Start()

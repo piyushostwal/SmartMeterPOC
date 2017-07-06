@@ -112,6 +112,10 @@ namespace Nop.Web.Infrastructure
             builder.RegisterType<WidgetModelFactory>().As<IWidgetModelFactory>()
                 .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"))
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<SmartMeterLogModelFactory>().As<ISmartMeterLogModelFactory>()
+                .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"))
+                .InstancePerLifetimeScope();
         }
 
         /// <summary>
