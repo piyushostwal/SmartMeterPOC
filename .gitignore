@@ -1,3 +1,6 @@
+**/**/obj
+**/**/bin
+**/**/Migrations
 *.suo
 *.user
 *.cache
