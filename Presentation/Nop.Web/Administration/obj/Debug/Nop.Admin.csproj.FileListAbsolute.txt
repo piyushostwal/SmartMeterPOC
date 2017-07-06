@@ -5,3 +5,10 @@ D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Administration\obj\De
 D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.csprojResolveAssemblyReference.cache
 D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.dll
 D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\bin\Nop.Admin.dll.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\bin\Nop.Admin.dll
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\bin\Nop.Admin.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.csproj.App.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.csprojResolveAssemblyReference.cache
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.dll
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.pdb

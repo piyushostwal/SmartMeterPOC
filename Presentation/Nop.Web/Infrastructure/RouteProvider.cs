@@ -410,6 +410,18 @@ namespace Nop.Web.Infrastructure
                             "customer/addressadd",
                             new { controller = "Customer", action = "AddressAdd" },
                             new[] { "Nop.Web.Controllers" });
+            routes.MapLocalizedRoute("CustomerMeters",
+                            "customer/CustomerMeters",
+                            new { controller = "Customer", action = "CustomerMeters" },
+                            new[] { "Nop.Web.Controllers" });
+            routes.MapLocalizedRoute("CustomerMeterDetails",
+                           "customer/CustomerMeterDetails",
+                           new { controller = "Customer", action = "CustomerMeterDetails" },
+                           new[] { "Nop.Web.Controllers" });
+            routes.MapLocalizedRoute("Dashboard",
+                         "customer/Dashboard",
+                         new { controller = "Customer", action = "Dashboard" },
+                         new[] { "Nop.Web.Controllers" });
             //customer profile page
             routes.MapLocalizedRoute("CustomerProfile",
                             "profile/{id}",

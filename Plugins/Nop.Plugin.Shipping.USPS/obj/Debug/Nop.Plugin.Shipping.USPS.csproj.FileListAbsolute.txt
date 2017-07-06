@@ -8,3 +8,13 @@ D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Shipping.USPS
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.csproj.App.config
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.dll
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Views\Configure.cshtml
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\web.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Description.txt
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\logo.jpg
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Nop.Plugin.Shipping.USPS.dll.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Nop.Plugin.Shipping.USPS.dll
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Nop.Plugin.Shipping.USPS.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.csproj.App.config
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.dll
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.pdb

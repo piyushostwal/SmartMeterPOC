@@ -9,3 +9,13 @@ D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.Fedex\obj\Debu
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.Fedex\obj\Debug\Nop.Plugin.Shipping.Fedex.dll
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.Fedex\obj\Debug\Nop.Plugin.Shipping.Fedex.pdb
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.Fedex\obj\Debug\Nop.Plugin.Shipping.Fedex.csprojResolveAssemblyReference.cache
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.Fedex\Views\Configure.cshtml
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.Fedex\web.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.Fedex\Description.txt
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.Fedex\logo.jpg
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.Fedex\Nop.Plugin.Shipping.Fedex.dll.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.Fedex\Nop.Plugin.Shipping.Fedex.dll
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.Fedex\Nop.Plugin.Shipping.Fedex.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.Fedex\obj\Debug\Nop.Plugin.Shipping.Fedex.csproj.App.config
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.Fedex\obj\Debug\Nop.Plugin.Shipping.Fedex.dll
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.Fedex\obj\Debug\Nop.Plugin.Shipping.Fedex.pdb

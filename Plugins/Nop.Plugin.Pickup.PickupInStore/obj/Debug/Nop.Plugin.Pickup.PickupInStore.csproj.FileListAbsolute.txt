@@ -11,3 +11,16 @@ D:\Repository\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Pickup.Pickup
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Pickup.PickupInStore\obj\Debug\Nop.Plugin.Pickup.PickupInStore.csprojResolveAssemblyReference.cache
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Pickup.PickupInStore\obj\Debug\Nop.Plugin.Pickup.PickupInStore.dll
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Pickup.PickupInStore\obj\Debug\Nop.Plugin.Pickup.PickupInStore.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Description.txt
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Views\Configure.cshtml
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Views\Create.cshtml
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Views\Edit.cshtml
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Views\_CreateOrUpdate.cshtml
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\web.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\logo.png
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Nop.Plugin.Pickup.PickupInStore.dll.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Nop.Plugin.Pickup.PickupInStore.dll
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Pickup.PickupInStore\Nop.Plugin.Pickup.PickupInStore.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Pickup.PickupInStore\obj\Debug\Nop.Plugin.Pickup.PickupInStore.csprojResolveAssemblyReference.cache
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Pickup.PickupInStore\obj\Debug\Nop.Plugin.Pickup.PickupInStore.dll
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Pickup.PickupInStore\obj\Debug\Nop.Plugin.Pickup.PickupInStore.pdb

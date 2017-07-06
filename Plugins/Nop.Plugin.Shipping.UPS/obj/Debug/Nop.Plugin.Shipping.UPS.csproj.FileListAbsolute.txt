@@ -9,3 +9,13 @@ D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.UPS\obj\Debug\
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.UPS\obj\Debug\Nop.Plugin.Shipping.UPS.dll
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.UPS\obj\Debug\Nop.Plugin.Shipping.UPS.pdb
 D:\Repository\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Shipping.UPS\obj\Debug\Nop.Plugin.Shipping.UPS.csprojResolveAssemblyReference.cache
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.UPS\Views\Configure.cshtml
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.UPS\web.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.UPS\Description.txt
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.UPS\logo.jpg
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.UPS\Nop.Plugin.Shipping.UPS.dll.config
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.UPS\Nop.Plugin.Shipping.UPS.dll
+D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.UPS\Nop.Plugin.Shipping.UPS.pdb
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.UPS\obj\Debug\Nop.Plugin.Shipping.UPS.csproj.App.config
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.UPS\obj\Debug\Nop.Plugin.Shipping.UPS.dll
+D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.UPS\obj\Debug\Nop.Plugin.Shipping.UPS.pdb
