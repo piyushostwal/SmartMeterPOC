@@ -7,7 +7,7 @@ using Nop.Core.Domain.SmartMeterLogs;
 
 namespace Nop.Data.Mapping.SmartMeterLogs
 {
-    public class SmartMeterLogMap: NopEntityTypeConfiguration<SmartMeterLog>
+    public class SmartMeterLogMap : NopEntityTypeConfiguration<SmartMeterLog>
     {
         public SmartMeterLogMap()
         {
@@ -22,4 +22,5 @@ namespace Nop.Data.Mapping.SmartMeterLogs
             this.Property(u => u.IsActive).IsRequired();
             this.Property(u => u.LoggingTime).IsRequired();
         }
+    }
 }

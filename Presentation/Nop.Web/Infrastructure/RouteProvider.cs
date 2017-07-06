@@ -49,8 +49,8 @@ namespace Nop.Web.Infrastructure
             //estimate shipping
             routes.MapLocalizedRoute("EstimateShipping",
                             "cart/estimateshipping",
-                            new {controller = "ShoppingCart", action = "GetEstimateShipping"},
-                            new[] {"Nop.Web.Controllers"});
+                            new { controller = "ShoppingCart", action = "GetEstimateShipping" },
+                            new[] { "Nop.Web.Controllers" });
             //wishlist
             routes.MapLocalizedRoute("Wishlist",
                             "wishlist/{customerGuid}",
@@ -324,7 +324,7 @@ namespace Nop.Web.Infrastructure
             //password recovery confirmation
             routes.MapLocalizedRoute("PasswordRecoveryConfirm",
                             "passwordrecovery/confirm",
-                            new { controller = "Customer", action = "PasswordRecoveryConfirm" },                            
+                            new { controller = "Customer", action = "PasswordRecoveryConfirm" },
                             new[] { "Nop.Web.Controllers" });
 
             //topics
@@ -332,7 +332,7 @@ namespace Nop.Web.Infrastructure
                             "t-popup/{SystemName}",
                             new { controller = "Topic", action = "TopicDetailsPopup" },
                             new[] { "Nop.Web.Controllers" });
-            
+
             //blog
             routes.MapLocalizedRoute("BlogByTag",
                             "blog/tag/{tag}",
@@ -522,7 +522,7 @@ namespace Nop.Web.Infrastructure
                             "newproducts/rss",
                             new { controller = "Product", action = "NewProductsRss" },
                             new[] { "Nop.Web.Controllers" });
-            
+
             //get state list by country ID  (AJAX link)
             routes.MapRoute("GetStatesByCountryId",
                             "country/getstatesbycountryid/",
@@ -732,7 +732,13 @@ namespace Nop.Web.Infrastructure
                             "install",
                             new { controller = "Install", action = "Index" },
                             new[] { "Nop.Web.Controllers" });
-            
+
+            //Smartmeterlogs route
+            routes.MapRoute("SmartMeters",
+                    "api/smartmeters",
+                    new { controller = "SmartMeterLog", action = "Get" },
+                    new[] { "Nop.Web.Controllers" });
+
             //page not found
             routes.MapLocalizedRoute("PageNotFound",
                             "page-not-found",
