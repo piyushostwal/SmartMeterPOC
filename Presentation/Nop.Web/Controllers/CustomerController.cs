@@ -1503,5 +1503,42 @@ namespace Nop.Web.Controllers
         }
 
         #endregion
+        #region My Account- My Meters
+        [HttpGet]
+        public ActionResult CustomerMeters()
+        {
+            //List<CustomerMetersModel> model = new List<CustomerMetersModel>();
+            //model.Add(new CustomerMetersModel(123458796, "Aslam Shrimali", "NSG I.T Park,Aundh,Pune"));           
+            CustomerMetersModel model = new CustomerMetersModel();
+            model.meterId = 123456789;
+            model.customerName = "Aslam Shrimali";
+            model.location = "NSG I.T Park,Aundh,Pune";
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult CustomerMeterDetails()
+        {
+            CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
+            model.meterId = 123456789;
+            model.customerName = "Aslam Shrimali";
+            model.location = "NSG I.T Park,Aundh,Pune";
+            model.lastMarkedUnit = 26;
+            model.lastMarkedDate = "15/04/2017";
+            model.lastPaidAmount = 1800;
+            model.lastPaymentDate = "15/05/2017";
+            model.dueAmount = 350;
+            model.dueDateBill = "15/06/2017";
+            model.billingUnit = "0046-Aundh";
+            return View(model);
+        }
+
+        #endregion
+        #region My Account- Dashboard
+        [HttpGet]
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        #endregion
     }
 }
