@@ -1,0 +1,120 @@
+﻿@model CustomerMeterDetailsModel
+@using Nop.Web.Models.Customer;
+@using Nop.Core;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts("My Account-My Meters");
+    //page class
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-customer-info-page");
+}
+@section left
+{
+    @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.Info })
+}
+<div class="page account-page customer-info-page">
+    <div class="page-title">
+        <h1>My Account - My Meters</h1>
+    </div>
+    <div class="page-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            var validationSummary = Html.ValidationSummary(true);
+            if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+            {
+                <div class="message-error">@validationSummary</div>
+            }
+            <div class="fieldset">
+                <div class="title">
+                    <strong>Meter Details</strong>
+                </div>
+                <div class="form-fields">
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter ID", new { }, ":")*@
+                        <label style="text-align: left;">Meter ID:</label>
+                        <label style="text-align: left;">@Model.meterId</label>
+                        @*@Html.EditorFor(model => model.meterId, new { @readonly = "readonly"})*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Customer Name", new { }, ":")*@
+                        <label style="text-align: left;">Customer Name:</label>
+                        <label style="text-align: left;">@Model.customerName</label>
+                        @*@Html.EditorFor(model => model.customerName, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Meter Location:</label>
+                        <label style="text-align: left;">@Model.location</label>
+                        @*@Html.EditorFor(model => model.location, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Last Marked Date:</label>
+                        <label style="text-align: left;">@Model.lastMarkedDate</label>
+                        @*@Html.EditorFor(model => model.lastMarkedDate, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Last Marked Unit:</label>
+                        <label style="text-align: left;">@Model.lastMarkedUnit</label>
+                        @*@Html.EditorFor(model => model.lastMarkedUnit, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Last Payment Date:</label>
+                        <label style="text-align: left;">@Model.lastPaymentDate</label>
+                        @*@Html.EditorFor(model => model.lastPaymentDate, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Last Paid Amount:</label>
+                        <label style="text-align: left;">@Model.lastPaidAmount</label>
+                        @*@Html.EditorFor(model => model.lastPaidAmount, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Due Date Bill:</label>
+                        <label style="text-align: left;">@Model.dueDateBill</label>
+                        @*@Html.EditorFor(model => model.lastPaidAmount, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Due Amount:</label>
+                        <label style="text-align: left;">@Model.dueAmount</label>
+                        @*@Html.EditorFor(model => model.lastPaidAmount, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                    <div class="inputs">
+                        @*@Html.LabelFor("Meter Location", new { }, ":")*@
+                        <label style="text-align: left;">Billing Unit:</label>
+                        <label style="text-align: left;">@Model.billingUnit</label>
+                        @*@Html.EditorFor(model => model.lastPaidAmount, new { @readonly = "readonly" })*@
+                        @*@Html.RequiredHint()*@
+                        @*@Html.ValidationMessageFor(model => model.FirstName)*@
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

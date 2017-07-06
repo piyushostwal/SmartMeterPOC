@@ -1,0 +1,82 @@
+﻿@model CustomerMetersModel
+@using Nop.Web.Models.Customer;
+@using Nop.Core;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts("My Account-My Meters");
+    //page class
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-customer-info-page");
+}
+@section left
+{
+    @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.Info })
+}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+@*<script>
+      $(".page-body").append("<ul></ul>");
+      for (var i in model) {
+          var li = "<li>";
+          $("ul").append(li.concat(arr[i]))
+      }
+    </script>*@
+<div class="page account-page customer-info-page">
+    <div class="page-title">
+        <h1>My Account - My Meters</h1>
+    </div>
+    <div class="page-body">
+        @*<ul>
+                <li>
+                <li>
+            </ul>*@
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            var validationSummary = Html.ValidationSummary(true);
+            if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+            {
+                <div class="message-error">@validationSummary</div>
+            }
+            <div class="fieldset">
+                <div class="title">
+                    <strong>Customer Meters</strong>
+                </div>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Meter ID</th>
+                        <th>Status</th>
+                    </tr>
+
+                    <tr class="success">
+                        <td>
+                            <a href="CustomerMeterDetails">@Model.meterId</a>
+                        </td>
+                        <td>
+                            Active
+                        </td>
+                    </tr>
+                    <tr class="warning">
+                        <td>
+                            <a href="CustomerMeterDetails">120356987</a>
+                        </td>
+                        <td>
+                            Blocked
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+</div>
