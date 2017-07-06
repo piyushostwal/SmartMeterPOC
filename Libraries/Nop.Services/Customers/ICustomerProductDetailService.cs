@@ -11,6 +11,6 @@ namespace Nop.Services.Customers
     public partial interface ICustomerProductDetailsService
     {
         IPagedList<CustomerProductDetails> GetCustomerProductDetails(int customerId, int pageIndex = 0, int pageSize = int.MaxValue);
-        
+        CustomerProductDetails GetCustomerProductDetailsByDeviceId(Guid deviceId);
     }
 }

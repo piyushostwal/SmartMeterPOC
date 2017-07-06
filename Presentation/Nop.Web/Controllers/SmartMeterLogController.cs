@@ -24,6 +24,7 @@ namespace Nop.Web.Controllers
         #region properties
         private readonly ISmartMeterLogService _smartMeterLogService;
         private readonly ICustomerBillUnitRateService _customerBillUnitRateService;
+        private readonly ICustomerProductDetailsService _customerProductDetailsService;
         private readonly IWorkContext _workContext;
         private readonly IStoreContext _storeContext;
         private readonly ILocalizationService _localizationService;
@@ -50,7 +51,8 @@ namespace Nop.Web.Controllers
                 IEventPublisher eventPublisher,
                 LocalizationSettings localizationSettings,
                 CaptchaSettings captchaSettings,
-            ICustomerBillUnitRateService customerBillUnitRateService)
+            ICustomerBillUnitRateService customerBillUnitRateService,
+            ICustomerProductDetailsService customerProductDetailsService)
         {
             _smartMeterLogService = smartMeterLogService;
             _workContext = workContext;
@@ -64,6 +66,7 @@ namespace Nop.Web.Controllers
             _localizationSettings = localizationSettings;
             _captchaSettings = captchaSettings;
             _customerBillUnitRateService = customerBillUnitRateService;
+            _customerProductDetailsService = customerProductDetailsService;
         }
 
         #endregion
@@ -84,25 +87,31 @@ namespace Nop.Web.Controllers
         // POST api/smartmeterlog
         public IHttpActionResult Post([FromBody]SmartMeterLogModel smartMeterLogModel)
         {
-            SmartMeterLog smartMeterLog = new SmartMeterLog();
-            smartMeterLog.DeviceID = smartMeterLogModel.DeviceID;
-            smartMeterLog.Lattitude = smartMeterLogModel.Lattitude;
-            smartMeterLog.Longitude = smartMeterLogModel.Longitude;
-            smartMeterLog.Consumption = smartMeterLogModel.Consumption;
-            smartMeterLog.TimeInterval = smartMeterLogModel.TimeInterval;
-            smartMeterLog.TimeIntervalSetTime = smartMeterLogModel.TimeIntervalSetTime;
-            smartMeterLog.IsActive = smartMeterLogModel.IsActive;
-            smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
-            var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
-
-            var settingsData = _customerBillUnitRateService.GetBillingRateInformation();
-            if (settingsData != null)
+            if (smartMeterLogModel.IsActive)
             {
-                data.TimeInterval = settingsData.TimeInterval;
-                data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
-            }
+                SmartMeterLog smartMeterLog = new SmartMeterLog();
+                smartMeterLog.DeviceID = smartMeterLogModel.DeviceID;
+                smartMeterLog.Lattitude = smartMeterLogModel.Lattitude;
+                smartMeterLog.Longitude = smartMeterLogModel.Longitude;
+                smartMeterLog.Consumption = smartMeterLogModel.Consumption;
+                smartMeterLog.TimeInterval = smartMeterLogModel.TimeInterval;
+                smartMeterLog.TimeIntervalSetTime = smartMeterLogModel.TimeIntervalSetTime;
+                smartMeterLog.IsActive = smartMeterLogModel.IsActive;
+                smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
+                var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
 
-            return Ok(data);
+                var settingsData = _customerBillUnitRateService.GetBillingRateInformation();
+                var customerData = _customerProductDetailsService.GetCustomerProductDetailsByDeviceId(smartMeterLog.DeviceID);
+                if (settingsData != null && customerData != null)
+                {
+                    data.TimeInterval = settingsData.TimeInterval;
+                    data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
+                    data.IsActive = customerData.Status;
+                }
+
+                return Ok(data);
+            }
+            return Unauthorized();
         }
 
         // PUT api/smartmeterlog/5

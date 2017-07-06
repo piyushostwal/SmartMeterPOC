@@ -11,7 +11,7 @@ namespace Nop.Data.Mapping.Customers
     {
         public CustomerProductDetailsMap()
         {
-            this.ToTable("CustomerProdcutDetails");
+            this.ToTable("CustomerProductDetails");
             this.HasKey(c => c.Id);
             this.Property(c => c.DeviceId);
             this.Property(c => c.BillingUnit).HasMaxLength(50);

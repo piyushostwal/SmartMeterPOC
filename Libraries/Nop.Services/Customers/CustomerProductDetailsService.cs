@@ -71,6 +71,11 @@ namespace Nop.Services.Customers
             var customers = new PagedList<CustomerProductDetails>(query, pageIndex, pageSize);
             return customers;
         }
+
+        public virtual CustomerProductDetails GetCustomerProductDetailsByDeviceId(Guid deviceId)
+        {
+            return _customerProductDetailsRepository.Table.FirstOrDefault(m => m.DeviceId == deviceId);
+        }
         #endregion
     }
 }
