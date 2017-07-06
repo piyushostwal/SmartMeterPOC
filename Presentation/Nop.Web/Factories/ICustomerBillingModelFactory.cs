@@ -9,6 +9,6 @@ namespace Nop.Web.Factories
 {
     public partial interface ICustomerBillingModelFactory
     {
-        IPagedList<CustomerBilling> PrepareCustomerBillingPagingFilteringModel(int customerId);
+        IPagedList<CustomerBilling> PrepareCustomerBillingPagingFilteringModel(Guid deviceId);
     }
 }
