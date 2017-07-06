@@ -66,12 +66,12 @@ namespace Nop.Services.Customers
 
         public CustomerBillUnitRate GetBillingRateInformation()
         {
-            var query = _customerBillUnitRateRepository.Table;
-            //query = query.Where(m => m.DeviceID == devieId);
-            query = query.OrderByDescending(c => c.Id);
-            if (query != null)
-                return query.FirstOrDefault();
-            return null;
+            return _customerBillUnitRateRepository.Table.FirstOrDefault();
+            //var query = _customerBillUnitRateRepository.Table;
+            //query = query.OrderByDescending(c => c.Id);
+            //if (query != null)
+            //    return query.FirstOrDefault();
+            //return null;
         }
 
         public void SaveBillingRateInformation(CustomerBillUnitRate billUnitRateInfo)
