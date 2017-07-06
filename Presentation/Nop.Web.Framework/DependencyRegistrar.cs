@@ -343,6 +343,7 @@ namespace Nop.Web.Framework
             builder.RegisterType<OpenAuthenticationService>().As<IOpenAuthenticationService>().InstancePerLifetimeScope();
            
             builder.RegisterType<SmartMeterLogService>().As<ISmartMeterLogService>().InstancePerLifetimeScope();
+            builder.RegisterType<CustomerProductDetailsService>().As<ICustomerProductDetailsService>().InstancePerLifetimeScope();
 
             builder.RegisterType<RoutePublisher>().As<IRoutePublisher>().SingleInstance();
 

@@ -14,13 +14,22 @@ namespace Nop.Data.Mapping.Customers
             this.ToTable("CustomerBilling");
             this.HasKey(c => c.Id);
             this.Property(c => c.DeviceId);
-            this.Property(c => c.BillingUnit).HasMaxLength(50);
-            this.Property(c => c.Status);
+            this.Property(c => c.BillPeriodFrom);
+            this.Property(c => c.BillPeriodTo);
+            this.Property(c => c.ConsumptionUnitReading);
+            this.Property(c => c.PreviousConsumptionUnitReading);
+            this.Property(c => c.BillAmount);
+            this.Property(c => c.BillDueDate);
+            this.Property(c => c.BillPaymentDate);
+            this.Property(c => c.IsBillPaid);
+            this.Property(c => c.LastBillAmount);
+            this.Property(c => c.LastBillPaymentDate);
+            this.Property(c => c.CreatedBy);
+            this.Property(c => c.Createdon);
+            this.Property(c => c.UpdatedBy);
+            this.Property(c => c.UpdateOn);
 
-            this.HasRequired(c => c.Order)
-                .WithMany()
-                .HasForeignKey(c => c.OrderId)
-                .WillCascadeOnDelete(false);
+            
         }
     }
 }
