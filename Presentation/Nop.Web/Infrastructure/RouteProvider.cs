@@ -70,6 +70,19 @@ namespace Nop.Web.Infrastructure
                             "order/history",
                             new { controller = "Order", action = "CustomerOrders" },
                             new[] { "Nop.Web.Controllers" });
+            routes.MapLocalizedRoute("CustomerMeters",
+                            "customer/CustomerMeters",
+                            new { controller = "Customer", action = "CustomerMeters" },
+                            new[] { "Nop.Web.Controllers" });
+            routes.MapLocalizedRoute("CustomerMeterDetails",
+                           "customer/CustomerMeterDetails",
+                           new { controller = "Customer", action = "CustomerMeterDetails" },
+                           new[] { "Nop.Web.Controllers" });
+            routes.MapLocalizedRoute("Dashboard",
+                         "customer/Dashboard",
+                         new { controller = "Customer", action = "Dashboard" },
+                         new[] { "Nop.Web.Controllers" });
+
 
             //contact us
             routes.MapLocalizedRoute("ContactUs",
