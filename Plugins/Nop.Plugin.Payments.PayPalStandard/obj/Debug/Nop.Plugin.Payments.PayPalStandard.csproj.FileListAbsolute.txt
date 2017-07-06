@@ -19,6 +19,5 @@ D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Payments.PayPalSta
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Payments.PayPalStandard\Nop.Plugin.Payments.PayPalStandard.dll
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Payments.PayPalStandard\Nop.Plugin.Payments.PayPalStandard.pdb
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Payments.PayPalStandard\obj\Debug\Nop.Plugin.Payments.PayPalStandard.csproj.App.config
-D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Payments.PayPalStandard\obj\Debug\Nop.Plugin.Payments.PayPalStandard.csprojResolveAssemblyReference.cache
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Payments.PayPalStandard\obj\Debug\Nop.Plugin.Payments.PayPalStandard.dll
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Payments.PayPalStandard\obj\Debug\Nop.Plugin.Payments.PayPalStandard.pdb

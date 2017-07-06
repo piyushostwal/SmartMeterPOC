@@ -21,6 +21,5 @@ D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Tax.FixedOrByCount
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Tax.FixedOrByCountryStateZip\Nop.Plugin.Tax.FixedOrByCountryStateZip.dll
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Tax.FixedOrByCountryStateZip\Nop.Plugin.Tax.FixedOrByCountryStateZip.pdb
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Tax.FixedOrByCountryStateZip\obj\Debug\Nop.Plugin.Tax.FixedOrByCountryStateZip.csproj.App.config
-D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Tax.FixedOrByCountryStateZip\obj\Debug\Nop.Plugin.Tax.FixedOrByCountryStateZip.csprojResolveAssemblyReference.cache
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Tax.FixedOrByCountryStateZip\obj\Debug\Nop.Plugin.Tax.FixedOrByCountryStateZip.dll
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Tax.FixedOrByCountryStateZip\obj\Debug\Nop.Plugin.Tax.FixedOrByCountryStateZip.pdb

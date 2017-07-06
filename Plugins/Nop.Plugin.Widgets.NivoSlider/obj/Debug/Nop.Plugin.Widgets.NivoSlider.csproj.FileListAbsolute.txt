@@ -67,6 +67,5 @@ D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Widgets.NivoSlider
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Widgets.NivoSlider\Nop.Plugin.Widgets.NivoSlider.dll
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Widgets.NivoSlider\Nop.Plugin.Widgets.NivoSlider.pdb
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Widgets.NivoSlider\obj\Debug\Nop.Plugin.Widgets.NivoSlider.csproj.App.config
-D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Widgets.NivoSlider\obj\Debug\Nop.Plugin.Widgets.NivoSlider.csprojResolveAssemblyReference.cache
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Widgets.NivoSlider\obj\Debug\Nop.Plugin.Widgets.NivoSlider.dll
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Widgets.NivoSlider\obj\Debug\Nop.Plugin.Widgets.NivoSlider.pdb

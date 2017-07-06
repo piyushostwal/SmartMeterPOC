@@ -37,6 +37,7 @@ namespace Nop.Web.Models.Customer
         //ForumSubscriptions = 90,
         //ProductReviews = 100,
         //VendorInfo = 110,
-        MyMeters = 40
+        MyMeters = 30,
+        Dashboard=40
     }
 }

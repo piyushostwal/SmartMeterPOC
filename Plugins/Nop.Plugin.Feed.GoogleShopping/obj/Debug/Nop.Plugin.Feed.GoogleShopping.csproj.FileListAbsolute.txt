@@ -19,6 +19,5 @@ D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Feed.GoogleShoppin
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Feed.GoogleShopping\Nop.Plugin.Feed.GoogleShopping.dll
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Feed.GoogleShopping\Nop.Plugin.Feed.GoogleShopping.pdb
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Feed.GoogleShopping\obj\Debug\Nop.Plugin.Feed.GoogleShopping.csproj.App.config
-D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Feed.GoogleShopping\obj\Debug\Nop.Plugin.Feed.GoogleShopping.csprojResolveAssemblyReference.cache
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Feed.GoogleShopping\obj\Debug\Nop.Plugin.Feed.GoogleShopping.dll
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Feed.GoogleShopping\obj\Debug\Nop.Plugin.Feed.GoogleShopping.pdb

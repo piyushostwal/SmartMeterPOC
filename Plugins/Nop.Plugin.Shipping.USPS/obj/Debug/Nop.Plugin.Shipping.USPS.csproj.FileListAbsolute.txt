@@ -16,6 +16,5 @@ D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Nop.
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Nop.Plugin.Shipping.USPS.dll
 D:\GenusSmartMeter\SmartMeterPOC\Presentation\Nop.Web\Plugins\Shipping.USPS\Nop.Plugin.Shipping.USPS.pdb
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.csproj.App.config
-D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.csprojResolveAssemblyReference.cache
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.dll
 D:\GenusSmartMeter\SmartMeterPOC\Plugins\Nop.Plugin.Shipping.USPS\obj\Debug\Nop.Plugin.Shipping.USPS.pdb

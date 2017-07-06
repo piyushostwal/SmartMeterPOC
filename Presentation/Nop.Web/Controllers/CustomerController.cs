@@ -889,7 +889,7 @@ namespace Nop.Web.Controllers
         {
             var model = _customerModelFactory.PrepareCustomerNavigationModel(selectedTabId);
             return PartialView(model);
-        }
+        } 
 
         [NopHttpsRequirement(SslRequirement.Yes)]
         public virtual ActionResult Info()
@@ -1530,6 +1530,13 @@ namespace Nop.Web.Controllers
             model.dueDateBill = "15/06/2017";
             model.billingUnit = "0046-Aundh";
             return View(model);
+        }
+
+        #endregion
+        #region My Account- Dashboard
+        [HttpGet]
+        public ActionResult Dashboard() {
+            return View();
         }
         #endregion
     }

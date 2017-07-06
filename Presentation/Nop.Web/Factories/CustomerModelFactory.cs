@@ -603,6 +603,13 @@ namespace Nop.Web.Factories
                 Tab = CustomerNavigationEnum.MyMeters,
                 ItemClass = "customer-meters"
             });
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "Dashboard",
+                Title = "Dashboard",
+                Tab = CustomerNavigationEnum.Dashboard,
+                ItemClass = "customer-dashboard"
+            });
 
             //if (_orderSettings.ReturnRequestsEnabled &&
             //    _returnRequestService.SearchReturnRequests(_storeContext.CurrentStore.Id,
