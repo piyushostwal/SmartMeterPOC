@@ -5,11 +5,18 @@
 @using Nop.Services.Security;
 
 @{
+    var kendoVersion = "2014.1.318";
     var storeSettings = EngineContext.Current.Resolve<StoreInformationSettings>();
     var permissionService = EngineContext.Current.Resolve<IPermissionService>();
     var displayMiniProfiler = storeSettings.DisplayMiniProfilerInPublicStore
         && (!storeSettings.DisplayMiniProfilerForAdminOnly || permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel));
-
+    Html.AppendCssFileParts(string.Format("~/Administration/Content/kendo/{0}/kendo.rtl.min.css", kendoVersion));
+    Html.AppendCssFileParts(string.Format("~/Administration/Content/kendo/{0}/kendo.default.min.css", kendoVersion));
+    Html.AppendCssFileParts(string.Format("~/Administration/Content/kendo/{0}/kendo.common.min.css", kendoVersion));
+    Html.AppendScriptParts(string.Format("~/Administration/Scripts/kendo/{0}/kendo.web.min.js", kendoVersion));
+    Html.AppendCssFileParts("~/Administration/Content/bootstrap/css/bootstrap.min.css");
+    Html.AppendCssFileParts("~/Administration/Content/adminLTE/AdminLTE-2.3.0.min.css");
+    Html.AppendScriptParts("~/Administration/Scripts/bootstrap/bootstrap.min.js");
     Html.AppendScriptParts("~/Scripts/public.ajaxcart.js");
     Html.AppendScriptParts("~/Scripts/public.common.js");
     Html.AppendScriptParts("~/Scripts/jquery-migrate-1.2.1.min.js");
@@ -17,6 +24,7 @@
     Html.AppendScriptParts("~/Scripts/jquery.validate.unobtrusive.min.js");
     Html.AppendScriptParts("~/Scripts/jquery.validate.min.js");
     Html.AppendScriptParts("~/Scripts/jquery-1.10.2.min.js");
+
 
     //X-UA-Compatible tag
     var commonSettings = EngineContext.Current.Resolve<CommonSettings>();
@@ -32,34 +40,34 @@
     }
 }
 <!DOCTYPE html>
-<html@(this.ShouldUseRtlTheme() ? Html.Raw(" dir=\"rtl\"") : null) @Html.NopPageCssClasses()>
-<head>
-    <title>@Html.NopTitle()</title>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-    <meta name="description" content="@(Html.NopMetaDescription())" />
-    <meta name="keywords" content="@(Html.NopMetaKeywords())" />
-    <meta name="generator" content="nopCommerce" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    @Html.NopHeadCustom()
-    @*This is used so that themes can inject content into the header*@
-    @Html.Partial("Head")
-    @Html.Widget("head_html_tag")
-    @Html.NopCssFiles(this.Url, ResourceLocation.Head)
-    @Html.NopScripts(this.Url, ResourceLocation.Head)
-    @Html.NopCanonicalUrls()
-    @Html.Action("RssHeaderLink", "News")
-    @Html.Action("RssHeaderLink", "Blog")
-    @*Favicon - upload favicon.ico file to the root directory*@
-    @Html.Action("Favicon", "Common")
-    @if (displayMiniProfiler)
-    {
-        @StackExchange.Profiling.MiniProfiler.RenderIncludes()
-    }
-    <!--Powered by nopCommerce - http://www.nopCommerce.com-->
-</head>
-<body>
-    @RenderBody()
-    @Html.NopCssFiles(this.Url, ResourceLocation.Foot)
-    @Html.NopScripts(this.Url, ResourceLocation.Foot)
-</body>
-</html>
+<html @(this.ShouldUseRtlTheme() ? Html.Raw(" dir=\"rtl\"") : null) @Html.NopPageCssClasses()>
+    <head>
+        <title>@Html.NopTitle()</title>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+        <meta name="description" content="@(Html.NopMetaDescription())" />
+        <meta name="keywords" content="@(Html.NopMetaKeywords())" />
+        <meta name="generator" content="nopCommerce" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        @Html.NopHeadCustom()
+        @*This is used so that themes can inject content into the header*@
+        @Html.Partial("Head")
+        @Html.Widget("head_html_tag")
+        @Html.NopCssFiles(this.Url, ResourceLocation.Head)
+        @Html.NopScripts(this.Url, ResourceLocation.Head)
+        @Html.NopCanonicalUrls()
+        @Html.Action("RssHeaderLink", "News")
+        @Html.Action("RssHeaderLink", "Blog")
+        @*Favicon - upload favicon.ico file to the root directory*@
+        @Html.Action("Favicon", "Common")
+        @if (displayMiniProfiler)
+        {
+            @StackExchange.Profiling.MiniProfiler.RenderIncludes()
+        }
+        <!--Powered by nopCommerce - http://www.nopCommerce.com-->
+    </head>
+    <body>
+        @RenderBody()
+        @Html.NopCssFiles(this.Url, ResourceLocation.Foot)
+        @Html.NopScripts(this.Url, ResourceLocation.Foot)
+    </body>
+    </html>
