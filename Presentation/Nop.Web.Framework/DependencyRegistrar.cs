@@ -53,6 +53,7 @@ using Nop.Services.Vendors;
 using Nop.Web.Framework.Mvc.Routes;
 using Nop.Web.Framework.Themes;
 using Nop.Web.Framework.UI;
+using Nop.Services.SmartMeterLogs;
 
 namespace Nop.Web.Framework
 {
@@ -341,7 +342,11 @@ namespace Nop.Web.Framework
             builder.RegisterType<ExternalAuthorizer>().As<IExternalAuthorizer>().InstancePerLifetimeScope();
             builder.RegisterType<OpenAuthenticationService>().As<IOpenAuthenticationService>().InstancePerLifetimeScope();
            
-                
+            builder.RegisterType<SmartMeterLogService>().As<ISmartMeterLogService>().InstancePerLifetimeScope();
+            builder.RegisterType<CustomerBillUnitRateService>().As<ICustomerBillUnitRateService>().InstancePerLifetimeScope();
+            builder.RegisterType<CustomerProductDetailsService>().As<ICustomerProductDetailsService>().InstancePerLifetimeScope();
+            builder.RegisterType<CustomerBillingService>().As<ICustomerBillingService>().InstancePerLifetimeScope();
+
             builder.RegisterType<RoutePublisher>().As<IRoutePublisher>().SingleInstance();
 
             //Register event consumers

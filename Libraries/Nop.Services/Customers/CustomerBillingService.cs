@@ -4,7 +4,6 @@ using Nop.Core.Data;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
-using Nop.Core.Domain.SmartMeterLogs;
 using Nop.Data;
 using Nop.Services.Events;
 using Nop.Services.Security;
@@ -15,14 +14,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Services.SmartMeterLogs
+namespace Nop.Services.Customers
 {
-    public partial class SmartMeterLogService : ISmartMeterLogService
+    public class CustomerBillingService : ICustomerBillingService
     {
         #region Fields
 
-        private readonly IRepository<SmartMeterLog> _meterRepository;
-        private readonly IRepository<CustomerBillUnitRate> _customerBillUnitRateRepository;
+        private readonly IRepository<CustomerBilling> _customerBilling;
         private readonly IDbContext _dbContext;
         private readonly IDataProvider _dataProvider;
         private readonly IWorkContext _workContext;
@@ -37,8 +35,7 @@ namespace Nop.Services.SmartMeterLogs
         #endregion
 
         #region Ctor
-        public SmartMeterLogService(IRepository<SmartMeterLog> meterRepository,
-            IRepository<CustomerBillUnitRate> customerBillUnitRateRepository,
+        public CustomerBillingService(IRepository<CustomerBilling> customerBilling,
             IDbContext dbContext,
             IDataProvider dataProvider,
             IWorkContext workContext,
@@ -50,7 +47,7 @@ namespace Nop.Services.SmartMeterLogs
             CommonSettings commonSettings,
             CatalogSettings catalogSettings)
         {
-            this._meterRepository = meterRepository;
+            this._customerBilling = customerBilling;
             this._cacheManager = cacheManager;
             this._dbContext = dbContext;
             this._dataProvider = dataProvider;
@@ -61,33 +58,18 @@ namespace Nop.Services.SmartMeterLogs
             this._aclService = aclService;
             this._commonSettings = commonSettings;
             this._catalogSettings = catalogSettings;
-            this._customerBillUnitRateRepository = customerBillUnitRateRepository;
         }
-
         #endregion
-
         #region methods
 
-        public virtual IPagedList<SmartMeterLog> GetMeterLog(Guid devieId, int pageIndex = 0, int pageSize = int.MaxValue)
+        public virtual IPagedList<CustomerBilling> GetAllCustomerBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue)
         {
-            var query = _meterRepository.Table;
-            query = query.Where(m => m.DeviceID == devieId);
-            query = query.OrderByDescending(c => c.DeviceID);
-            var customers = new PagedList<SmartMeterLog>(query, pageIndex, pageSize);
+            var query = _customerBilling.Table;
+            query = query.Where(m => m.DeviceId == deviceId);
+            query = query.OrderByDescending(c => c.Id);
+            var customers = new PagedList<CustomerBilling>(query, pageIndex, pageSize);
             return customers;
         }
-
-        public SmartMeterLog SaveMeterLog(SmartMeterLog meterLog)
-        {
-            if (meterLog != null)
-            {
-                _meterRepository.Insert(meterLog);
-                //event notification
-                _eventPublisher.EntityInserted(meterLog);
-            }
-            return meterLog;
-        }
-
         #endregion
     }
 }
