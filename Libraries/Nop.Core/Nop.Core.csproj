@@ -120,10 +120,12 @@
     <Compile Include="Domain\Common\AddressAttributeValue.cs" />
     <Compile Include="Domain\Common\SearchTermReportLine.cs" />
     <Compile Include="Domain\Common\SearchTerm.cs" />
+    <Compile Include="Domain\Customers\CustomerBilling.cs" />
     <Compile Include="Domain\Customers\CustomerPassword.cs" />
     <Compile Include="Domain\Customers\CustomerAttribute.cs" />
     <Compile Include="Domain\Customers\CustomerAttributeValue.cs" />
     <Compile Include="Domain\Customers\CustomerLoginResults.cs" />
+    <Compile Include="Domain\Customers\CustomerProductDetails.cs" />
     <Compile Include="Domain\Customers\Events.cs" />
     <Compile Include="Domain\Customers\RewardPointsActivatingDelayPeriod.cs" />
     <Compile Include="Domain\Discounts\RequirementGroupInteractionType.cs" />
