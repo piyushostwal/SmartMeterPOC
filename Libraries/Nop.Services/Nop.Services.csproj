@@ -277,6 +277,9 @@
     <Compile Include="Shipping\Pickup\IPickupPointProvider.cs" />
     <Compile Include="Shipping\Date\DateRangeService.cs" />
     <Compile Include="Shipping\Tracking\ShipmentExtensions.cs" />
+    <Compile Include="SmartMeterLogs\ISmartMeterLogService.cs" />
+    <Compile Include="SmartMeterLogs\SmartMeterLogModelExtensions.cs" />
+    <Compile Include="SmartMeterLogs\SmartMeterLogService.cs" />
     <Compile Include="Topics\ITopicTemplateService.cs" />
     <Compile Include="Topics\TopicTemplateService.cs" />
     <Compile Include="Vendors\VendorExtensions.cs" />
