@@ -14,20 +14,13 @@
 {
     @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.Info })
 }
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-@*<script>
-      $(".page-body").append("<ul></ul>");
-      for (var i in model) {
-          var li = "<li>";
-          $("ul").append(li.concat(arr[i]))
-      }
+@*
+    <script>
+          $(".page-body").append("<ul></ul>");
+          for (var i in model) {
+              var li = "<li>";
+              $("ul").append(li.concat(arr[i]))
+          }
     </script>*@
 <div class="page account-page customer-info-page">
     <div class="page-title">
@@ -46,35 +39,99 @@
             {
                 <div class="message-error">@validationSummary</div>
             }
-            <div class="fieldset">
-                <div class="title">
-                    <strong>Customer Meters</strong>
+            @*<div class="fieldset">
+                    <div class="title">
+                        <strong>Customer Meters</strong>
+                    </div>
+                    <table class="table-striped" border="1">
+                        <tr>
+                            <th>Meter ID</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="CustomerMeterDetails">@Model.meterId</a>
+                            </td>
+                            <td>
+                                Active
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>*@
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="products-grid"></div>
+
+                    <script>
+                        $(document).ready(function () {
+                            $("#products-grid").kendoGrid({
+                                dataSource: {
+                                    data: [{
+                                        "Id": @Model.meterId,
+                                        "Status": "Active",
+                                        "Payment": "Due"
+                                    },
+                                    {
+                                        "Id": @Model.meterId,
+                                        "Status": "Inactive",
+                                        "Payment": "Ok"
+                                    }],
+                                    schema: {
+                                        model: {
+                                            fields: {
+                                                Status: { type: "string" },
+                                                Id: { type: "number" },
+                                                Payment: { type: "string" }
+                                            }
+                                        }
+                                    },
+                                    error: function (e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true,
+                                    pageSize: 20
+                                },
+                                pageable: {
+                                    input: true,
+                                    numeric: false
+                                },
+                                scrollable: false,
+                                sortable: true,
+                                filterable: true,
+                                columns: [
+                                    {
+                                        field: "Id",
+                                        title: "Device Id",
+                                        template: '<a href="CustomerMeterDetails">@Model.meterId</a>',
+                                        attributes: { style: "text-align:center" },
+                                        width: 300
+                                    },
+                                                            {
+                                                                field: "Payment",
+                                                                title: "Payment",
+                                                                template: '# if(Payment=="Ok") {# <span class="label label-success">Ok</span> #} else {# <span class="label label-danger">Due</span>#} #',
+                                                                attributes: { style: "text-align:center" },
+                                                                width: 300
+                                                            },
+                                                            {
+                                                                field: "Status",
+                                                                title: "Status",
+                                                                template: '# if(Status=="Active") {# <span class="label label-success">Active</span> #} else {# <span class="label label-danger">Inactive</span>#} #',
+                                                                attributes: { style: "text-align:center" },
+                                                                width: 300
+                                                            },
+
+                                ]
+                            });
+                        });
+                    </script>
                 </div>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Meter ID</th>
-                        <th>Status</th>
-                    </tr>
-
-                    <tr class="success">
-                        <td>
-                            <a href="CustomerMeterDetails">@Model.meterId</a>
-                        </td>
-                        <td>
-                            Active
-                        </td>
-                    </tr>
-                    <tr class="warning">
-                        <td>
-                            <a href="CustomerMeterDetails">120356987</a>
-                        </td>
-                        <td>
-                            Blocked
-                        </td>
-                    </tr>
-
-                </table>
-
             </div>
         }
 

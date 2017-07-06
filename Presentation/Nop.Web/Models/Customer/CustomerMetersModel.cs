@@ -8,7 +8,7 @@ namespace Nop.Web.Models.Customer
     public class CustomerMetersModel
     {
         public long meterId { get; set; }
-        public string customerName { get; set; }
-        public string location { get; set; }
+        public string status { get; set; }
+        public string billingUnit { get; set; }
     }
 }

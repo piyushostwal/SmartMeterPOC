@@ -163,6 +163,7 @@ label, label + * {
 .page-title h1 {
 	font-size: 30px;
 	font-weight: normal;
+    margin-top: -2px;
 }
 .page:after,
 .page-title:after,
@@ -6000,16 +6001,16 @@ pre {
 
 
 .master-wrapper-content {
-	width: 980px;
+	/*width: 980px;*/
 	margin: auto;
 }
 .center-2 {
 	float: right;
-	width: 73%;
+	width: 80%;
 }
 .side-2 {
 	float: left;
-	width: 25%;
+	width: 18%;
 }
 .page {
 	text-align: left;
@@ -6071,7 +6072,7 @@ pre {
 
 
 .header {
-	width: 980px;
+	/*width: 980px;*/
 	margin: auto;
 }
 .header-upper:after {
@@ -6244,7 +6245,7 @@ pre {
 .header-menu {
 	position: relative;
 	z-index: 5;
-	width: 980px;
+	/*width: 980px;*/
 	margin: 0 auto 30px;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
@@ -6326,7 +6327,7 @@ pre {
 
 
 .footer-upper {
-	width: 980px;
+	/*width: 980px;*/
 	padding: 35px 10px;
 }
 .footer-upper:after {
@@ -6368,7 +6369,7 @@ pre {
 }
 .footer-lower {
 	position: relative;
-	width: 980px;
+	/*width: 980px;*/
 	padding: 25px 5px;
 }
 .footer-lower:after {
