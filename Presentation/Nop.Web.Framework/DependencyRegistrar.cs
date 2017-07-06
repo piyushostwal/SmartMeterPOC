@@ -345,6 +345,7 @@ namespace Nop.Web.Framework
             builder.RegisterType<SmartMeterLogService>().As<ISmartMeterLogService>().InstancePerLifetimeScope();
             builder.RegisterType<CustomerBillUnitRateService>().As<ICustomerBillUnitRateService>().InstancePerLifetimeScope();
             builder.RegisterType<CustomerProductDetailsService>().As<ICustomerProductDetailsService>().InstancePerLifetimeScope();
+            builder.RegisterType<CustomerBillingService>().As<ICustomerBillingService>().InstancePerLifetimeScope();
 
             builder.RegisterType<RoutePublisher>().As<IRoutePublisher>().SingleInstance();
 

@@ -77,6 +77,8 @@ namespace Nop.Web.Controllers
         private readonly LocalizationSettings _localizationSettings;
         private readonly CaptchaSettings _captchaSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
+        private readonly ICustomerProductDetailsService _customerProductDetailsService;
+        private readonly ICustomerBillingService _customerBillingService;
 
         #endregion
 
@@ -116,7 +118,9 @@ namespace Nop.Web.Controllers
             IWorkflowMessageService workflowMessageService,
             LocalizationSettings localizationSettings,
             CaptchaSettings captchaSettings,
-            StoreInformationSettings storeInformationSettings)
+            StoreInformationSettings storeInformationSettings,
+            ICustomerProductDetailsService customerProductDetailsService,
+            ICustomerBillingService customerBillingService)
         {
             this._addressModelFactory = addressModelFactory;
             this._customerModelFactory = customerModelFactory;
@@ -153,6 +157,8 @@ namespace Nop.Web.Controllers
             this._localizationSettings = localizationSettings;
             this._captchaSettings = captchaSettings;
             this._storeInformationSettings = storeInformationSettings;
+            this._customerBillingService = customerBillingService;
+            this._customerProductDetailsService = customerProductDetailsService;
         }
 
         #endregion
@@ -1507,6 +1513,7 @@ namespace Nop.Web.Controllers
         [HttpGet]
         public ActionResult CustomerMeters()
         {
+            var meterdatils = _customerProductDetailsService.GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
             //List<CustomerMetersModel> model = new List<CustomerMetersModel>();
             //model.Add(new CustomerMetersModel(123458796, "Aslam Shrimali", "NSG I.T Park,Aundh,Pune"));           
             CustomerMetersModel model = new CustomerMetersModel();
@@ -1518,6 +1525,7 @@ namespace Nop.Web.Controllers
         [HttpGet]
         public ActionResult CustomerMeterDetails()
         {
+            var customerbilling = _customerBillingService.GetAllCustomerBills(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
             CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
             model.meterId = 123456789;
             model.customerName = "Aslam Shrimali";

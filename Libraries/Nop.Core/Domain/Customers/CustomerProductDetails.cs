@@ -18,7 +18,7 @@ namespace Nop.Core.Domain.Customers
         public string BillingUnit { get; set; }
         public bool Status { get; set; }
         public DateTime Createdon { get; set; }
-        public int CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
         public DateTime? UpdateOn { get; set; }
         public int? UpdatedBy { get; set; }
         public virtual Customer Customer { get; set; }
