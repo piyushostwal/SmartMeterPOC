@@ -1518,8 +1518,8 @@ namespace Nop.Web.Controllers
             //model.Add(new CustomerMetersModel(123458796, "Aslam Shrimali", "NSG I.T Park,Aundh,Pune"));           
             CustomerMetersModel model = new CustomerMetersModel();
             model.meterId = 123456789;
-            model.customerName = "Aslam Shrimali";
-            model.location = "NSG I.T Park,Aundh,Pune";
+            //model.customerName = "Aslam Shrimali";
+            //model.location = "NSG I.T Park,Aundh,Pune";
             return View(model);
         }
         [HttpGet]
@@ -1530,13 +1530,13 @@ namespace Nop.Web.Controllers
             model.meterId = 123456789;
             model.customerName = "Aslam Shrimali";
             model.location = "NSG I.T Park,Aundh,Pune";
-            model.lastMarkedUnit = 26;
-            model.lastMarkedDate = "15/04/2017";
-            model.lastPaidAmount = 1800;
-            model.lastPaymentDate = "15/05/2017";
-            model.dueAmount = 350;
-            model.dueDateBill = "15/06/2017";
-            model.billingUnit = "0046-Aundh";
+            //model.lastMarkedUnit = 26;
+            //model.lastMarkedDate = "15/04/2017";
+            //model.lastPaidAmount = 1800;
+            //model.lastPaymentDate = "15/05/2017";
+            //model.dueAmount = 350;
+            //model.dueDateBill = "15/06/2017";
+            //model.billingUnit = "0046-Aundh";
             return View(model);
         }
 
