@@ -13,11 +13,15 @@ namespace Nop.Core.Domain.Customers
         #endregion
 
         #region Proeprties
-        public int OrderId { get; set; }
+        public int CustomerId { get; set; }
         public Guid DeviceId { get; set; }
         public string BillingUnit { get; set; }
         public bool Status { get; set; }
-        public virtual Order Order { get; set; }
+        public DateTime Createdon { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime UpdateOn { get; set; }
+        public int UpdatedBy { get; set; }
+        public virtual Customer Customer { get; set; }
         #endregion
 
     }

@@ -16,10 +16,14 @@ namespace Nop.Data.Mapping.Customers
             this.Property(c => c.DeviceId);
             this.Property(c => c.BillingUnit).HasMaxLength(50);
             this.Property(c => c.Status);
+            this.Property(c => c.CreatedBy);
+            this.Property(c => c.Createdon);
+            this.Property(c => c.UpdatedBy);
+            this.Property(c => c.UpdateOn);
 
-            this.HasRequired(c => c.Order)
+            this.HasRequired(c => c.Customer)
                 .WithMany()
-                .HasForeignKey(c => c.OrderId)
+                .HasForeignKey(c => c.CustomerId)
                 .WillCascadeOnDelete(false);
         }
     }
