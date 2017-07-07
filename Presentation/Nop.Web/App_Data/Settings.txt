@@ -1,2 +1,0 @@
-DataProvider: sqlserver
-DataConnectionString: Data Source=192.168.101.21;Initial Catalog=smartmeterpoc;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=espl@123
