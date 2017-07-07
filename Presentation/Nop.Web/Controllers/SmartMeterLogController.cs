@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Nop.Web.Controllers
@@ -72,7 +73,7 @@ namespace Nop.Web.Controllers
         #endregion
 
         // GET api/smartmeterlog
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
         }
@@ -115,8 +116,9 @@ namespace Nop.Web.Controllers
         }
 
         // PUT api/smartmeterlog/5
-        public void Put(int id, [FromBody]string value)
+        public async Task Put(Guid id, [FromBody]bool value)
         {
+            await _customerProductDetailsService.UpdateCustomerProductStatus(id, value);
         }
 
         // DELETE api/smartmeterlog/5
