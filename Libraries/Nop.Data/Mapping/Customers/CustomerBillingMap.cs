@@ -24,6 +24,7 @@ namespace Nop.Data.Mapping.Customers
             this.Property(c => c.IsBillPaid);
             this.Property(c => c.LastBillAmount);
             this.Property(c => c.LastBillPaymentDate);
+            this.Property(c => c.IsCurrentBill);
             this.Property(c => c.CreatedBy);
             this.Property(c => c.Createdon);
             this.Property(c => c.UpdatedBy);
