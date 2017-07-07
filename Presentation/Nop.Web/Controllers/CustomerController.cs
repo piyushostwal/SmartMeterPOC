@@ -1530,13 +1530,17 @@ namespace Nop.Web.Controllers
             model.meterId = 123456789;
             model.customerName = "Aslam Shrimali";
             model.location = "NSG I.T Park,Aundh,Pune";
-            //model.lastMarkedUnit = 26;
-            //model.lastMarkedDate = "15/04/2017";
-            //model.lastPaidAmount = 1800;
-            //model.lastPaymentDate = "15/05/2017";
-            //model.dueAmount = 350;
-            //model.dueDateBill = "15/06/2017";
-            //model.billingUnit = "0046-Aundh";
+            model.BillingUnit ="0046-Aundh";
+            model.ConsumptionUnitReading=26;
+            model.BillPeriodFrom ="15/03/2017";
+            model.BillPeriodTo="15/04/2017";
+            model.BillAmount=350;
+            model.BillPaymentDate ="20/05/2017"; 
+            model.BillDueDate="25/05/2017";
+            model.PreviousConsumbptionUnitReading=18;
+            model.LastBillAmount=260;
+            model.LastBillPaymentDate = "12/03/2017";
+        
             return View(model);
         }
 
