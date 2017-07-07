@@ -70,6 +70,15 @@ namespace Nop.Services.Customers
             var customers = new PagedList<CustomerBilling>(query, pageIndex, pageSize);
             return customers;
         }
+        public virtual CustomerBilling GetCustomerCurrentBill(Guid deviceId)
+        {
+            var query = _customerBilling.Table;
+            query = query.Where(m => m.DeviceId == deviceId)
+                    .Where(m => m.IsCurrentBill == true);
+            query = query.OrderByDescending(c => c.Id);
+            var customers = query.FirstOrDefault();
+            return customers;
+        }
         #endregion
     }
 }

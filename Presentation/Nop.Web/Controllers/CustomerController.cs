@@ -34,6 +34,8 @@ using Nop.Web.Framework.Security;
 using Nop.Web.Framework.Security.Captcha;
 using Nop.Web.Framework.Security.Honeypot;
 using Nop.Web.Models.Customer;
+using System.Collections.Generic;
+using Nop.Services.SmartMeterLogs;
 
 namespace Nop.Web.Controllers
 {
@@ -79,6 +81,7 @@ namespace Nop.Web.Controllers
         private readonly StoreInformationSettings _storeInformationSettings;
         private readonly ICustomerProductDetailsService _customerProductDetailsService;
         private readonly ICustomerBillingService _customerBillingService;
+        private readonly ISmartMeterLogService _smartmeterLogService;
 
         #endregion
 
@@ -120,7 +123,8 @@ namespace Nop.Web.Controllers
             CaptchaSettings captchaSettings,
             StoreInformationSettings storeInformationSettings,
             ICustomerProductDetailsService customerProductDetailsService,
-            ICustomerBillingService customerBillingService)
+            ICustomerBillingService customerBillingService,
+            ISmartMeterLogService smartmeterLogService)
         {
             this._addressModelFactory = addressModelFactory;
             this._customerModelFactory = customerModelFactory;
@@ -159,6 +163,7 @@ namespace Nop.Web.Controllers
             this._storeInformationSettings = storeInformationSettings;
             this._customerBillingService = customerBillingService;
             this._customerProductDetailsService = customerProductDetailsService;
+            this._smartmeterLogService = smartmeterLogService;
         }
 
         #endregion
@@ -1513,33 +1518,61 @@ namespace Nop.Web.Controllers
         [HttpGet]
         public ActionResult CustomerMeters()
         {
-            var meterdatils = _customerProductDetailsService.GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
-            //List<CustomerMetersModel> model = new List<CustomerMetersModel>();
-            //model.Add(new CustomerMetersModel(123458796, "Aslam Shrimali", "NSG I.T Park,Aundh,Pune"));           
-            CustomerMetersModel model = new CustomerMetersModel();
-            model.meterId = 123456789;
-            //model.customerName = "Aslam Shrimali";
-            //model.location = "NSG I.T Park,Aundh,Pune";
+            var meterdatils = _customerProductDetailsService.
+                GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
+           
+                   
+            List<CustomerMetersModel> model = new List<CustomerMetersModel>();
+            if(meterdatils.Count!=0)
+            {
+                foreach (var m in meterdatils)
+                {
+                    var customerbilling = _customerBillingService.GetCustomerCurrentBill(m.DeviceId);
+                    model.Add(new CustomerMetersModel
+                    {
+                        meterId = m.DeviceId.ToString(),
+                        status = m.Status,
+                        billingUnit = m.BillingUnit,
+                        IsBillPaid=customerbilling.IsBillPaid
+                    });
+                }
+                
+            }           
             return View(model);
         }
         [HttpGet]
-        public ActionResult CustomerMeterDetails()
+        public ActionResult CustomerMeterDetails(Guid deviceId)
         {
-            var customerbilling = _customerBillingService.GetAllCustomerBills(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+            var meterdatils = _customerProductDetailsService.
+                GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
+            var customerbilling = _customerBillingService.GetCustomerCurrentBill(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+            var smartMeterLogs = _smartmeterLogService.GetMeterLog(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
             CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
-            model.meterId = 123456789;
-            model.customerName = "Aslam Shrimali";
-            model.location = "NSG I.T Park,Aundh,Pune";
-            model.BillingUnit ="0046-Aundh";
-            model.ConsumptionUnitReading=26;
-            model.BillPeriodFrom ="15/03/2017";
-            model.BillPeriodTo="15/04/2017";
-            model.BillAmount=350;
-            model.BillPaymentDate ="20/05/2017"; 
-            model.BillDueDate="25/05/2017";
-            model.PreviousConsumbptionUnitReading=18;
-            model.LastBillAmount=260;
-            model.LastBillPaymentDate = "12/03/2017";
+            
+            model.customerName = _workContext.CurrentCustomer.GetFullName();
+            if(customerbilling!=null)
+            {
+                model.meterId = customerbilling.DeviceId.ToString();
+                model.ConsumptionUnitReading = customerbilling.ConsumptionUnitReading;
+                model.BillPeriodFrom = customerbilling.BillPeriodFrom.ToString("MM/dd/yyyy");
+                model.BillPeriodTo = customerbilling.BillPeriodTo.ToString("MM/dd/yyyy");
+                model.BillAmount = customerbilling.BillAmount;
+                model.BillPaymentDate = customerbilling.BillPaymentDate != null ?
+                    customerbilling.BillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+                model.BillDueDate = customerbilling.BillDueDate.ToString("MM/dd/yyyy");
+                model.PreviousConsumbptionUnitReading = customerbilling.PreviousConsumbptionUnitReading;
+                model.LastBillAmount = customerbilling.LastBillAmount.Value;
+                model.LastBillPaymentDate = customerbilling.LastBillPaymentDate!=null?
+                    customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy"):string.Empty;
+            }
+            if (meterdatils != null)
+            {
+                model.BillingUnit =
+                    meterdatils.FirstOrDefault(m => m.DeviceId.ToString() == "c56a2690-f588-4758-a874-baddda23c166").BillingUnit;
+            }
+            if(smartMeterLogs.Count>0)
+                model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
+            
         
             return View(model);
         }

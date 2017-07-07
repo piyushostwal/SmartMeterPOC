@@ -23,6 +23,7 @@ namespace Nop.Core.Domain.Customers
         public bool IsBillPaid { get; set; }
         public decimal? LastBillAmount { get; set; }
         public DateTime? LastBillPaymentDate { get; set; }
+        public bool IsCurrentBill { get; set; }
         public DateTime Createdon { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? UpdateOn { get; set; }
