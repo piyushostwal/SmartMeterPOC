@@ -17,7 +17,7 @@ namespace Nop.Web.Models.Customer
         public decimal BillAmount { get; set; }
         public string BillPaymentDate { get; set; }
         public string BillDueDate { get; set; }
-        public int PreviousConsumbptionUnitReading { get; set; }
+        public int PreviousConsumptionUnitReading { get; set; }
         public decimal? LastBillAmount { get; set; }
         public string LastBillPaymentDate { get; set; }
         

@@ -1530,9 +1530,9 @@ namespace Nop.Web.Controllers
                     var customerbilling = _customerBillingService.GetCustomerCurrentBill(m.DeviceId);
                     model.Add(new CustomerMetersModel
                     {
-                        meterId = m.DeviceId.ToString(),
-                        status = m.Status,
-                        billingUnit = m.BillingUnit,
+                        MeterId = m.DeviceId.ToString(),
+                        Status = m.Status,
+                        BillingUnit = m.BillingUnit,
                         IsBillPaid=customerbilling.IsBillPaid
                     });
                 }
@@ -1560,7 +1560,7 @@ namespace Nop.Web.Controllers
                 model.BillPaymentDate = customerbilling.BillPaymentDate != null ?
                     customerbilling.BillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
                 model.BillDueDate = customerbilling.BillDueDate.ToString("MM/dd/yyyy");
-                model.PreviousConsumbptionUnitReading = customerbilling.PreviousConsumbptionUnitReading;
+                model.PreviousConsumptionUnitReading = customerbilling.PreviousConsumbptionUnitReading;
                 model.LastBillAmount = customerbilling.LastBillAmount.Value;
                 model.LastBillPaymentDate = customerbilling.LastBillPaymentDate!=null?
                     customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy"):string.Empty;
