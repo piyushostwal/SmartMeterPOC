@@ -11,6 +11,7 @@ using Nop.Services.Security;
 using Nop.Services.Stores;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,6 +87,45 @@ namespace Nop.Services.SmartMeterLogs
                 _eventPublisher.EntityInserted(meterLog);
             }
             return meterLog;
+        }
+
+        public virtual IPagedList<SmartMeterLog> GetMeterlogsByTimeInterval(Guid deviceId, int timeInterval, DateTime startTime,
+            DateTime endTime, int pageIndex = 0, int pageSize = int.MaxValue)       {
+
+
+            //prepare parameters
+            var TimeInterval = _dataProvider.GetParameter();
+            TimeInterval.ParameterName = "TimeInterval";
+            TimeInterval.Value = timeInterval;
+            TimeInterval.DbType = DbType.Int32;
+
+            var DeviceId = _dataProvider.GetParameter();
+            DeviceId.ParameterName = "DeviceId";
+            DeviceId.Value = deviceId;
+            DeviceId.DbType = DbType.Guid;
+
+            var StartTime = _dataProvider.GetParameter();
+            StartTime.ParameterName = "StartTime";
+            StartTime.Value = startTime;
+            StartTime.DbType = DbType.DateTime;
+
+            var EndTime = _dataProvider.GetParameter();
+            EndTime.ParameterName = "EndTime";
+            EndTime.Value = endTime;
+            EndTime.DbType = DbType.DateTime;
+
+            var totalRecordsParameter = _dataProvider.GetParameter();
+            totalRecordsParameter.ParameterName = "TotalRecords";
+            totalRecordsParameter.Direction = ParameterDirection.Output;
+            totalRecordsParameter.DbType = DbType.Int32;
+
+            //invoke stored procedure
+            var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLog>("UspSelectSmartmeterLogs",
+                TimeInterval, DeviceId, StartTime, EndTime, totalRecordsParameter);
+            var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
+
+            //paging
+            return new PagedList<SmartMeterLog>(smartMeterLogs, pageIndex, pageSize, totalRecords);
         }
 
         #endregion

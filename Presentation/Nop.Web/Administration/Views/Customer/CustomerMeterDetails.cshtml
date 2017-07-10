@@ -9,6 +9,8 @@
     ViewBag.Title = T("Customers").Text;
     //active menu item (system name)
     Html.SetActiveMenuItemSystemName("Meter Details");
+    Html.AppendCssFileParts("~/Administration/Content/bootstrap/css/bootstrap.min.css");
+    Html.AppendScriptParts("~/Administration/Scripts/bootstrap/bootstrap.min.js");
 }
 
 @using (Html.BeginForm())
@@ -18,5 +20,64 @@
         <h1 class="pull-left">
             Customer Meter Details
         </h1>
+        <br/>
+        <div class="content">
+            <div class="form-horizontal">
+                <div class="panel-group">
+                    <div class="panel panel-default panel-search">
+                        <div class="panel-body">
+                            <div class='form-horizontal well'>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <fieldset>
+                                                    <legend>Consumer Details</legend>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Meter ID: meterId</label><br />
+                                                        <label class="control-label">Customer Name: customerName</label><br />
+                                                        <label class="control-label">Billing Unit: BillingUnit</label><br />
+                                                        <label class="control-label">Location: location</label><br />
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <fieldset>
+                                                    <legend>Consumption Details</legend>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Consumption Unit Reading: ConsumptionUnitReading</label><br />
+                                                        <label class="control-label">Previous Consumbption Unit Reading: PreviousConsumbptionUnitReading</label><br />
+                                                        @*<label class="control-label">Billing Unit: BillingUnit</label>*@<br />
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="background-color:#ccc">
+                                        <fieldset>
+                                            <legend>Billing Details</legend>
+                                            <div class="control-group">
+                                                <label class="control-label">Bill Period From: BillPeriodFrom $</label><br />
+                                                <label class="control-label">Bill Period To: BillPeriodTo</label><br />
+                                                <label class="control-label">Bill Amount: BillAmount $</label><br />
+                                                <label class="control-label">Bill Payment Date: BillPaymentDate</label><br />
+                                                <label class="control-label">Bill Due Date: BillDueDate</label><br />
+                                                <label class="control-label">Last Bill Amount: LastBillAmount</label><br />
+                                                <label class="control-label">Last Bill Payment Date: LastBillPaymentDate</label><br />
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="btn btn-danger pull-right">Deactivate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-}
+        </div>
+        }
