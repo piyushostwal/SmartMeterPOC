@@ -11,5 +11,7 @@ namespace Nop.Web.Models.SmartMeterLogs
         public Guid deviceId { get; set; }
         public int TimeInterval { get; set; }
         public DateTime LoggingTime { get; set; }
+        public double consumption { get; set; }
+        public int Reading { get; set; }
     }
 }

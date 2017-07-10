@@ -18,6 +18,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 
 namespace Nop.Web.Controllers
 {
@@ -86,6 +87,14 @@ namespace Nop.Web.Controllers
             return Ok(logs);
         }
 
+        [HttpGet]
+        [Route("api/SmartMeterLog/collection")]
+        public IHttpActionResult GetSmartMeterLogCollection([FromUri]Guid[] ids)
+        {
+
+            return Ok();
+        }
+
         // POST api/smartmeterlog
         public IHttpActionResult Post([FromBody]SmartMeterLogModel smartMeterLogModel)
         {
@@ -135,13 +144,13 @@ namespace Nop.Web.Controllers
         {
             if (filterModel.DeviceID != Guid.Empty && filterModel.TimeInterval >= 15)
             {
-                //List<SmartMeterLog> returnedLogs = _smartMeterLogService.GetMeterLogsForGraph(filterModel.DeviceID, filterModel.TimeInterval, filterModel.StartDate, filterModel.EndDate);
-                //List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
-                //if (returnedLogs != null && returnedLogs.Count > 0)
-                //{
-                //    allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, LoggingTime = l.LoggingTime }).ToList();
-                //}
-                //return Ok(allLogs);
+                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate);
+                List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
+                if (returnedLogs != null && returnedLogs.Count > 0)
+                {
+                    allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList();
+                }
+                return Ok(allLogs);
 
             }
             return BadRequest();
