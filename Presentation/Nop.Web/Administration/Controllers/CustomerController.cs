@@ -2475,7 +2475,7 @@ namespace Nop.Admin.Controllers
 
 
             return View(model);
-            return View();
+            
         }
         [HttpPost]
         // [AdminAntiForgery(true)]
