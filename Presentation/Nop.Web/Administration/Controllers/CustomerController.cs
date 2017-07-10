@@ -1627,6 +1627,12 @@ namespace Nop.Admin.Controllers
 
             return RedirectToAction("Edit", new { id = customer.Id });
         }
+        
+        public ActionResult CustomerMeters() {
+            
+            return View();
+        }
+        
 
         #endregion
 

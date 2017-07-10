@@ -75,7 +75,7 @@ namespace Nop.Web.Infrastructure
                             new { controller = "Customer", action = "CustomerMeters" },
                             new[] { "Nop.Web.Controllers" });
             routes.MapLocalizedRoute("CustomerMeterDetails",
-                           "customer/CustomerMeterDetails",
+                           "customer/CustomerMeterDetails/{deviceId}",
                            new { controller = "Customer", action = "CustomerMeterDetails" },
                            new[] { "Nop.Web.Controllers" });
             routes.MapLocalizedRoute("Dashboard",
