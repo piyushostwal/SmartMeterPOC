@@ -1568,7 +1568,7 @@ namespace Nop.Web.Controllers
             if (meterdatils != null)
             {
                 model.BillingUnit =
-                    meterdatils.FirstOrDefault(m => m.DeviceId.ToString() == "c56a2690-f588-4758-a874-baddda23c166").BillingUnit;
+                    meterdatils.FirstOrDefault(m => m.DeviceId == deviceId).BillingUnit;
             }
             if(smartMeterLogs.Count>0)
                 model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
