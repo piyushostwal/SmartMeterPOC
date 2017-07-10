@@ -8,12 +8,13 @@ namespace Nop.Admin.Models.Customers
 {
     public partial class CustomerListModel : BaseNopModel
     {
+       
         public CustomerListModel()
         {
             SearchCustomerRoleIds = new List<int>();
             AvailableCustomerRoles = new List<SelectListItem>();
         }
-
+        
         [UIHint("MultiSelect")]
         [NopResourceDisplayName("Admin.Customers.Customers.List.CustomerRoles")]
         public IList<int> SearchCustomerRoleIds { get; set; }
