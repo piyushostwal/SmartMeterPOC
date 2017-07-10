@@ -1,8 +1,6 @@
-﻿
-
-    @using Nop.Web.Models.Customer;
-    @using Nop.Core;
-    @model System.Collections.Generic.List<CustomerMetersModel>
+﻿@using Nop.Web.Models.Customer;
+@using Nop.Core;
+@model System.Collections.Generic.List<customermetersmodel>
     @{
         Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
@@ -20,7 +18,7 @@
 {
         @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.Info })
     }
-    
+
     @*@Html.DropDownListFor(x => x, Meterlist, new { @id = "MeterList" });*@
     @*@Html.Hidden("MeterList", Meterlist, new { @id = "MeterList" });*@
     @*
@@ -31,89 +29,88 @@
                   $("ul").append(li.concat(arr[i]))
               }
         </script>*@
-                                              <div class="page account-page customer-info-page">
-                                                  <div class="page-title">
-                                                      <h1>My Account - My Meters</h1>
-                                                  </div>
-                                                  <div class="page-body">
-                                                 
-                                                      @using (Html.BeginForm())
-                                                      {
-                                                          @Html.AntiForgeryToken()
-                                                          var validationSummary = Html.ValidationSummary(true);
-                                                          if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
-                                                          {
-                                                              <div class="message-error">@validationSummary</div>
-                                                          }
-                                                         
-                                                            <div class="panel panel-default">
-                                                              <div class="panel-body">
-                                                                  <div id="products-grid"></div>
+    <div class="page account-page customer-info-page">
+        <div class="page-title">
+            <h1>My Account - My Meters</h1>
+        </div>
+        <div class="page-body">
 
-                                                                  <script>
-    var arrayOfArrays = JSON.parse('@Html.Raw(Json.Encode(Model))');
-    console.log(arrayOfArrays)
-    $("#products-grid").kendoGrid({
-        dataSource: {
-            data: arrayOfArrays,
-            schema: {
-                model: {
-                    fields: {
-                        status: { type: "bool" },
-                        MeterId: { type: "string" },
-                        IsBillPaid: { type: "bool" }
-                    }
-                }
-            },
-            error: function (e) {
-                display_kendoui_grid_error(e);
-                // Cancel the changes
-                this.cancelChanges();
-            },
-            serverPaging: true,
-            serverFiltering: true,
-            serverSorting: true,
-            pageSize: 20
-        },
-        pageable: {
-            input: true,
-            numeric: false
-        },
-        scrollable: false,
-        sortable: true,
-        filterable: true,
-        columns: [
+            @using (Html.BeginForm())
             {
-                field: "MeterId",
-                title: "Device Id",
-                template: '<a href="CustomerMeterDetails/' + '#= MeterId #' + '">' + '#= MeterId #' + '</a>',
-                //template:'#= MeterId #',
-                attributes: { style: "text-align:center" },
-                width: 300
-            },
+                @Html.AntiForgeryToken()
+                var validationSummary = Html.ValidationSummary(true);
+                if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+                {
+                    <div class="message-error">@validationSummary</div>
+                }
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="products-grid"></div>
+
+                        <script>
+                            var arrayOfArrays = JSON.parse('@Html.Raw(Json.Encode(Model))');
+                            console.log(arrayOfArrays)
+                            $("#products-grid").kendoGrid({
+                                dataSource: {
+                                    data: arrayOfArrays,
+                                    schema: {
+                                        model: {
+                                            fields: {
+                                                status: { type: "bool" },
+                                                MeterId: { type: "string" },
+                                                IsBillPaid: { type: "bool" }
+                                            }
+                                        }
+                                    },
+                                    error: function (e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true,
+                                    pageSize: 20
+                                },
+                                pageable: {
+                                    input: true,
+                                    numeric: false
+                                },
+                                scrollable: false,
+                                sortable: true,
+                                filterable: true,
+                                columns: [
                                     {
-                                        field: "IsBillPaid",
-                                        title: "Payment",
-                                        template: '# if(IsBillPaid) {# <span class="label label-success">Active</span> #} else {# <span class="label label-danger">Inactive</span>#} #',
+                                        field: "MeterId",
+                                        title: "Device Id",
+                                        template: '<a href="CustomerMeterDetails/' + '#= MeterId #' + '">' + '#= MeterId #' + '</a>',
+                                        //template:'#= MeterId #',
                                         attributes: { style: "text-align:center" },
                                         width: 300
                                     },
-                                    {
-                                        field: "status",
-                                        title: "Status",
-                                        template: '# if(Status) {# <span class="label label-success">Active</span> #} else {# <span class="label label-danger">Inactive</span>#} #',
-                                        attributes: { style: "text-align:center" },
-                                        width: 300
-                                    },
+                                                            {
+                                                                field: "IsBillPaid",
+                                                                title: "Payment",
+                                                                template: '# if(IsBillPaid) {# <span class="label label-success">Active</span> #} else {# <span class="label label-danger">Inactive</span>#} #',
+                                                                attributes: { style: "text-align:center" },
+                                                                width: 300
+                                                            },
+                                                            {
+                                                                field: "status",
+                                                                title: "Status",
+                                                                template: '# if(Status) {# <span class="label label-success">Active</span> #} else {# <span class="label label-danger">Inactive</span>#} #',
+                                                                attributes: { style: "text-align:center" },
+                                                                width: 300
+                                                            },
 
-        ]
-    });
-    //});
-                                                                  </script>
-                                                              </div>
-                                                          </div>
-                                                      }
+                                ]
+                            });
+                            //});
+                        </script>
+                    </div>
+                </div>
+            }
 
-                                                  </div>
-                                              </div>
-  
+        </div>
+    </div>

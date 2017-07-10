@@ -29,7 +29,7 @@
         <div class="fieldset">
             <div class='form-horizontal well'>
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="row">
                             <div class="col-md-12">
                                 <fieldset>
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="background-color:#ccc">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="background-color:#ccc">
                         <fieldset>
                             <legend>Billing Details</legend>
                             <div class="control-group">
@@ -85,13 +85,13 @@
                         </h3>
                         <div class="box-tools pull-right">
 
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>      } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>      } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>      } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="hour">Hour</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
+                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="hour">Hour</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
                             <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
                                 @if (hidePanel)
                                 {
@@ -233,6 +233,103 @@
                 </text>
         }
             });
+        </script>
+
+    </div>
+    <div class="page-title">
+        <h1>Payment History</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="products-grid"></div>
+            </div>
+        </div>
+        <script>
+            var arrayOfArrays = [
+                {
+                    "billPeriod": "July-2017",
+                    "amount": "206",
+                    "transactionId": "12345",
+                    "billId":"45645"
+                },
+                {
+                    "billPeriod": "August-2017",
+                    "amount": "25",
+                    "transactionId": "45645",
+                    "billId": "456456"
+                },
+                {
+                    "billPeriod": "20-july-2017",
+                    "amount": "2546",
+                    "transactionId": "4546",
+                    "billId": "45645"
+                }
+            ]
+                            console.log(arrayOfArrays)
+                            $("#products-grid").kendoGrid({
+                                dataSource: {
+                                    data: arrayOfArrays,
+                                    schema: {
+                                        model: {
+                                            fields: {
+                                                transactionId: { type: "string" },
+                                                billPeriod: { type: "string" },
+                                                billId: { type: "string" },
+                                                amount: {type:"string"}
+                                            }
+                                        }
+                                    },
+                                    error: function (e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true,
+                                    pageSize: 20
+                                },
+                                pageable: {
+                                    input: true,
+                                    numeric: false
+                                },
+                                scrollable: false,
+                                sortable: true,
+                                filterable: true,
+                                columns: [
+                                    {
+                                        field: "billId",
+                                        title: "Bill Id",
+                                        template: '<a href="CustomerMeterDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
+                                        //template:'#= MeterId #',
+                                        attributes: { style: "text-align:center" },
+                                        width: 300
+                                    },
+                                    {
+                                        field: "billPeriod",
+                                        title: "Bill Month",
+                                        //template:'#= MeterId #',
+                                        attributes: { style: "text-align:center" },
+                                        width: 300
+                                    },
+                                    {
+                                        field: "amount",
+                                        title: "Amount",
+                                        //template:'#= MeterId #',
+                                        attributes: { style: "text-align:center" },
+                                        width: 300
+                                    },
+                                    {
+                                        field: "transactionId",
+                                        title: "Transaction Id",
+                                        //template:'#= MeterId #',
+                                        attributes: { style: "text-align:center" },
+                                        width: 300
+                                    },
+                                                     
+
+                                ]
+                            });
+                            //});
         </script>
     </div>
 
