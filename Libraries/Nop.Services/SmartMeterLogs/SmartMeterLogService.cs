@@ -89,7 +89,7 @@ namespace Nop.Services.SmartMeterLogs
             return meterLog;
         }
 
-        public virtual IPagedList<SmartMeterLog> GetMeterlogsByTimeInterval(Guid deviceId, int timeInterval, DateTime startTime,
+        public virtual IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByTimeInterval(Guid deviceId, int timeInterval, DateTime startTime,
             DateTime endTime, int pageIndex = 0, int pageSize = int.MaxValue)       {
 
 
@@ -120,12 +120,12 @@ namespace Nop.Services.SmartMeterLogs
             totalRecordsParameter.DbType = DbType.Int32;
 
             //invoke stored procedure
-            var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLog>("UspSelectSmartmeterLogs",
-                TimeInterval, DeviceId, StartTime, EndTime, totalRecordsParameter);
+            var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>("UspSelectSmartmeterLogs",
+                DeviceId,TimeInterval , StartTime, EndTime, totalRecordsParameter);
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
             //paging
-            return new PagedList<SmartMeterLog>(smartMeterLogs, pageIndex, pageSize, totalRecords);
+            return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize, totalRecords);
         }
 
         #endregion
