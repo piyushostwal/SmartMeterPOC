@@ -2399,6 +2399,17 @@ namespace Nop.Admin.Controllers
             var xml = _exportManager.ExportCustomersToXml(customers);
             return new XmlDownloadResult(xml, "customers.xml");
         }
+        //[HttpGet]
+        //public ActionResult CustomerMeters()
+        //{
+
+        //    return View();
+        //}
+        [HttpGet]
+        public ActionResult CustomerMeterDetails() {
+
+            return View();
+        }
 
         [HttpPost]
         public virtual ActionResult UpdateCustomereProductStatus(CustomerProductStatusModel statusModel)
