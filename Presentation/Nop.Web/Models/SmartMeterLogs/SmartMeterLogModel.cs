@@ -17,5 +17,6 @@ namespace Nop.Web.Models.SmartMeterLogs
         public DateTime TimeIntervalSetTime { get; set; }
         public bool IsActive { get; set; }
         public DateTime LoggingTime { get; set; }
+        public int Reading { get; set; }
     }
 }

@@ -89,29 +89,30 @@ namespace Nop.Web.Controllers
         // POST api/smartmeterlog
         public IHttpActionResult Post([FromBody]SmartMeterLogModel smartMeterLogModel)
         {
-            if (smartMeterLogModel.IsActive)
+            var settingsData = _customerBillUnitRateService.GetBillingRateInformation();
+            var customerData = _customerProductDetailsService.GetCustomerProductDetailsByDeviceId(smartMeterLogModel.DeviceID);
+            if (settingsData != null && customerData != null)
             {
-                SmartMeterLog smartMeterLog = new SmartMeterLog();
-                smartMeterLog.DeviceID = smartMeterLogModel.DeviceID;
-                smartMeterLog.Lattitude = smartMeterLogModel.Lattitude;
-                smartMeterLog.Longitude = smartMeterLogModel.Longitude;
-                smartMeterLog.Consumption = smartMeterLogModel.Consumption;
-                smartMeterLog.TimeInterval = smartMeterLogModel.TimeInterval;
-                smartMeterLog.TimeIntervalSetTime = smartMeterLogModel.TimeIntervalSetTime;
-                smartMeterLog.IsActive = smartMeterLogModel.IsActive;
-                smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
-                var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
-
-                var settingsData = _customerBillUnitRateService.GetBillingRateInformation();
-                var customerData = _customerProductDetailsService.GetCustomerProductDetailsByDeviceId(smartMeterLog.DeviceID);
-                if (settingsData != null && customerData != null)
+                if (customerData.Status)
                 {
+                    SmartMeterLog smartMeterLog = new SmartMeterLog();
+                    smartMeterLog.DeviceID = smartMeterLogModel.DeviceID;
+                    smartMeterLog.Lattitude = smartMeterLogModel.Lattitude;
+                    smartMeterLog.Longitude = smartMeterLogModel.Longitude;
+                    smartMeterLog.Consumption = smartMeterLogModel.Consumption;
+                    smartMeterLog.TimeInterval = smartMeterLogModel.TimeInterval;
+                    smartMeterLog.TimeIntervalSetTime = smartMeterLogModel.TimeIntervalSetTime;
+                    smartMeterLog.IsActive = smartMeterLogModel.IsActive;
+                    smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
+                    smartMeterLog.Reading = smartMeterLogModel.Reading;
+                    var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
+
                     data.TimeInterval = settingsData.TimeInterval;
                     data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
                     data.IsActive = customerData.Status;
-                }
 
-                return Ok(data);
+                    return Ok(data);
+                }
             }
             return Unauthorized();
         }
@@ -126,6 +127,24 @@ namespace Nop.Web.Controllers
         // DELETE api/smartmeterlog/5
         public void Delete(int id)
         {
+        }
+
+        [HttpPost]
+        [Route("api/SmartMeterLog/graph")]
+        public IHttpActionResult GetGraphData(SmartMeterLogGraphFilterModel filterModel)
+        {
+            if (filterModel.DeviceID != Guid.Empty && filterModel.TimeInterval >= 15)
+            {
+                //List<SmartMeterLog> returnedLogs = _smartMeterLogService.GetMeterLogsForGraph(filterModel.DeviceID, filterModel.TimeInterval, filterModel.StartDate, filterModel.EndDate);
+                //List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
+                //if (returnedLogs != null && returnedLogs.Count > 0)
+                //{
+                //    allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, LoggingTime = l.LoggingTime }).ToList();
+                //}
+                //return Ok(allLogs);
+
+            }
+            return BadRequest();
         }
     }
 
