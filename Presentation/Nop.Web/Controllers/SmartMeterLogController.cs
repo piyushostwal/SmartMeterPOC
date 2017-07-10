@@ -8,6 +8,7 @@ using Nop.Services.Messages;
 using Nop.Services.Security;
 using Nop.Services.SmartMeterLogs;
 using Nop.Web.Factories;
+using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework.Security.Captcha;
 using Nop.Web.Models.SmartMeterLogs;
 using System;
@@ -116,14 +117,21 @@ namespace Nop.Web.Controllers
         }
 
         // PUT api/smartmeterlog/5
-        public async Task Put(Guid id, [FromBody]bool value)
+        public async Task Put(Guid id, [FromBody]CustomerProductStatusModel statusModel)
         {
-            await _customerProductDetailsService.UpdateCustomerProductStatus(id, value);
+            await _customerProductDetailsService.UpdateCustomerProductStatus(id, statusModel.Status);
+
         }
 
         // DELETE api/smartmeterlog/5
         public void Delete(int id)
         {
         }
+    }
+
+    public class CustomerProductStatusModel : BaseNopModel
+    {
+        public Guid DeviceId { get; set; }
+        public bool Status { get; set; }
     }
 }
