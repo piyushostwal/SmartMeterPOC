@@ -1632,6 +1632,9 @@ namespace Nop.Admin.Controllers
             
             return View();
         }
+        public ActionResult MetersHashmap() {
+            return View();
+        }
         
 
         #endregion
