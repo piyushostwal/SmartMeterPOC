@@ -146,6 +146,7 @@
     <Compile Include="Domain\Shipping\Warehouse.cs" />
     <Compile Include="Domain\Shipping\DeliveryDate.cs" />
     <Compile Include="Domain\SmartMeterLogs\SmartMeterLog.cs" />
+    <Compile Include="Domain\SmartMeterLogs\SmartMeterLogByTimeInterval.cs" />
     <Compile Include="Domain\Topics\TopicTemplate.cs" />
     <Compile Include="Domain\Vendors\VendorNote.cs" />
     <Compile Include="Domain\Vendors\VendorSettings.cs" />

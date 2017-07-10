@@ -12,7 +12,7 @@ namespace Nop.Services.SmartMeterLogs
     {
         IPagedList<SmartMeterLog> GetMeterLog(Guid devieId, int pageIndex = 0, int pageSize = int.MaxValue);
         SmartMeterLog SaveMeterLog(SmartMeterLog meterLog);
-        IPagedList<SmartMeterLog> GetMeterlogsByTimeInterval(Guid deviceId, int timeInterval, DateTime startTime,
+        IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByTimeInterval(Guid deviceId, int timeInterval, DateTime startTime,
             DateTime endTime, int pageIndex = 0, int pageSize = int.MaxValue);
     }
 }
