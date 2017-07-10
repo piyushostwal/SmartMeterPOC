@@ -1545,8 +1545,8 @@ namespace Nop.Web.Controllers
         {
             var meterdatils = _customerProductDetailsService.
                 GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
-            var customerbilling = _customerBillingService.GetCustomerCurrentBill(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
-            var smartMeterLogs = _smartmeterLogService.GetMeterLog(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+            var customerbilling = _customerBillingService.GetCustomerCurrentBill(deviceId);
+            var smartMeterLogs = _smartmeterLogService.GetMeterLog(deviceId);
             CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
             
             model.customerName = _workContext.CurrentCustomer.GetFullName();
