@@ -1654,7 +1654,7 @@ namespace Nop.Admin.Controllers
                     var customerbilling = _customerBillingService.GetCustomerCurrentBill(m.DeviceId);
                     model.Add(new CustomerMetersModel
                     {
-                        MeterId = m.DeviceId, //.ToString(),
+                        MeterId = m.DeviceId.ToString(),
                         Status = m.Status,
                         BillingUnit = m.BillingUnit,
                         IsBillPaid = customerbilling.IsBillPaid
@@ -1663,6 +1663,44 @@ namespace Nop.Admin.Controllers
 
             } 
             return View(model);
+        }
+        [HttpGet]
+        [Route("{MeterId:Guid}")]
+        public ActionResult CustomerMeterDetails(Guid MeterId)
+        {
+            var meterdatils = _customerProductDetailsService.
+               GetCustomerProductDetails(15);
+            var customerbilling = _customerBillingService.GetCustomerCurrentBill(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+            var smartMeterLogs = _smartmeterLogService.GetMeterLog(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+            CustomerMeterDetails model = new CustomerMeterDetails();
+
+            model.customerName = _workContext.CurrentCustomer.GetFullName();
+            if (customerbilling != null)
+            {
+                model.meterId = customerbilling.DeviceId.ToString();
+                model.ConsumptionUnitReading = customerbilling.ConsumptionUnitReading;
+                model.BillPeriodFrom = customerbilling.BillPeriodFrom.ToString("MM/dd/yyyy");
+                model.BillPeriodTo = customerbilling.BillPeriodTo.ToString("MM/dd/yyyy");
+                model.BillAmount = customerbilling.BillAmount;
+                model.BillPaymentDate = customerbilling.BillPaymentDate != null ?
+                    customerbilling.BillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+                model.BillDueDate = customerbilling.BillDueDate.ToString("MM/dd/yyyy");
+                model.PreviousConsumptionUnitReading = customerbilling.PreviousConsumbptionUnitReading;
+                model.LastBillAmount = customerbilling.LastBillAmount.Value;
+                model.LastBillPaymentDate = customerbilling.LastBillPaymentDate != null ?
+                    customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+            }
+            if (meterdatils != null)
+            {
+                model.BillingUnit =
+                    meterdatils.FirstOrDefault(m => m.DeviceId.ToString() == "c56a2690-f588-4758-a874-baddda23c166").BillingUnit;
+            }
+            if (smartMeterLogs.Count > 0)
+                model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
+
+
+            return View(model);
+
         }
         public ActionResult MetersHashmap() {
             return View();
@@ -2440,43 +2478,7 @@ namespace Nop.Admin.Controllers
 
         //    return View();
         //}
-        [HttpGet]
-        [Route("Customer/CustomerMeterDetails/{DeviceId}")]
-        public ActionResult CustomerMeterDetails(Guid deviceId) {
-            var meterdatils = _customerProductDetailsService.
-               GetCustomerProductDetails(15);
-            var customerbilling = _customerBillingService.GetCustomerCurrentBill(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
-            var smartMeterLogs = _smartmeterLogService.GetMeterLog(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
-            CustomerMeterDetails model = new CustomerMeterDetails();
-
-            model.customerName = _workContext.CurrentCustomer.GetFullName();
-            if (customerbilling != null)
-            {
-                model.meterId = customerbilling.DeviceId.ToString();
-                model.ConsumptionUnitReading = customerbilling.ConsumptionUnitReading;
-                model.BillPeriodFrom = customerbilling.BillPeriodFrom.ToString("MM/dd/yyyy");
-                model.BillPeriodTo = customerbilling.BillPeriodTo.ToString("MM/dd/yyyy");
-                model.BillAmount = customerbilling.BillAmount;
-                model.BillPaymentDate = customerbilling.BillPaymentDate != null ?
-                    customerbilling.BillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
-                model.BillDueDate = customerbilling.BillDueDate.ToString("MM/dd/yyyy");
-                model.PreviousConsumptionUnitReading = customerbilling.PreviousConsumbptionUnitReading;
-                model.LastBillAmount = customerbilling.LastBillAmount.Value;
-                model.LastBillPaymentDate = customerbilling.LastBillPaymentDate != null ?
-                    customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
-            }
-            if (meterdatils != null)
-            {
-                model.BillingUnit =
-                    meterdatils.FirstOrDefault(m => m.DeviceId.ToString() == "c56a2690-f588-4758-a874-baddda23c166").BillingUnit;
-            }
-            if (smartMeterLogs.Count > 0)
-                model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
-
-
-            return View(model);
-            
-        }
+      
         [HttpPost]
         // [AdminAntiForgery(true)]
         public virtual ActionResult UpdateCustomereProductStatus(CustomerProductStatusModel statusModel)

@@ -142,6 +142,8 @@ namespace Nop.Web.Controllers
         [Route("api/SmartMeterLog/graph")]
         public IHttpActionResult GetGraphData(SmartMeterLogGraphFilterModel filterModel)
         {
+            if (filterModel == null) return BadRequest();
+
             if (filterModel.DeviceID != Guid.Empty && filterModel.TimeInterval >= 15)
             {
                 IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate);
