@@ -1665,7 +1665,7 @@ namespace Nop.Admin.Controllers
             return View(model);
         }
         [HttpGet]
-        [Route("{MeterId:Guid}")]
+        [Route("Customer/CustomerMeterDetails/{MeterId:Guid}")]
         public ActionResult CustomerMeterDetails(Guid MeterId)
         {
             var meterdatils = _customerProductDetailsService.
@@ -1703,6 +1703,9 @@ namespace Nop.Admin.Controllers
 
         }
         public ActionResult MetersHashmap() {
+            return View();
+        }
+        public ActionResult Dashboard() {
             return View();
         }
         
