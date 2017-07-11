@@ -179,12 +179,12 @@
                                                     fields: {
                                                         Status: { type: "bool" },
                                                         MeterId: { type: "string" },
-                                                        IsBillPaid: { type: "bool" }
+                                                        IsBillPaid: { type: "bool" },
                                                         //Status: { type: "string" },
                                                         //Id: { type: "number" },
                                                         //Payment: { type: "string" },
                                                         //Email: { type: "string" },
-                                                        //Username: { type: "string" },
+                                                        CustomerFullName: { type: "string" }
                                                         //UserId: { type: "string" },
 
                                                     }
@@ -209,19 +209,20 @@
                                         filterable: false,
                                         columns: [
                                             {
+                                                field: "CustomerFullName",
+                                                title: "Customer Name",
+                                                template: '#= CustomerFullName #',
+                                                attributes: { style: "text-align:center" },
+                                                width: 300
+                                            },
+                                            {
                                                 field: "Id",
                                                 title: "Device Id",
                                                 template: '<a href="CustomerMeterDetails/' + '#= MeterId #' + '">' + '#= MeterId #' + '</a>',
                                                 attributes: { style: "text-align:center" },
                                                 width: 300
                                             },
-                                            //{
-                                            //    field: "Username",
-                                            //    title: "Username",
-                                            //    template: 'jahdf',
-                                            //    attributes: { style: "text-align:center" },
-                                            //    width: 300
-                                            //},
+                                            
                                             //{
                                             //    field: "Email",
                                             //    title: "Email",

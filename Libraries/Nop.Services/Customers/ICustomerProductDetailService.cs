@@ -15,5 +15,6 @@ namespace Nop.Services.Customers
         CustomerProductDetails GetCustomerProductDetailsByDeviceId(Guid deviceId);
         Task<bool> UpdateDeviceStatus(Guid deviceId, bool status);
         Task UpdateCustomerProductStatus(Guid deviceId, bool isActive);
+        IPagedList<CustomerProductDetails> SearchDevices(string deviceId, int pageIndex = 0, int pageSize = int.MaxValue);
     }
 }

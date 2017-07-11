@@ -1,4 +1,5 @@
 ﻿using Nop.Core;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.SmartMeterLogs;
 using Nop.Services.Customers;
@@ -10,6 +11,7 @@ using Nop.Services.SmartMeterLogs;
 using Nop.Web.Factories;
 using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework.Security.Captcha;
+using Nop.Web.Models.Customer;
 using Nop.Web.Models.SmartMeterLogs;
 using System;
 using System.Collections.Generic;
@@ -91,8 +93,17 @@ namespace Nop.Web.Controllers
         [Route("api/SmartMeterLog/collection")]
         public IHttpActionResult GetSmartMeterLogCollection([FromUri]Guid[] ids)
         {
+            IPagedList<SmartMeterLog> smartMeterLogs = _smartMeterLogService.GetMeterLogForMultipleDeviceIds(ids);
+            return Ok(smartMeterLogs);
+        }
 
-            return Ok();
+        [HttpGet]
+        [Route("api/device/search/{id}")]
+        public IHttpActionResult GetSmartMeterLogCollection(string id)
+        {
+            IPagedList<CustomerProductDetails> smartMeterLogs = _customerProductDetailsService.SearchDevices(id);
+            List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel() { DeviceId = m.DeviceId, CustomerId = m.CustomerId, Id = m.Id, CustomerName = m.Customer.Username }).ToList(); ;
+            return Ok(meterModel);
         }
 
         // POST api/smartmeterlog

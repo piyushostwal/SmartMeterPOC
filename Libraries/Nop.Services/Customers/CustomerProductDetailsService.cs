@@ -104,6 +104,14 @@ namespace Nop.Services.Customers
             _eventPublisher.EntityUpdated(customerProductDetails);
         }
 
+        public virtual IPagedList<CustomerProductDetails> SearchDevices(string deviceId, int pageIndex = 0, int pageSize = int.MaxValue)
+        {
+            var query = _customerProductDetailsRepository.Table.Where(m => m.DeviceId.ToString().Contains(deviceId));
+            query = query.OrderByDescending(c => c.DeviceId);
+            var devices = new PagedList<CustomerProductDetails>(query, pageIndex, pageSize);
+            return devices;
+        }
+
         /// <summary>
         /// Update IsActive stauts for device
         /// </summary>
