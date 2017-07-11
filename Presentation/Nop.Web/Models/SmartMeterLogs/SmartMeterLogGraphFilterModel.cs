@@ -8,9 +8,17 @@ namespace Nop.Web.Models.SmartMeterLogs
 {
     public class SmartMeterLogGraphFilterModel : BaseNopModel
     {
+        public SmartMeterLogGraphFilterModel()
+        {
+            PageIndex = 0;
+            PageSize = 20;
+        }
+
         public Guid DeviceID { get; set; }
         public int TimeInterval { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
     }
 }

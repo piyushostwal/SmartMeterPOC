@@ -21,6 +21,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using Nop.Services.Common;
 
 namespace Nop.Web.Controllers
 {
@@ -41,6 +42,7 @@ namespace Nop.Web.Controllers
 
         private readonly LocalizationSettings _localizationSettings;
         private readonly CaptchaSettings _captchaSettings;
+
         #endregion
 
         #region constructor
@@ -102,7 +104,14 @@ namespace Nop.Web.Controllers
         public IHttpActionResult GetSmartMeterLogCollection(string id)
         {
             IPagedList<CustomerProductDetails> smartMeterLogs = _customerProductDetailsService.SearchDevices(id);
-            List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel() { DeviceId = m.DeviceId, CustomerId = m.CustomerId, Id = m.Id, CustomerName = m.Customer.Username }).ToList(); ;
+
+            List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel()
+                    {
+                        DeviceId = m.DeviceId,
+                        CustomerId = m.CustomerId,
+                        Id = m.Id,
+                        CustomerName = m.Customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName) + " " + m.Customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName)
+                    }).ToList();
             return Ok(meterModel);
         }
 
@@ -157,7 +166,7 @@ namespace Nop.Web.Controllers
 
             if (filterModel.DeviceID != Guid.Empty && filterModel.TimeInterval >= 15)
             {
-                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate);
+                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate, filterModel.PageIndex, filterModel.PageSize);
                 List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
                 if (returnedLogs != null && returnedLogs.Count > 0)
                 {
@@ -168,6 +177,7 @@ namespace Nop.Web.Controllers
             }
             return BadRequest();
         }
+
     }
 
     public class CustomerProductStatusModel : BaseNopModel
