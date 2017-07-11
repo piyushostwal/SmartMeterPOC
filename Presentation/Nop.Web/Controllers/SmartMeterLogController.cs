@@ -21,6 +21,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using Nop.Services.Common;
 
 namespace Nop.Web.Controllers
 {
@@ -102,7 +103,13 @@ namespace Nop.Web.Controllers
         public IHttpActionResult GetSmartMeterLogCollection(string id)
         {
             IPagedList<CustomerProductDetails> smartMeterLogs = _customerProductDetailsService.SearchDevices(id);
-            List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel() { DeviceId = m.DeviceId, CustomerId = m.CustomerId, Id = m.Id, CustomerName = m.Customer.Username }).ToList(); ;
+            List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel()
+                    {
+                        DeviceId = m.DeviceId,
+                        CustomerId = m.CustomerId,
+                        Id = m.Id,
+                        CustomerName = m.Customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName) + " " + m.Customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName)
+                    }).ToList();
             return Ok(meterModel);
         }
 
@@ -168,6 +175,7 @@ namespace Nop.Web.Controllers
             }
             return BadRequest();
         }
+
     }
 
     public class CustomerProductStatusModel : BaseNopModel
