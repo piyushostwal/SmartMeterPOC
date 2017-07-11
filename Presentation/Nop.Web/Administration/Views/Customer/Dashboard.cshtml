@@ -174,26 +174,26 @@
             labels: [],
             datasets: [
                 {
-                    label: "Consumption",
+                    label: "Piyush Ostwal",
                     fillColor: "white",
                     strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
+                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
+                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    backgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
+                    pointBorderColor: "#"+((1<<24)*Math.random()|0).toString(16),
+                    pointBackgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
                     pointBorderWidth: 1,
                     data: [],
                     fill:false
                 },
                  {
-                     label: "Consumption1",
+                     label: "Manish Patil",
                      fillColor: "white",
                      strokeColor: "rgba(60,166,166,0.8)",
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
+                        pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
                      pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
                      pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -282,14 +282,14 @@
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
                     
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);
@@ -340,7 +340,7 @@
             labels: [],
             datasets: [
                 {
-                    label: "Consumption",
+                    label: "Piyush Ostwal",
                     fillColor: "white",
                     strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -356,7 +356,7 @@
                     fill: false
                 },
                  {
-                     label: "Consumption1",
+                     label: "Manish Patil",
                      fillColor: "white",
                      strokeColor: "rgba(60,166,166,0.8)",
                     pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -425,7 +425,7 @@
         var data;
         var data1 = {};
         data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 45;
+        data1.TimeInterval = 600;
         data1.StartDate = "2015-5-22 12:45:34.243";
         data1.EndDate = "2016-1-22 12:45:34.243";
 
@@ -438,24 +438,19 @@
             },
             dataType: 'json',
             //data: data,
-            data: JSON.stringify({
-                DeviceID: "c56a2690-f588-4758-a874-baddda23c166",
-                TimeInterval: 45,
-                StartDate: "2017-5-01 12:45:34.243",
-                EndDate: "2017-5-31 12:45:34.243"
-            }),
+            data: JSON.stringify(data1),
             success: function (result) {
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
 
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);
@@ -505,7 +500,7 @@
             labels: [],
             datasets: [
                 {
-                    label: "Consumption",
+                    label: "Piyush Ostwal",
                     fillColor: "white",
                     strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -521,7 +516,7 @@
                     fill: false
                 },
                  {
-                     label: "Consumption1",
+                     label: "Manish Patil",
                      fillColor: "white",
                      strokeColor: "rgba(60,166,166,0.8)",
                     pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -590,7 +585,7 @@
         var data;
         var data1 = {};
         data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 45;
+        data1.TimeInterval = 410;
         data1.StartDate = "2015-5-22 12:45:34.243";
         data1.EndDate = "2016-1-22 12:45:34.243";
 
@@ -603,24 +598,19 @@
             },
             dataType: 'json',
             //data: data,
-            data: JSON.stringify({
-                DeviceID: "c56a2690-f588-4758-a874-baddda23c166",
-                TimeInterval: 45,
-                StartDate: "2017-5-01 12:45:34.243",
-                EndDate: "2017-5-31 12:45:34.243"
-            }),
+            data: JSON.stringify(data1),
             success: function (result) {
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
 
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);
@@ -670,7 +660,7 @@
             labels: [],
             datasets: [
                 {
-                    label: "Consumption",
+                    label: "Piyush Ostwal",
                     fillColor: "white",
                     strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -686,7 +676,7 @@
                     fill: false
                 },
                  {
-                     label: "Consumption1",
+                     label: "Manish Patil",
                      fillColor: "white",
                      strokeColor: "rgba(60,166,166,0.8)",
                     pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -755,7 +745,7 @@
         var data;
         var data1 = {};
         data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 45;
+        data1.TimeInterval = 300;
         data1.StartDate = "2015-5-22 12:45:34.243";
         data1.EndDate = "2016-1-22 12:45:34.243";
 
@@ -768,24 +758,19 @@
             },
             dataType: 'json',
             //data: data,
-            data: JSON.stringify({
-                DeviceID: "c56a2690-f588-4758-a874-baddda23c166",
-                TimeInterval: 45,
-                StartDate: "2017-5-01 12:45:34.243",
-                EndDate: "2017-5-31 12:45:34.243"
-            }),
+            data: JSON.stringify(data1),
             success: function (result) {
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
 
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);

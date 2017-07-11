@@ -11,7 +11,7 @@ namespace Nop.Web.Models.SmartMeterLogs
         public SmartMeterLogGraphFilterModel()
         {
             PageIndex = 0;
-            PageSize = 10;
+            PageSize = 20;
         }
 
         public Guid DeviceID { get; set; }
