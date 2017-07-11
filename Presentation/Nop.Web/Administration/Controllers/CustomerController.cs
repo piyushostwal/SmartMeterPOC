@@ -1643,7 +1643,7 @@ namespace Nop.Admin.Controllers
         
         public ActionResult CustomerMeters() {
             var meterdatils = _customerProductDetailsService.
-           GetCustomerProductDetails(15);
+           GetAllCustomerProductDetails();
 
 
             List<CustomerMetersModel> model = new List<CustomerMetersModel>();
