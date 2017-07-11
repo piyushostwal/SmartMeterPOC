@@ -102,7 +102,7 @@ namespace Nop.Web.Controllers
         public IHttpActionResult GetSmartMeterLogCollection(string id)
         {
             IPagedList<CustomerProductDetails> smartMeterLogs = _customerProductDetailsService.SearchDevices(id);
-            List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel() { DeviceId = m.DeviceId, CustomerName = m.Customer.Username }).ToList(); ;
+            List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel() { DeviceId = m.DeviceId, CustomerId = m.CustomerId, Id = m.Id, CustomerName = m.Customer.Username }).ToList(); ;
             return Ok(meterModel);
         }
 

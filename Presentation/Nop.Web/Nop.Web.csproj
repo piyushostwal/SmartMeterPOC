@@ -404,6 +404,7 @@
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogGraphFilterModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogGraphModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogModel.cs" />
+    <Compile Include="Models\SmartMeterLogs\SmartMeterSearchModel.cs" />
     <Compile Include="Models\Vendors\ApplyVendorModel.cs" />
     <Compile Include="Models\Customer\CustomerAttributeModel.cs" />
     <Compile Include="Models\Catalog\CustomerBackInStockSubscriptionsModel.cs" />
