@@ -73,7 +73,87 @@
                                 </div>
 
                             </div>
-                            <button class="btn btn-danger pull-right">Deactivate</button>
+                            
+                            @if (@Model.Status)
+                            {
+                                <button class="btn btn-danger deact" id="@Model.meterId" data-status="@Model.Status">Deactivate</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-success act" id="@Model.meterId" data-status="@Model.Status">Activate</button>
+                            }
+                                
+                            
+                            
+
+
+                            <script>
+    $(document).ready(function () {
+        $(".deact").bind("click", function (e) {
+            //e.preventDefault()
+            debugger
+            var data = {};
+            data.DeviceId = $(this).attr("id");
+            data.Status = false;
+            var token = $('input[name="__RequestVerificationToken"]').val();
+            debugger
+            $.ajax({
+                url: "/Admin/Customer/UpdateCustomereProductStatus",
+                type: 'POST',
+                //data: {
+                //    __RequestVerificationToken: token,
+                //    data:data},
+                data: {
+                    __RequestVerificationToken: token,
+                    DeviceId: data.DeviceId,
+                    Status: data.Status
+                },
+                success: function () {
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    //location.reload();
+                },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                }
+            });
+
+        })
+        $(".act").bind("click", function (e) {
+            //e.preventDefault()
+            debugger
+            var data = {};
+            data.DeviceId = $(this).attr("id");
+            data.Status = true;
+            var token = $('input[name="__RequestVerificationToken"]').val();
+            debugger
+            $.ajax({
+                url: "/Admin/Customer/UpdateCustomereProductStatus",
+                type: 'POST',
+                //data: {
+                //    __RequestVerificationToken: token,
+                //    data:data},
+                data: {
+                    __RequestVerificationToken: token,
+                    DeviceId: data.DeviceId,
+                    Status: data.Status
+                },
+                success: function () {
+                    debugger;
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    // location.reload();
+                },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                }
+            });
+
+        })
+    });
+                            </script>
                         </div>
                     </div>
                 </div>
