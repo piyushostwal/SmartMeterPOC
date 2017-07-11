@@ -2170,6 +2170,12 @@
 .fa-themeisle:before {
   content: "\f2b2";
 }
+
+.fa-microchip:before
+{
+    content:"\f2db"
+}
+.fa-calculator:before{content:"\f1ec"}
 .fa-google-plus-circle:before,
 .fa-google-plus-official:before {
   content: "\f2b3";
