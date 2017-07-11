@@ -1657,7 +1657,8 @@ namespace Nop.Admin.Controllers
                         MeterId = m.DeviceId.ToString(),
                         Status = m.Status,
                         BillingUnit = m.BillingUnit,
-                        IsBillPaid = customerbilling.IsBillPaid
+                        IsBillPaid = customerbilling.IsBillPaid,
+                        CustomerFullName=m.Customer.GetFullName()
                     });
                 }
 
@@ -1665,16 +1666,16 @@ namespace Nop.Admin.Controllers
             return View(model);
         }
         [HttpGet]
-        [Route("Customer/CustomerMeterDetails/{MeterId:Guid}")]
-        public ActionResult CustomerMeterDetails(Guid MeterId)
+        [Route("Customer/CustomerMeterDetails/{id}")]
+        public ActionResult CustomerMeterDetails(Guid id)
         {
             var meterdatils = _customerProductDetailsService.
-               GetCustomerProductDetails(15);
-            var customerbilling = _customerBillingService.GetCustomerCurrentBill(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
-            var smartMeterLogs = _smartmeterLogService.GetMeterLog(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+               GetCustomerProductDetailsByDeviceId(id);
+            var customerbilling = _customerBillingService.GetCustomerCurrentBill(id);
+            var smartMeterLogs = _smartmeterLogService.GetMeterLog(id);
             CustomerMeterDetails model = new CustomerMeterDetails();
 
-            model.customerName = _workContext.CurrentCustomer.GetFullName();
+            
             if (customerbilling != null)
             {
                 model.meterId = customerbilling.DeviceId.ToString();
@@ -1692,8 +1693,8 @@ namespace Nop.Admin.Controllers
             }
             if (meterdatils != null)
             {
-                model.BillingUnit =
-                    meterdatils.FirstOrDefault(m => m.DeviceId.ToString() == "c56a2690-f588-4758-a874-baddda23c166").BillingUnit;
+                model.BillingUnit = meterdatils.BillingUnit;
+                model.customerName = meterdatils.Customer.GetFullName();
             }
             if (smartMeterLogs.Count > 0)
                 model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
