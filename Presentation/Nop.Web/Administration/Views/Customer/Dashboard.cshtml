@@ -174,33 +174,31 @@
             labels: [],
             datasets: [
                 {
-                    label: "Consumption",
+                    label: "Piyush Ostwal",
                     fillColor: "white",
-                    strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointBorderWidth: 1,
                     data: [],
-                    fill:false
+                    fill: false
                 },
                  {
-                     label: "Consumption1",
+                     label: "Manish Patil",
                      fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                      pointBorderWidth: 1,
                      data: [],
                      fill: false
@@ -282,14 +280,14 @@
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
                     
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);
@@ -334,39 +332,37 @@
 </script>
 
 <script>
-    var osConfig = {
+    var osConfig2 = {
         type: 'line',
         data: {
             labels: [],
             datasets: [
                 {
-                    label: "Consumption",
+                    label: "Piyush Ostwal",
                     fillColor: "white",
                     strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointBorderWidth: 1,
                     data: [],
                     fill: false
                 },
                  {
-                     label: "Consumption1",
+                     label: "Manish Patil",
                      fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
+                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
                      pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
                      pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                      pointBorderWidth: 1,
                      data: [],
                      fill: false
@@ -425,7 +421,7 @@
         var data;
         var data1 = {};
         data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 45;
+        data1.TimeInterval = 600;
         data1.StartDate = "2015-5-22 12:45:34.243";
         data1.EndDate = "2016-1-22 12:45:34.243";
 
@@ -438,24 +434,19 @@
             },
             dataType: 'json',
             //data: data,
-            data: JSON.stringify({
-                DeviceID: "c56a2690-f588-4758-a874-baddda23c166",
-                TimeInterval: 45,
-                StartDate: "2017-5-01 12:45:34.243",
-                EndDate: "2017-5-31 12:45:34.243"
-            }),
+            data: JSON.stringify(data1),
             success: function (result) {
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
 
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);
@@ -466,11 +457,11 @@
 
                 if (!window.orderStatistics2) {
 
-                    osConfig.data.labels = osLabels;
-                    osConfig.data.datasets[0].data = osData;
-                    osConfig.data.datasets[1].data = osData1;
-                    osConfig.data.scales =
-                    window.orderStatistics2 = new Chart(document.getElementById("chart2").getContext("2d"), osConfig);
+                    osConfig2.data.labels = osLabels;
+                    osConfig2.data.datasets[0].data = osData;
+                    osConfig2.data.datasets[1].data = osData1;
+                    osConfig2.data.scales =
+                    window.orderStatistics2 = new Chart(document.getElementById("chart2").getContext("2d"), osConfig2);
                 } else {
 
                     window.orderStatistics2.config.data.labels = osLabels;
@@ -499,44 +490,42 @@
     $('#chart2-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
 </script>
 <script>
-    var osConfig = {
+    var osConfig3 = {
         type: 'line',
         data: {
             labels: [],
             datasets: [
-                {
-                    label: "Consumption",
-                    fillColor: "white",
-                    strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
-                    pointBorderWidth: 1,
-                    data: [],
-                    fill: false
-                },
-                 {
-                     label: "Consumption1",
-                     fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
-                     pointBorderWidth: 1,
-                     data: [],
-                     fill: false
-                 }
-            ]
+    {
+        label: "Piyush Ostwal",
+        fillColor: "white",
+        strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
+        borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBorderWidth: 1,
+        data: [],
+        fill: false
+    },
+    {
+        label: "Manish Patil",
+        fillColor: "white",
+    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
+    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
+    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
+    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
+    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointBorderWidth: 1,
+    data: [],
+    fill: false
+    }
+    ]
         },
         options: {
             legend: {
@@ -590,7 +579,7 @@
         var data;
         var data1 = {};
         data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 45;
+        data1.TimeInterval = 410;
         data1.StartDate = "2015-5-22 12:45:34.243";
         data1.EndDate = "2016-1-22 12:45:34.243";
 
@@ -603,24 +592,19 @@
             },
             dataType: 'json',
             //data: data,
-            data: JSON.stringify({
-                DeviceID: "c56a2690-f588-4758-a874-baddda23c166",
-                TimeInterval: 45,
-                StartDate: "2017-5-01 12:45:34.243",
-                EndDate: "2017-5-31 12:45:34.243"
-            }),
+            data: JSON.stringify(data1),
             success: function (result) {
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
 
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);
@@ -631,11 +615,11 @@
 
                 if (!window.orderStatistics3) {
 
-                    osConfig.data.labels = osLabels;
-                    osConfig.data.datasets[0].data = osData;
-                    osConfig.data.datasets[1].data = osData1;
-                    osConfig.data.scales =
-                    window.orderStatistics3 = new Chart(document.getElementById("chart3").getContext("2d"), osConfig);
+                    osConfig3.data.labels = osLabels;
+                    osConfig3.data.datasets[0].data = osData;
+                    osConfig3.data.datasets[1].data = osData1;
+                    osConfig3.data.scales =
+                    window.orderStatistics3 = new Chart(document.getElementById("chart3").getContext("2d"), osConfig3);
                 } else {
 
                     window.orderStatistics3.config.data.labels = osLabels;
@@ -664,39 +648,37 @@
     $('#chart3-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
 </script>
 <script>
-    var osConfig = {
+    var osConfig4 = {
         type: 'line',
         data: {
             labels: [],
             datasets: [
                 {
-                    label: "Consumption",
+                    label: "Piyush Ostwal",
                     fillColor: "white",
-                    strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointBorderWidth: 1,
                     data: [],
                     fill: false
                 },
                  {
-                     label: "Consumption1",
+                     label: "Manish Patil",
                      fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                      pointBorderWidth: 1,
                      data: [],
                      fill: false
@@ -755,7 +737,7 @@
         var data;
         var data1 = {};
         data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 45;
+        data1.TimeInterval = 300;
         data1.StartDate = "2015-5-22 12:45:34.243";
         data1.EndDate = "2016-1-22 12:45:34.243";
 
@@ -768,24 +750,19 @@
             },
             dataType: 'json',
             //data: data,
-            data: JSON.stringify({
-                DeviceID: "c56a2690-f588-4758-a874-baddda23c166",
-                TimeInterval: 45,
-                StartDate: "2017-5-01 12:45:34.243",
-                EndDate: "2017-5-31 12:45:34.243"
-            }),
+            data: JSON.stringify(data1),
             success: function (result) {
 
                 console.log(result);
                 data = result;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i <= data.length; i++) {
 
-                    if (i <= 10) {
+                    if (i <= 9) {
                         var date = new Date(data[i].loggingTime)
                         osLabels.push(date.getHours() + ":" + date.getMinutes());
                         osData.push(data[i].consumption);
                     } else {
-                        if (i > 10 && i <= 20) {
+                        if (i > 9 && i <= 19) {
                             var date = new Date(data[i].loggingTime)
                             osLabels1.push(date.getHours() + ":" + date.getMinutes());
                             osData1.push(data[i].consumption);
@@ -796,11 +773,11 @@
 
                 if (!window.orderStatistics4) {
 
-                    osConfig.data.labels = osLabels;
-                    osConfig.data.datasets[0].data = osData;
-                    osConfig.data.datasets[1].data = osData1;
-                    osConfig.data.scales =
-                    window.orderStatistics4 = new Chart(document.getElementById("chart4").getContext("2d"), osConfig);
+                    osConfig4.data.labels = osLabels;
+                    osConfig4.data.datasets[0].data = osData;
+                    osConfig4.data.datasets[1].data = osData1;
+                    osConfig4.data.scales =
+                    window.orderStatistics4 = new Chart(document.getElementById("chart4").getContext("2d"), osConfig4);
                 } else {
 
                     window.orderStatistics4.config.data.labels = osLabels;
