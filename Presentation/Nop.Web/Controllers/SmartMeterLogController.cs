@@ -182,16 +182,16 @@ namespace Nop.Web.Controllers
         }
 
         [HttpGet]
-        [Route("/api/search/customer/{searchString}")]
+        [Route("api/search/customer/{searchString}")]
         public IHttpActionResult SearchCustomer(string searchString)
         {
             var searchResult = _customerService.SearchCustomer(searchString);
             List<CustomerSearchResultModel> result = searchResult.Select(s => new CustomerSearchResultModel() { CustomerId = s.Id, FirstName = s.GetAttribute<string>(SystemCustomerAttributeNames.FirstName), LastName = s.GetAttribute<string>(SystemCustomerAttributeNames.LastName), Username = s.Username }).ToList();
-            return Ok();
+            return Ok(result);
         }
 
         [HttpGet]
-        [Route("/api/SmartMeterLog/weekends")]
+        [Route("api/SmartMeterLog/weekends")]
         public IHttpActionResult GetWeekendGraphData(SmartMeterLogGraphFilterModel filterModel)
         {
 

@@ -399,6 +399,7 @@
     <Compile Include="Models\Common\SitemapModel.cs" />
     <Compile Include="Models\Customer\CustomerMeterDetailsModel.cs" />
     <Compile Include="Models\Customer\CustomerMetersModel.cs" />
+    <Compile Include="Models\Customer\CustomerSearchResultModel.cs" />
     <Compile Include="Models\Customer\Dashboard.cs" />
     <Compile Include="Models\Customer\EmailRevalidationModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogGraphFilterModel.cs" />
