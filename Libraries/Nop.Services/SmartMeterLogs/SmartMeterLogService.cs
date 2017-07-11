@@ -126,7 +126,7 @@ namespace Nop.Services.SmartMeterLogs
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
             //paging
-            return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize, totalRecords);
+            return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize);
         }
 
 

@@ -42,6 +42,7 @@ namespace Nop.Web.Controllers
 
         private readonly LocalizationSettings _localizationSettings;
         private readonly CaptchaSettings _captchaSettings;
+
         #endregion
 
         #region constructor
@@ -164,7 +165,7 @@ namespace Nop.Web.Controllers
 
             if (filterModel.DeviceID != Guid.Empty && filterModel.TimeInterval >= 15)
             {
-                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate);
+                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate, filterModel.PageIndex, filterModel.PageSize);
                 List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
                 if (returnedLogs != null && returnedLogs.Count > 0)
                 {
