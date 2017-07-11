@@ -31,6 +31,7 @@ namespace Nop.Web.Controllers
         private readonly ISmartMeterLogService _smartMeterLogService;
         private readonly ICustomerBillUnitRateService _customerBillUnitRateService;
         private readonly ICustomerProductDetailsService _customerProductDetailsService;
+        private readonly ICustomerService _customerService;
         private readonly IWorkContext _workContext;
         private readonly IStoreContext _storeContext;
         private readonly ILocalizationService _localizationService;
@@ -58,8 +59,9 @@ namespace Nop.Web.Controllers
                 IEventPublisher eventPublisher,
                 LocalizationSettings localizationSettings,
                 CaptchaSettings captchaSettings,
-            ICustomerBillUnitRateService customerBillUnitRateService,
-            ICustomerProductDetailsService customerProductDetailsService)
+                ICustomerBillUnitRateService customerBillUnitRateService,
+                ICustomerProductDetailsService customerProductDetailsService,
+                ICustomerService customerService)
         {
             _smartMeterLogService = smartMeterLogService;
             _workContext = workContext;
@@ -74,6 +76,7 @@ namespace Nop.Web.Controllers
             _captchaSettings = captchaSettings;
             _customerBillUnitRateService = customerBillUnitRateService;
             _customerProductDetailsService = customerProductDetailsService;
+            this._customerService = customerService;
         }
 
         #endregion
@@ -175,6 +178,23 @@ namespace Nop.Web.Controllers
 
             }
             return BadRequest();
+        }
+
+        [HttpGet]
+        [Route("/api/search/customer/{searchString}")]
+        public IHttpActionResult SearchCustomer(string searchString)
+        {
+            var searchResult = _customerService.SearchCustomer(searchString);
+            List<CustomerSearchResultModel> result = searchResult.Select(s => new CustomerSearchResultModel() { CustomerId = s.Id, FirstName = s.GetAttribute<string>(SystemCustomerAttributeNames.FirstName), LastName = s.GetAttribute<string>(SystemCustomerAttributeNames.LastName), Username = s.Username }).ToList();
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("/api/SmartMeterLog/weekends")]
+        public IHttpActionResult GetWeekendGraphData(SmartMeterLogGraphFilterModel filterModel)
+        {
+
+            return Ok();
         }
 
     }
