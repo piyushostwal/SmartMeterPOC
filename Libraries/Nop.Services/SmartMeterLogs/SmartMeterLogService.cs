@@ -89,8 +89,47 @@ namespace Nop.Services.SmartMeterLogs
             return meterLog;
         }
 
-        public virtual IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByTimeInterval(Guid deviceId, int timeInterval, DateTime startTime,
-            DateTime endTime, int pageIndex = 0, int pageSize = int.MaxValue)
+        //public virtual IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByTimeInterval(Guid deviceId, int timeInterval, DateTime startTime,
+        //    DateTime endTime, int pageIndex = 0, int pageSize = int.MaxValue)
+        //{
+
+
+        //    //prepare parameters
+        //    var TimeInterval = _dataProvider.GetParameter();
+        //    TimeInterval.ParameterName = "TimeInterval";
+        //    TimeInterval.Value = timeInterval;
+        //    TimeInterval.DbType = DbType.Int32;
+
+        //    var DeviceId = _dataProvider.GetParameter();
+        //    DeviceId.ParameterName = "DeviceId";
+        //    DeviceId.Value = deviceId;
+        //    DeviceId.DbType = DbType.Guid;
+
+        //    var StartTime = _dataProvider.GetParameter();
+        //    StartTime.ParameterName = "StartTime";
+        //    StartTime.Value = startTime;
+        //    StartTime.DbType = DbType.DateTime;
+
+        //    var EndTime = _dataProvider.GetParameter();
+        //    EndTime.ParameterName = "EndTime";
+        //    EndTime.Value = endTime;
+        //    EndTime.DbType = DbType.DateTime;
+
+        //    var totalRecordsParameter = _dataProvider.GetParameter();
+        //    totalRecordsParameter.ParameterName = "TotalRecords";
+        //    totalRecordsParameter.Direction = ParameterDirection.Output;
+        //    totalRecordsParameter.DbType = DbType.Int32;
+
+        //    //invoke stored procedure
+        //    var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>("UspSelectSmartmeterLogs",
+        //        DeviceId, TimeInterval, StartTime, EndTime, totalRecordsParameter);
+        //    var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
+
+        //    //paging
+        //    return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize);
+        //}
+
+        public virtual IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByTimeInterval(int timeInterval, int pageIndex = 0, int pageSize = int.MaxValue)
         {
 
 
@@ -100,20 +139,7 @@ namespace Nop.Services.SmartMeterLogs
             TimeInterval.Value = timeInterval;
             TimeInterval.DbType = DbType.Int32;
 
-            var DeviceId = _dataProvider.GetParameter();
-            DeviceId.ParameterName = "DeviceId";
-            DeviceId.Value = deviceId;
-            DeviceId.DbType = DbType.Guid;
 
-            var StartTime = _dataProvider.GetParameter();
-            StartTime.ParameterName = "StartTime";
-            StartTime.Value = startTime;
-            StartTime.DbType = DbType.DateTime;
-
-            var EndTime = _dataProvider.GetParameter();
-            EndTime.ParameterName = "EndTime";
-            EndTime.Value = endTime;
-            EndTime.DbType = DbType.DateTime;
 
             var totalRecordsParameter = _dataProvider.GetParameter();
             totalRecordsParameter.ParameterName = "TotalRecords";
@@ -122,12 +148,13 @@ namespace Nop.Services.SmartMeterLogs
 
             //invoke stored procedure
             var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>("UspSelectSmartmeterLogs",
-                DeviceId, TimeInterval, StartTime, EndTime, totalRecordsParameter);
+                TimeInterval, totalRecordsParameter);
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
             //paging
             return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize);
         }
+
 
 
         public virtual IPagedList<SmartMeterLog> GetMeterLogForMultipleDeviceIds(Guid[] deviceIds, int pageIndex = 0, int pageSize = int.MaxValue)

@@ -31,6 +31,7 @@ namespace Nop.Web.Controllers
         private readonly ISmartMeterLogService _smartMeterLogService;
         private readonly ICustomerBillUnitRateService _customerBillUnitRateService;
         private readonly ICustomerProductDetailsService _customerProductDetailsService;
+        private readonly ICustomerService _customerService;
         private readonly IWorkContext _workContext;
         private readonly IStoreContext _storeContext;
         private readonly ILocalizationService _localizationService;
@@ -58,8 +59,9 @@ namespace Nop.Web.Controllers
                 IEventPublisher eventPublisher,
                 LocalizationSettings localizationSettings,
                 CaptchaSettings captchaSettings,
-            ICustomerBillUnitRateService customerBillUnitRateService,
-            ICustomerProductDetailsService customerProductDetailsService)
+                ICustomerBillUnitRateService customerBillUnitRateService,
+                ICustomerProductDetailsService customerProductDetailsService,
+                ICustomerService customerService)
         {
             _smartMeterLogService = smartMeterLogService;
             _workContext = workContext;
@@ -74,6 +76,7 @@ namespace Nop.Web.Controllers
             _captchaSettings = captchaSettings;
             _customerBillUnitRateService = customerBillUnitRateService;
             _customerProductDetailsService = customerProductDetailsService;
+            this._customerService = customerService;
         }
 
         #endregion
@@ -166,16 +169,38 @@ namespace Nop.Web.Controllers
 
             if (filterModel.DeviceID != Guid.Empty && filterModel.TimeInterval >= 15)
             {
-                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate, filterModel.PageIndex, filterModel.PageSize);
-                List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
-                if (returnedLogs != null && returnedLogs.Count > 0)
-                {
-                    allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList();
-                }
-                return Ok(allLogs);
+                //IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate);
+                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.TimeInterval / 15);
+                var formattedLogs = returnedLogs.GroupBy(l => l.DeviceID, (key, g) => new { deviceId = key, list = g.Select(l => new SmartMeterLogGraphModel() { TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList() }).ToList();
+
+                //IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate, filterModel.PageIndex, filterModel.PageSize);                
+                //List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
+                //if (returnedLogs != null && returnedLogs.Count > 0)
+                //{
+                //allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList();
+                //allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList();
+                //}
+                return Ok(formattedLogs);
 
             }
             return BadRequest();
+        }
+
+        [HttpGet]
+        [Route("api/search/customer/{searchString}")]
+        public IHttpActionResult SearchCustomer(string searchString)
+        {
+            var searchResult = _customerService.SearchCustomer(searchString);
+            List<CustomerSearchResultModel> result = searchResult.Select(s => new CustomerSearchResultModel() { CustomerId = s.Id, FirstName = s.GetAttribute<string>(SystemCustomerAttributeNames.FirstName), LastName = s.GetAttribute<string>(SystemCustomerAttributeNames.LastName), Username = s.Username }).ToList();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/SmartMeterLog/weekends")]
+        public IHttpActionResult GetWeekendGraphData(SmartMeterLogGraphFilterModel filterModel)
+        {
+
+            return Ok();
         }
 
     }

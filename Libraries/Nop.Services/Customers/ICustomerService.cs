@@ -75,7 +75,7 @@ namespace Nop.Services.Customers
         /// <param name="customerIds">Customer identifiers</param>
         /// <returns>Customers</returns>
         IList<Customer> GetCustomersByIds(int[] customerIds);
-        
+
         /// <summary>
         /// Gets a customer by GUID
         /// </summary>
@@ -89,7 +89,7 @@ namespace Nop.Services.Customers
         /// <param name="email">Email</param>
         /// <returns>Customer</returns>
         Customer GetCustomerByEmail(string email);
-        
+
         /// <summary>
         /// Get customer by system role
         /// </summary>
@@ -121,7 +121,7 @@ namespace Nop.Services.Customers
         /// </summary>
         /// <param name="customer">Customer</param>
         void UpdateCustomer(Customer customer);
-        
+
         /// <summary>
         /// Reset data required for checkout
         /// </summary>
@@ -146,6 +146,7 @@ namespace Nop.Services.Customers
         /// <returns>Number of deleted customers</returns>
         int DeleteGuestCustomers(DateTime? createdFromUtc, DateTime? createdToUtc, bool onlyWithoutShoppingCart);
 
+        IPagedList<Customer> SearchCustomer(string searchString, int pageSize = 0, int pageIndex = 0);
         #endregion
 
         #region Customer roles
