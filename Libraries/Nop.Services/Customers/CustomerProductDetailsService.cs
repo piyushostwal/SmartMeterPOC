@@ -64,6 +64,14 @@ namespace Nop.Services.Customers
 
         #region methods
 
+        public virtual IPagedList<CustomerProductDetails> GetAllCustomerProductDetails( int pageIndex = 0, int pageSize = int.MaxValue)
+        {
+            var query = _customerProductDetailsRepository.Table;
+            query = query.OrderByDescending(c => c.Id);
+            var customers = new PagedList<CustomerProductDetails>(query, pageIndex, pageSize);
+            return customers;
+        }
+
         public virtual IPagedList<CustomerProductDetails> GetCustomerProductDetails(int customerId, int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _customerProductDetailsRepository.Table;
