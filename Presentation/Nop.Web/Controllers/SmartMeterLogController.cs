@@ -104,6 +104,7 @@ namespace Nop.Web.Controllers
         public IHttpActionResult GetSmartMeterLogCollection(string id)
         {
             IPagedList<CustomerProductDetails> smartMeterLogs = _customerProductDetailsService.SearchDevices(id);
+
             List<SmartMeterSearchModel> meterModel = smartMeterLogs.Select(m => new SmartMeterSearchModel()
                     {
                         DeviceId = m.DeviceId,
