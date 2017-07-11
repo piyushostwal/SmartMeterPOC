@@ -1,0 +1,23 @@
+﻿@model Dashboard
+    @using System.Globalization;
+
+    @{
+        var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+        var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+        //page title
+        ViewBag.Title = T("Customers").Text;
+        //active menu item (system name)
+        Html.SetActiveMenuItemSystemName("Customers list");
+        //var Meterlist = @Model;
+    }
+
+    @using (Html.BeginForm(new { id = "__AjaxAntiForgeryForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Dashboard
+        </h1>
+    </div>
