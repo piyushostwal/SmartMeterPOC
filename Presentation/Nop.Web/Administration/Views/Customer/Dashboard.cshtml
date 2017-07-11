@@ -176,31 +176,29 @@
                 {
                     label: "Piyush Ostwal",
                     fillColor: "white",
-                    strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
+                    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    backgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
-                    pointBorderColor: "#"+((1<<24)*Math.random()|0).toString(16),
-                    pointBackgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
+                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointBorderWidth: 1,
                     data: [],
-                    fill:false
+                    fill: false
                 },
                  {
                      label: "Manish Patil",
                      fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
-                        pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                      pointBorderWidth: 1,
                      data: [],
                      fill: false
@@ -334,7 +332,7 @@
 </script>
 
 <script>
-    var osConfig = {
+    var osConfig2 = {
         type: 'line',
         data: {
             labels: [],
@@ -347,10 +345,9 @@
                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointBorderWidth: 1,
                     data: [],
                     fill: false
@@ -358,15 +355,14 @@
                  {
                      label: "Manish Patil",
                      fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
+                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
                      pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
                     pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
                      pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                      pointBorderWidth: 1,
                      data: [],
                      fill: false
@@ -461,11 +457,11 @@
 
                 if (!window.orderStatistics2) {
 
-                    osConfig.data.labels = osLabels;
-                    osConfig.data.datasets[0].data = osData;
-                    osConfig.data.datasets[1].data = osData1;
-                    osConfig.data.scales =
-                    window.orderStatistics2 = new Chart(document.getElementById("chart2").getContext("2d"), osConfig);
+                    osConfig2.data.labels = osLabels;
+                    osConfig2.data.datasets[0].data = osData;
+                    osConfig2.data.datasets[1].data = osData1;
+                    osConfig2.data.scales =
+                    window.orderStatistics2 = new Chart(document.getElementById("chart2").getContext("2d"), osConfig2);
                 } else {
 
                     window.orderStatistics2.config.data.labels = osLabels;
@@ -494,44 +490,42 @@
     $('#chart2-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
 </script>
 <script>
-    var osConfig = {
+    var osConfig3 = {
         type: 'line',
         data: {
             labels: [],
             datasets: [
-                {
-                    label: "Piyush Ostwal",
-                    fillColor: "white",
-                    strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
-                    pointBorderWidth: 1,
-                    data: [],
-                    fill: false
-                },
-                 {
-                     label: "Manish Patil",
-                     fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
-                     pointBorderWidth: 1,
-                     data: [],
-                     fill: false
-                 }
-            ]
+    {
+        label: "Piyush Ostwal",
+        fillColor: "white",
+        strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
+        pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
+        borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBorderWidth: 1,
+        data: [],
+        fill: false
+    },
+    {
+        label: "Manish Patil",
+        fillColor: "white",
+    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
+    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
+    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
+    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
+    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+    pointBorderWidth: 1,
+    data: [],
+    fill: false
+    }
+    ]
         },
         options: {
             legend: {
@@ -621,11 +615,11 @@
 
                 if (!window.orderStatistics3) {
 
-                    osConfig.data.labels = osLabels;
-                    osConfig.data.datasets[0].data = osData;
-                    osConfig.data.datasets[1].data = osData1;
-                    osConfig.data.scales =
-                    window.orderStatistics3 = new Chart(document.getElementById("chart3").getContext("2d"), osConfig);
+                    osConfig3.data.labels = osLabels;
+                    osConfig3.data.datasets[0].data = osData;
+                    osConfig3.data.datasets[1].data = osData1;
+                    osConfig3.data.scales =
+                    window.orderStatistics3 = new Chart(document.getElementById("chart3").getContext("2d"), osConfig3);
                 } else {
 
                     window.orderStatistics3.config.data.labels = osLabels;
@@ -654,7 +648,7 @@
     $('#chart3-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
 </script>
 <script>
-    var osConfig = {
+    var osConfig4 = {
         type: 'line',
         data: {
             labels: [],
@@ -662,15 +656,14 @@
                 {
                     label: "Piyush Ostwal",
                     fillColor: "white",
-                    strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: 'rgba(60, 141, 188, 0.7)',
-                    backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                     pointBorderWidth: 1,
                     data: [],
                     fill: false
@@ -678,15 +671,14 @@
                  {
                      label: "Manish Patil",
                      fillColor: "white",
-                     strokeColor: "rgba(60,166,166,0.8)",
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: 'rgba(60, 141, 188, 0.7)',
-                     backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                     pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                     pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                      pointBorderWidth: 1,
                      data: [],
                      fill: false
@@ -781,11 +773,11 @@
 
                 if (!window.orderStatistics4) {
 
-                    osConfig.data.labels = osLabels;
-                    osConfig.data.datasets[0].data = osData;
-                    osConfig.data.datasets[1].data = osData1;
-                    osConfig.data.scales =
-                    window.orderStatistics4 = new Chart(document.getElementById("chart4").getContext("2d"), osConfig);
+                    osConfig4.data.labels = osLabels;
+                    osConfig4.data.datasets[0].data = osData;
+                    osConfig4.data.datasets[1].data = osData1;
+                    osConfig4.data.scales =
+                    window.orderStatistics4 = new Chart(document.getElementById("chart4").getContext("2d"), osConfig4);
                 } else {
 
                     window.orderStatistics4.config.data.labels = osLabels;
