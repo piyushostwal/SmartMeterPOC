@@ -122,6 +122,7 @@
         };
 
         function changeOsPeriod(period) {
+            debugger
             var osLabels = [];
             var osData = [];
 
@@ -133,6 +134,7 @@
                     period: period
                 },
                 success: function (data) {
+                    debugger
                     for (var i = 0; i < data.length; i++) {
                         osLabels.push(data[i].date);
                         osData.push(data[i].value);

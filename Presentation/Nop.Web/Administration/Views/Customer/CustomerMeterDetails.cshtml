@@ -34,10 +34,10 @@
                                                 <fieldset>
                                                     <legend>Consumer Details</legend>
                                                     <div class="control-group">
-                                                        <label class="control-label">Meter ID: meterId</label><br />
-                                                        <label class="control-label">Customer Name: customerName</label><br />
-                                                        <label class="control-label">Billing Unit: BillingUnit</label><br />
-                                                        <label class="control-label">Location: location</label><br />
+                                                        <label class="control-label">Meter ID: @Model.meterId</label><br />
+                                                        <label class="control-label">Customer Name: @Model.customerName</label><br />
+                                                        <label class="control-label">Billing Unit: @Model.BillingUnit</label><br />
+                                                        <label class="control-label">Location:@Model.location</label><br />
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -48,8 +48,8 @@
                                                 <fieldset>
                                                     <legend>Consumption Details</legend>
                                                     <div class="control-group">
-                                                        <label class="control-label">Consumption Unit Reading: ConsumptionUnitReading</label><br />
-                                                        <label class="control-label">Previous Consumbption Unit Reading: PreviousConsumbptionUnitReading</label><br />
+                                                        <label class="control-label">Consumption Unit Reading:@Model.ConsumptionUnitReading</label><br />
+                                                        <label class="control-label">Previous Consumbption Unit Reading:@Model.PreviousConsumptionUnitReading</label><br />
                                                         @*<label class="control-label">Billing Unit: BillingUnit</label>*@<br />
                                                     </div>
                                                 </fieldset>
@@ -60,13 +60,13 @@
                                         <fieldset>
                                             <legend>Billing Details</legend>
                                             <div class="control-group">
-                                                <label class="control-label">Bill Period From: BillPeriodFrom $</label><br />
-                                                <label class="control-label">Bill Period To: BillPeriodTo</label><br />
-                                                <label class="control-label">Bill Amount: BillAmount $</label><br />
-                                                <label class="control-label">Bill Payment Date: BillPaymentDate</label><br />
-                                                <label class="control-label">Bill Due Date: BillDueDate</label><br />
-                                                <label class="control-label">Last Bill Amount: LastBillAmount</label><br />
-                                                <label class="control-label">Last Bill Payment Date: LastBillPaymentDate</label><br />
+                                                <label class="control-label">Bill Period From: @Model.BillPeriodFrom</label><br />
+                                                <label class="control-label">Bill Period To:@Model.BillPeriodFrom</label><br />
+                                                <label class="control-label">Bill Amount: @Model.BillAmount $</label><br />
+                                                <label class="control-label">Bill Payment Date: @Model.BillPaymentDate</label><br />
+                                                <label class="control-label">Bill Due Date: @Model.BillDueDate</label><br />
+                                                <label class="control-label">Last Bill Amount: @Model.LastBillAmount</label><br />
+                                                <label class="control-label">Last Bill Payment Date: @Model.LastBillPaymentDate</label><br />
                                             </div>
                                         </fieldset>
                                     </div>

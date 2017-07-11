@@ -119,9 +119,10 @@ namespace Nop.Services.Customers
             //hc.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             hc.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
             var method = new HttpMethod("PATCH");
+            var messageBody = "{ \"isActive\": \"" + status + "\" }";
             var request = new HttpRequestMessage(method, requestUrl)
             {
-                Content = new StringContent("{ \"isActive\": \"" + status + " \" }", Encoding.UTF8, "application/json")
+                Content = new StringContent(messageBody, Encoding.UTF8, "application/json")
             };
 
             HttpResponseMessage hrm = await hc.SendAsync(request);

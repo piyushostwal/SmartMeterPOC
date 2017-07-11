@@ -43,6 +43,7 @@ using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Kendoui;
 using Nop.Web.Framework.Mvc;
+using Nop.Services.SmartMeterLogs;
 
 namespace Nop.Admin.Controllers
 {
@@ -94,6 +95,10 @@ namespace Nop.Admin.Controllers
         private readonly IRewardPointService _rewardPointService;
         private readonly ICacheManager _cacheManager;
         private readonly ICustomerProductDetailsService _customerProductDetailsService;
+        private readonly ICustomerBillingService _customerBillingService;
+        private readonly ISmartMeterLogService _smartmeterLogService;
+       // private readonly ICustomerProductDetailsService _customerProductDetailsService;
+
 
         #endregion
 
@@ -142,7 +147,9 @@ namespace Nop.Admin.Controllers
             IWorkflowMessageService workflowMessageService,
             IRewardPointService rewardPointService,
             ICacheManager cacheManager,
-            ICustomerProductDetailsService customerProductDetailsService)
+            ICustomerProductDetailsService customerProductDetailsService,
+            ICustomerBillingService customerBillingService,
+            ISmartMeterLogService smartmeterLogService)
         {
             this._customerService = customerService;
             this._newsLetterSubscriptionService = newsLetterSubscriptionService;
@@ -188,6 +195,9 @@ namespace Nop.Admin.Controllers
             this._rewardPointService = rewardPointService;
             this._cacheManager = cacheManager;
             this._customerProductDetailsService = customerProductDetailsService;
+            this._customerBillingService = customerBillingService;
+            this._smartmeterLogService = smartmeterLogService;
+            //this._customerProductDetailsService = customerProductDetailsService;
         }
 
         #endregion
@@ -772,7 +782,7 @@ namespace Nop.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
 
-            //load registered customers by default
+            //load registered customers by default;
             var defaultRoleIds = new List<int> { _customerService.GetCustomerRoleBySystemName(SystemCustomerRoleNames.Registered).Id };
             var model = new CustomerListModel
             {
@@ -793,6 +803,9 @@ namespace Nop.Admin.Controllers
                     Selected = defaultRoleIds.Any(x => x == role.Id)
                 });
             }
+             
+           
+             
 
             return View(model);
         }
@@ -1629,10 +1642,70 @@ namespace Nop.Admin.Controllers
         }
         
         public ActionResult CustomerMeters() {
-            
-            return View();
+            var meterdatils = _customerProductDetailsService.
+           GetCustomerProductDetails(15);
+
+
+            List<CustomerMetersModel> model = new List<CustomerMetersModel>();
+            if (meterdatils.Count != 0)
+            {
+                foreach (var m in meterdatils)
+                {
+                    var customerbilling = _customerBillingService.GetCustomerCurrentBill(m.DeviceId);
+                    model.Add(new CustomerMetersModel
+                    {
+                        MeterId = m.DeviceId.ToString(),
+                        Status = m.Status,
+                        BillingUnit = m.BillingUnit,
+                        IsBillPaid = customerbilling.IsBillPaid
+                    });
+                }
+
+            } 
+            return View(model);
+        }
+        [HttpGet]
+        [Route("Customer/CustomerMeterDetails/{MeterId:Guid}")]
+        public ActionResult CustomerMeterDetails(Guid MeterId)
+        {
+            var meterdatils = _customerProductDetailsService.
+               GetCustomerProductDetails(15);
+            var customerbilling = _customerBillingService.GetCustomerCurrentBill(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+            var smartMeterLogs = _smartmeterLogService.GetMeterLog(new Guid("c56a2690-f588-4758-a874-baddda23c166"));
+            CustomerMeterDetails model = new CustomerMeterDetails();
+
+            model.customerName = _workContext.CurrentCustomer.GetFullName();
+            if (customerbilling != null)
+            {
+                model.meterId = customerbilling.DeviceId.ToString();
+                model.ConsumptionUnitReading = customerbilling.ConsumptionUnitReading;
+                model.BillPeriodFrom = customerbilling.BillPeriodFrom.ToString("MM/dd/yyyy");
+                model.BillPeriodTo = customerbilling.BillPeriodTo.ToString("MM/dd/yyyy");
+                model.BillAmount = customerbilling.BillAmount;
+                model.BillPaymentDate = customerbilling.BillPaymentDate != null ?
+                    customerbilling.BillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+                model.BillDueDate = customerbilling.BillDueDate.ToString("MM/dd/yyyy");
+                model.PreviousConsumptionUnitReading = customerbilling.PreviousConsumbptionUnitReading;
+                model.LastBillAmount = customerbilling.LastBillAmount.Value;
+                model.LastBillPaymentDate = customerbilling.LastBillPaymentDate != null ?
+                    customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+            }
+            if (meterdatils != null)
+            {
+                model.BillingUnit =
+                    meterdatils.FirstOrDefault(m => m.DeviceId.ToString() == "c56a2690-f588-4758-a874-baddda23c166").BillingUnit;
+            }
+            if (smartMeterLogs.Count > 0)
+                model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
+
+
+            return View(model);
+
         }
         public ActionResult MetersHashmap() {
+            return View();
+        }
+        public ActionResult Dashboard() {
             return View();
         }
         
@@ -2408,17 +2481,13 @@ namespace Nop.Admin.Controllers
 
         //    return View();
         //}
-        [HttpGet]
-        public ActionResult CustomerMeterDetails() {
-
-            return View();
-        }
-
+      
         [HttpPost]
+        // [AdminAntiForgery(true)]
         public virtual ActionResult UpdateCustomereProductStatus(CustomerProductStatusModel statusModel)
         {
             _customerProductDetailsService.UpdateCustomerProductStatus(statusModel.DeviceId, statusModel.Status);
-            return View();
+            return RedirectToAction("CustomerMeters");
         }
 
         #endregion
