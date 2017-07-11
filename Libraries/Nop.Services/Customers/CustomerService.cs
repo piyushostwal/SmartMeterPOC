@@ -714,7 +714,7 @@ namespace Nop.Services.Customers
             }
         }
 
-        public virtual IPagedList<Customer> SearchCustomer(string searchString, int pageSize = 0, int pageIndex = 0)
+        public virtual IPagedList<Customer> SearchCustomer(string searchString, int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _customerRepository.Table.Where(c => c.Username.Contains(searchString));
             query = query.OrderBy(c => c.Username);

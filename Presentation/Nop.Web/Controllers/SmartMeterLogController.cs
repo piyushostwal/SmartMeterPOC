@@ -169,13 +169,18 @@ namespace Nop.Web.Controllers
 
             if (filterModel.DeviceID != Guid.Empty && filterModel.TimeInterval >= 15)
             {
-                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate, filterModel.PageIndex, filterModel.PageSize);
-                List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
-                if (returnedLogs != null && returnedLogs.Count > 0)
-                {
-                    allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList();
-                }
-                return Ok(allLogs);
+                //IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate);
+                IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.TimeInterval / 15);
+                var formattedLogs = returnedLogs.GroupBy(l => l.DeviceID, (key, g) => new { deviceId = key, list = g.Select(l => new SmartMeterLogGraphModel() { TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList() }).ToList();
+
+                //IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate, filterModel.PageIndex, filterModel.PageSize);                
+                //List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
+                //if (returnedLogs != null && returnedLogs.Count > 0)
+                //{
+                //allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList();
+                //allLogs = returnedLogs.Select(l => new SmartMeterLogGraphModel() { deviceId = l.DeviceID, TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList();
+                //}
+                return Ok(formattedLogs);
 
             }
             return BadRequest();

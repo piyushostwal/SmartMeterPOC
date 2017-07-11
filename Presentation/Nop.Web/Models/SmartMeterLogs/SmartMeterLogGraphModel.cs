@@ -8,7 +8,7 @@ namespace Nop.Web.Models.SmartMeterLogs
 {
     public class SmartMeterLogGraphModel : BaseNopModel
     {
-        public Guid deviceId { get; set; }
+        //public Guid deviceId { get; set; }
         public int TimeInterval { get; set; }
         public DateTime LoggingTime { get; set; }
         public double consumption { get; set; }
