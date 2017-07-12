@@ -276,6 +276,7 @@
                 <div id="products-grid"></div>
             </div>
         </div>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
         <script>
             var arrayOfArrays = [
                 {
@@ -363,6 +364,20 @@
                                 ]
                             });
                             //});
+
+                            var config = {
+                                apiKey: "AIzaSyDIXCGE7OJgPvn8zO_jqKRkSHpziBbB2z4",
+                                authDomain: "smarthome.firebaseapp.com",
+                                databaseURL: "https://smarthome-46be4.firebaseio.com",
+                                messagingSenderId: "994315037246",
+                                storageBucket: "smarthome-46be4.appspot.com"
+                            };
+                            firebase.initializeApp(config);
+
+                            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.meterId/');
+                            customerMeterDetails.on('value', function (snapshot) {
+                                alert(' Refresh Values');
+                            });
         </script>
     </div>
 
