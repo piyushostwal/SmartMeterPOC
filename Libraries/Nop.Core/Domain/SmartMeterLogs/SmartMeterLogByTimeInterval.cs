@@ -16,5 +16,6 @@ namespace Nop.Core.Domain.SmartMeterLogs
         public int? CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string CustomerAddress { get; set; }
+        public int SolarGeneratedUnits { get; set; }
     }
 }

@@ -170,7 +170,7 @@ namespace Nop.Services.SmartMeterLogs
             //paging
             return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize);
         }
-        public virtual IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByCustomerId(int timeInterval, int customerId, 
+        public virtual IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByCustomerId(int timeInterval, int customerId, int month, int year, DateTime? date = null,
             int pageIndex = 0, int pageSize = int.MaxValue)
         {
 
@@ -179,14 +179,27 @@ namespace Nop.Services.SmartMeterLogs
             var CustomerId = _dataProvider.GetParameter();
             CustomerId.ParameterName = "CustomerId";
             CustomerId.Value = customerId;
-            CustomerId.DbType = DbType.Int32; 
-            
+            CustomerId.DbType = DbType.Int32;
+
             var TimeInterval = _dataProvider.GetParameter();
             TimeInterval.ParameterName = "TimeInterval";
             TimeInterval.Value = timeInterval;
             TimeInterval.DbType = DbType.Int32;
 
-           
+            var Month = _dataProvider.GetParameter();
+            Month.ParameterName = "Month";
+            Month.Value = month != 0 ? month : System.Data.SqlTypes.SqlInt32.Null;
+            Month.DbType = DbType.Int32;
+
+            var Year = _dataProvider.GetParameter();
+            Year.ParameterName = "Year";
+            Year.Value = year != 0 ? year : System.Data.SqlTypes.SqlInt32.Null;
+            Year.DbType = DbType.Int32;
+
+            var Date = _dataProvider.GetParameter();
+            Date.ParameterName = "date";
+            Date.Value = date != null ? Convert.ToDateTime(date.Value) : System.Data.SqlTypes.SqlDateTime.Null;
+            Date.DbType = DbType.DateTime;
 
             var totalRecordsParameter = _dataProvider.GetParameter();
             totalRecordsParameter.ParameterName = "TotalRecords";
@@ -195,7 +208,8 @@ namespace Nop.Services.SmartMeterLogs
 
             //invoke stored procedure
             var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>(
-                "UspSelectSmartmeterLogsByCustomerId",CustomerId,TimeInterval,totalRecordsParameter);
+                "UspSelectSmartmeterLogsByCustomerId", CustomerId, TimeInterval, Month, Year, Date, totalRecordsParameter);
+
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
             //paging

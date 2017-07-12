@@ -13,5 +13,6 @@ namespace Nop.Web.Models.SmartMeterLogs
         public DateTime LoggingTime { get; set; }
         public double consumption { get; set; }
         public int Reading { get; set; }
+        public int SolarGeneratedUnits { get; set; }
     }
 }

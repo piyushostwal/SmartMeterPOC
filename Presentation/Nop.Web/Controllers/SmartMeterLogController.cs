@@ -137,6 +137,7 @@ namespace Nop.Web.Controllers
                     smartMeterLog.IsActive = smartMeterLogModel.IsActive;
                     smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
                     smartMeterLog.Reading = smartMeterLogModel.Reading;
+                    smartMeterLog.SolarGeneratedUnits = smartMeterLogModel.SolarGeneratedUnits;
                     var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
 
 
@@ -172,7 +173,7 @@ namespace Nop.Web.Controllers
             {
                 //IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate);
                 IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.TimeInterval / 15);
-                var formattedLogs = returnedLogs.GroupBy(l => l.DeviceID, (key, g) => new { deviceId = key, list = g.Select(l => new SmartMeterLogGraphModel() { TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime }).OrderByDescending(o => o.LoggingTime).ToList() }).ToList();
+                var formattedLogs = returnedLogs.GroupBy(l => l.DeviceID, (key, g) => new { deviceId = key, list = g.Select(l => new SmartMeterLogGraphModel() { TimeInterval = l.TimeInterval, consumption = l.Consumption, Reading = l.Reading, LoggingTime = l.LoggingTime, SolarGeneratedUnits = l.SolarGeneratedUnits }).OrderByDescending(o => o.LoggingTime).ToList() }).ToList();
 
                 //IPagedList<SmartMeterLogByTimeInterval> returnedLogs = _smartMeterLogService.GetMeterlogsByTimeInterval(filterModel.DeviceID, filterModel.TimeInterval / 15, filterModel.StartDate, filterModel.EndDate, filterModel.PageIndex, filterModel.PageSize);                
                 //List<SmartMeterLogGraphModel> allLogs = new List<SmartMeterLogGraphModel>();
