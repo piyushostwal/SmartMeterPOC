@@ -11,7 +11,7 @@ namespace Nop.Services.SmartMeterLogs
     public partial interface ISmartMeterLogService
     {
         IPagedList<SmartMeterLog> GetMeterLog(Guid devieId, int pageIndex = 0, int pageSize = int.MaxValue);
-        SmartMeterLog SaveMeterLog(SmartMeterLog meterLog);
+        Task<SmartMeterLog> SaveMeterLog(SmartMeterLog meterLog);
         IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByTimeInterval(int timeInterval, int pageIndex = 0, int pageSize = int.MaxValue);
 
         IPagedList<SmartMeterLog> GetMeterLogForMultipleDeviceIds(Guid[] deviceIds, int pageIndex = 0, int pageSize = int.MaxValue);

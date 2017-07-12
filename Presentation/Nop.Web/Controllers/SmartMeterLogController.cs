@@ -139,11 +139,12 @@ namespace Nop.Web.Controllers
                     smartMeterLog.Reading = smartMeterLogModel.Reading;
                     var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
 
-                    data.TimeInterval = settingsData.TimeInterval;
-                    //data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
-                    data.IsActive = customerData.Status;
 
-                    return Ok(data);
+                    data.Result.TimeInterval = settingsData.TimeInterval;
+                    //data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
+                    data.Result.IsActive = customerData.Status;
+
+                    return Ok(data.Result);
                 }
             }
             return Unauthorized();
