@@ -35,13 +35,47 @@
                                 <fieldset>
                                     <legend>Consumer Details</legend>
                                     <div class="control-group">
-                                        <label class="control-label">Meter ID: @Model.DeviceId</label><br />
-                                        <label class="control-label">Customer Name: @Model.customerName</label><br />
-                                        <label class="control-label">Billing Unit: @Model.BillingUnit</label><br />
-                                        <label class="control-label">Location: @Model.location</label><br />
+
+                                        <table class="meter-details">
+                                            <tr>
+                                                <td class="label-td">
+                                                    Meter ID <span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.meterId
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-td">
+                                                    Customer Name<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.customerName
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-td">
+                                                    Billing Unit<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.BillingUnit
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-td">
+                                                    Location<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.location
+                                                </td>
+                                            </tr>
+                                        </table>
+
                                     </div>
                                 </fieldset>
                             </div>
+
+
                         </div>
                         <br />
                         <div class="row">
@@ -49,9 +83,26 @@
                                 <fieldset>
                                     <legend>Consumption Details</legend>
                                     <div class="control-group">
-                                        <label class="control-label">Consumption Unit Reading: @Model.ConsumptionUnitReading</label><br />
-                                        <label class="control-label">Previous Consumption Unit Reading: @Model.PreviousConsumptionUnitReading</label><br />
-                                        @*<label class="control-label">Billing Unit: @Model.BillingUnit</label>*@<br />
+                                        <table class="meter-details">
+                                            <tr>
+                                                <td class="label-td">
+                                                    Current Consumption<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.ConsumptionUnitReading Kwh
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-td">
+                                                    Previous Consumptio<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.PreviousConsumptionUnitReading Kwh
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <br />
                                     </div>
                                 </fieldset>
                             </div>
@@ -61,13 +112,64 @@
                         <fieldset>
                             <legend>Billing Details</legend>
                             <div class="control-group">
-                                <label class="control-label">Bill Period From: @Model.BillPeriodFrom $</label><br />
-                                <label class="control-label">Bill Period To: @Model.BillPeriodTo</label><br />
-                                <label class="control-label">Bill Amount: @Model.BillAmount $</label><br />
-                                <label class="control-label">Bill Payment Date: @Model.BillPaymentDate</label><br />
-                                <label class="control-label">Bill Due Date: @Model.BillDueDate</label><br />
-                                <label class="control-label">Last Bill Amount: @Model.LastBillAmount</label><br />
-                                <label class="control-label">Last Bill Payment Date: @Model.LastBillPaymentDate</label><br />
+                                <table class="meter-details">
+                                    <tr>
+                                        <td class="label-td">
+                                            Bill Period From<span class="right-float">:</span>
+                                        </td>
+                                        <td class="value-td">
+                                            @Model.BillPeriodFrom
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td">
+                                            Bill Period To<span class="right-float">:</span>
+                                        </td>
+                                        <td class="value-td">
+                                            @Model.BillPeriodTo
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td">
+                                            Bill Amount<span class="right-float">:</span>
+                                        </td>
+                                        <td class="value-td">
+                                            @Model.BillAmount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td">
+                                            Bill Payment Date<span class="right-float">:</span>
+                                        </td>
+                                        <td class="value-td">
+                                            @Model.BillPaymentDate
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td">
+                                            Bill Due Date<span class="right-float">:</span>
+                                        </td>
+                                        <td class="value-td">
+                                            @Model.BillDueDate
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td">
+                                            Last Bill Amount<span class="right-float">:</span>
+                                        </td>
+                                        <td class="value-td">
+                                            @Model.LastBillAmount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td">
+                                            Last Bill Payment Date<span class="right-float">:</span>
+                                        </td>
+                                        <td class="value-td">
+                                            @Model.LastBillPaymentDate
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </fieldset>
                     </div>
@@ -85,13 +187,13 @@
                         </h3>
                         <div class="box-tools pull-right">
 
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="hour">Hour</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
+                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="60">Hour</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
                             <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
                                 @if (hidePanel)
                                 {
@@ -105,16 +207,45 @@
                         </div>
                     </div>
                     <div class="box-body">
+                        <button class="btn btn-xs btn-info btn-flat margin-r-5 btn-arrow" title="your-tooltip-here"><span class="glyphicon glyphicon-fast-backward"></span></button>
                         <div class="chart" style="height: 300px;">
                             <canvas id="@(prefix)-chart" height="300"></canvas>
                         </div>
+                        <button class="btn btn-xs btn-info btn-flat margin-r-5 btn-arrow-right" title="your-tooltip-here"><span class="glyphicon  glyphicon-fast-forward"></span></button>
                     </div>
                 </div>
             </div>
         </div>
         <script>
             $(document).ready(function () {
+                var month = new Array();
+                month[0] = "January";
+                month[1] = "February";
+                month[2] = "March";
+                month[3] = "April";
+                month[4] = "May";
+                month[5] = "June";
+                month[6] = "July";
+                month[7] = "August";
+                month[8] = "September";
+                month[9] = "October";
+                month[10] = "November";
+                month[11] = "December";
                 var osCurrentPeriod;
+                var datasets = {
+                    label: "XYZ",
+                    fillColor: "rgba(60,141,188,0.9)",
+                    strokeColor: "rgba(60,141,188,0.8)",
+                    pointColor: "#3b8bba",
+                    pointStrokeColor: "rgba(60,141,188,1)",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(60,141,188,1)",
+                    borderColor: 'rgba(60, 141, 188, 0.7)',
+                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
+                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    pointBorderWidth: 1,
+                    data: []
+                }
                 var data =
                     [{ "date": "29 Thursday", "value": "0" }, { "date": "30 Friday", "value": "0" }, { "date": "1 Saturday", "value": "0" }, { "date": "2 Sunday", "value": "0" }, { "date": "3 Monday", "value": "0" }, { "date": "4 Tuesday", "value": "6" }, { "date": "5 Wednesday", "value": "2" }, { "date": "6 Thursday", "value": "0" }]
 
@@ -135,26 +266,12 @@
                     data: {
                         labels: [],
                         datasets: [
-                            {
-                                label: "XYZ",
-                                fillColor: "rgba(60,141,188,0.9)",
-                                strokeColor: "rgba(60,141,188,0.8)",
-                                pointColor: "#3b8bba",
-                                pointStrokeColor: "rgba(60,141,188,1)",
-                                pointHighlightFill: "#fff",
-                                pointHighlightStroke: "rgba(60,141,188,1)",
-                                borderColor: 'rgba(60, 141, 188, 0.7)',
-                                backgroundColor: 'rgba(44, 152, 214, 0.5)',
-                                pointBorderColor: 'rgba(37, 103, 142, 0.9)',
-                                pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
-                                pointBorderWidth: 1,
-                                data: []
-                            }
+
                         ]
                     },
                     options: {
                         legend: {
-                            display: false
+                            display: true
                         },
                         scales: {
                             xAxes: [{
@@ -195,59 +312,131 @@
                         responsive: true
                     }
                 };
+                function createDataset(osLabels_new, osData_new, label) {
 
+                    if (!window.orderStatistics) {
+                        osConfig.data.labels = osLabels_new;
+                        //osConfig.data.datasets.push(datasets);
+                        var data_len = osConfig.data.datasets.length
+                        osConfig.data.datasets[data_len] = {
+                            label: "XYZ",
+                            fillColor: "rgba(60,141,188,0.9)",
+                            strokeColor: "rgba(60,141,188,0.8)",
+                            pointColor: "#3b8bba",
+                            pointStrokeColor: "rgba(60,141,188,1)",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(60,141,188,1)",
+                            borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                            pointBorderColor: 'rgba(37, 103, 142, 0.9)',
+                            pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                            pointBorderWidth: 1,
+                            data: []
+                        }
+                        osConfig.data.datasets[data_len].label = label;
+                        osConfig.data.datasets[data_len].data = osData_new;
+
+                        osConfig.data.scales =
+                        window.orderStatistics = new Chart(document.getElementById("@(prefix)-chart").getContext("2d"), osConfig);
+                    } else {
+
+                        window.orderStatistics.config.data.labels = osLabels_new;
+                        datasets.borderColor = "#" + ((1 << 24) * Math.random() | 0).toString(16)
+                        //window.orderStatistics.config.data.datasets.push(datasets)
+                        var data_len = window.orderStatistics.config.data.datasets.length
+                        window.orderStatistics.config.data.datasets[data_len] = {
+                            label: "XYZ",
+                            fillColor: "rgba(60,141,188,0.9)",
+                            strokeColor: "rgba(60,141,188,0.8)",
+                            pointColor: "#3b8bba",
+                            pointStrokeColor: "rgba(60,141,188,1)",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(60,141,188,1)",
+                            borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                            pointBorderColor: 'rgba(37, 103, 142, 0.9)',
+                            pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                            pointBorderWidth: 1,
+                            data: []
+                        }
+                        window.orderStatistics.config.data.datasets[data_len].data = osData_new;
+                        osConfig.data.datasets[data_len].label = label;
+                        window.orderStatistics.update();
+                    }
+                }
                 function changeOsPeriod(period) {
-                    
+
+                    if (window.orderStatistics) {
+                        window.orderStatistics.config.data.datasets = [];
+                    }
+
                     var osLabels = [];
                     var osData = [];
                     var data1 = {};
                     var data;
-                    data1.deviceId="@Model.meterId";
-                    data1.TimeInterval=45;
-                    data1.StartDate="2015-5-22 12:45:34.243";
-                    data1.EndDate = "2016-1-22 12:45:34.243";
-                    
+                    var deviceId = ["@Model.DeviceId"]
+
+                    data1.CustomerID = "@Model.CustomerId";
+                    data1.TimeInterval = period;
+                    data1.TimeIntervalDate = "2017-07-10";
+
                     $.ajax({
-                        url: "/api/SmartMeterLog/graph",
+                        url: "/api/customer/graph",
                         type: 'POST',
                         headers: {
-                            "content-type":"application/json",
+                            "content-type": "application/json",
                             "cache-control": "no-cache",
                         },
                         dataType: 'json',
-                        //data: data,
                         data: JSON.stringify(data1),
                         success: function (result) {
                             data = result;
-                            for (var i = 0; i < data.length; i++) {
+                            var res = data.filter(function (v) {
+                                return deviceId.indexOf(v.deviceId) > -1;
+                            });
+                            for (var i = 0; i < res.length; i++) {
+                                osLabels = []
+                                osData = []
+                                cons = res[i].consumptionList;
+                                solar = res[i].solarGeneratedUnitsList;
+                                for (var j = 0; j < cons.length; j++) {
+                                    var date = new Date(cons[j].loggingTime)
+                                    switch (period) {
+                                        case "year":
+                                            osLabels.push(date.getFullYear());
+                                            break;
+                                        case "month":
+                                            osLabels.push(month[date.getMonth()]);
+                                            break;
+                                        case "week":
+                                            osLabels.push("Week:" + j + " " + month[date.getMonth()]);
+                                            break;
 
-                                if (i <= 10) {
-                                    var date = new Date(data[i].loggingTime)
-                                    osLabels.push(date.getHours() + ":" + date.getMinutes());
-                                    osData.push(data[i].consumption);
-                                } else {
-                                    break;
+                                        default:
+                                            osLabels.push(date.getHours() + ":" + date.getMinutes());
+                                    }
+
+                                    osData.push(cons[j].consumption);
+
                                 }
+                                createDataset(osLabels, osData, "Meter");
+                                osData = []
+                                for (var k = 0; k < solar.length; k++) {
+                                    var date = new Date(solar[k].loggingTime)
+                                    osData.push(solar[k].solarGeneratedUnits);
+
+                                }
+                                createDataset(osLabels, osData, "Solar");
+
                             }
 
-                            if (!window.orderStatistics) {
-                                osConfig.data.labels = osLabels;
-                                osConfig.data.datasets[0].data = osData;
-                                osConfig.data.scales =
-                                window.orderStatistics = new Chart(document.getElementById("@prefix-chart").getContext("2d"), osConfig);
-                            } else {
-                                window.orderStatistics.config.data.labels = osLabels;
-                                window.orderStatistics.config.data.datasets[0].data = osData;
-                                window.orderStatistics.update();
-                            }
+
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                           
+
                             alert(xhr.status);
                             alert(thrownError);
                         }
                     });
-                    
+
                     return true
                 }
 
@@ -301,7 +490,7 @@
                     "billPeriod": "July-2017",
                     "amount": "206",
                     "transactionId": "12345",
-                    "billId":"45645"
+                    "billId": "45645"
                 },
                 {
                     "billPeriod": "August-2017",
@@ -316,93 +505,96 @@
                     "billId": "45645"
                 }
             ]
-                            console.log(arrayOfArrays)
-                            $("#products-grid").kendoGrid({
-                                dataSource: {
-                                    data: previousBillings,
-                                    schema: {
-                                        model: {
-                                            fields: {
-                                                consumptionUnitReading: { type: "string" },
-                                                billPeriod: { type: "string" },
-                                                billId: { type: "string" },
-                                                amount: {type:"string"},
-                                                isBillPaid: { type: "bool" }
-                                            }
-                                        }
-                                    },
-                                    error: function (e) {
-                                        display_kendoui_grid_error(e);
-                                        // Cancel the changes
-                                        this.cancelChanges();
-                                    },
-                                    serverPaging: true,
-                                    serverFiltering: true,
-                                    serverSorting: true,
-                                    pageSize: 20
-                                },
-                                pageable: {
-                                    input: true,
-                                    numeric: false
-                                },
-                                scrollable: false,
-                                sortable: true,
-                                filterable: true,
-                                columns: [
-                                    {
-                                        field: "billId",
-                                        title: "Bill Id",
-                                        template: '<a href="BillingDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
-                                        //template:'#= MeterId #',
-                                        attributes: { style: "text-align:center" },
-                                        width: 300
-                                    },
-                                    {
-                                        field: "billPeriod",
-                                        title: "Bill Month",
-                                        //template:'#= MeterId #',
-                                        attributes: { style: "text-align:center" },
-                                        width: 300
-                                    },
-                                    {
-                                        field: "amount",
-                                        title: "Amount",
-                                        //template:'#= MeterId #',
-                                        attributes: { style: "text-align:center" },
-                                        width: 300
-                                    },
-                                    {
-                                        field: "consumptionUnitReading",
-                                        title: "Meter Reading",
-                                        //template:'#= MeterId #',
-                                        attributes: { style: "text-align:center" },
-                                        width: 300
-                                    },
-                                    {
-                                        field: "isBillPaid",
-                                        title: "Bill Paid",
-                                        //template:'#= MeterId #',
-                                        attributes: { style: "text-align:center" },
-                                        width: 300
-                                    }
-                                ]
-                            });
-                            //});
 
-                            var config = {
-                                apiKey: "AIzaSyDIXCGE7OJgPvn8zO_jqKRkSHpziBbB2z4",
-                                authDomain: "smarthome.firebaseapp.com",
-                                databaseURL: "https://smarthome-46be4.firebaseio.com",
-                                messagingSenderId: "994315037246",
-                                storageBucket: "smarthome-46be4.appspot.com"
-                            };
-                            firebase.initializeApp(config);
+            console.log(arrayOfArrays)
+            $("#products-grid").kendoGrid({
+                dataSource: {
+                    data: previousBillings,
+                    schema: {
+                        model: {
+                            fields: {
+                                consumptionUnitReading: { type: "string" },
+                                billPeriod: { type: "string" },
+                                billId: { type: "string" },
+                                amount: { type: "string" },
+                                isBillPaid: { type: "bool" }
+                            }
+                        }
+                    },
+                    error: function (e) {
+                        display_kendoui_grid_error(e);
+                        // Cancel the changes
+                        this.cancelChanges();
+                    },
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true,
+                    pageSize: 20
+                },
+                pageable: {
+                    input: true,
+                    numeric: false
+                },
+                scrollable: false,
+                sortable: true,
+                filterable: true,
+                columns: [
+                    {
+                        field: "billId",
+                        title: "Bill Id",
+                        template: '<a href="BillingDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
+                        //template:'#= MeterId #',
+                        attributes: { style: "text-align:center" },
+                        width: 300
+                    },
+                    {
+                        field: "billPeriod",
+                        title: "Bill Month",
+                        //template:'#= MeterId #',
+                        attributes: { style: "text-align:center" },
+                        width: 300
+                    },
+                    {
+                        field: "amount",
+                        title: "Amount",
+                        //template:'#= MeterId #',
+                        attributes: { style: "text-align:center" },
+                        width: 300
+                    },
+                    {
+                        field: "consumptionUnitReading",
+                        title: "Meter Reading",
+                        //template:'#= MeterId #',
+                        attributes: { style: "text-align:center" },
+                        width: 300
+                    },
+                    {
+                        field: "isBillPaid",
+                        title: "Bill Paid",
+                        //template:'#= MeterId #',
+                        attributes: { style: "text-align:center" },
+                        width: 300
+                    }
+                ]
+            });
 
-                            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.DeviceId/');
-                            customerMeterDetails.on('value', function (snapshot) {
-                                alert(' Refresh Values');
-                            });
-</script>
+            var config = {
+                apiKey: "AIzaSyDIXCGE7OJgPvn8zO_jqKRkSHpziBbB2z4",
+                authDomain: "smarthome.firebaseapp.com",
+                databaseURL: "https://smarthome-46be4.firebaseio.com",
+                messagingSenderId: "994315037246",
+                storageBucket: "smarthome-46be4.appspot.com"
+            };
+            firebase.initializeApp(config);
+
+            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.DeviceId/');
+            customerMeterDetails.on('value', function (snapshot) {
+                alert(' Refresh Values');
+            });
+
+
+        </script>
+
     </div>
 
 </div>

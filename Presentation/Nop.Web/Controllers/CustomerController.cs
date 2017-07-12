@@ -1568,7 +1568,7 @@ namespace Nop.Web.Controllers
                 model.LastBillAmount = customerbilling.LastBillAmount.Value;
                 model.LastBillPaymentDate = customerbilling.LastBillPaymentDate!=null?
                     customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy"):string.Empty;
-
+                model.CustomerId = _workContext.CurrentCustomer.Id;
                 model.PreviousBills = previousBills.ToList<CustomerBilling>();
             }
             if (meterdatils != null)
