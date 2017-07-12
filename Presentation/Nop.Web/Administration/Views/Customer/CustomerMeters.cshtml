@@ -249,13 +249,14 @@
                                         //e.preventDefault()
                                         debugger
                                         var data = {};
+                                        var but = $(this)
                                         data.DeviceId = $(this).attr("id");
                                         data.Status = false;
                                         var token = $('input[name="__RequestVerificationToken"]').val();
                                         debugger
                                         $.ajax({
-                                            url: "/Admin/Customer/UpdateCustomereProductStatus",
-                                            type: 'POST',
+                                            url: "/api/smartmeterlog/" + data.DeviceId,
+                                            type: 'PUT',
                                             //data: {
                                             //    __RequestVerificationToken: token, 
                                             //    data:data},
@@ -265,11 +266,14 @@
                                                 Status: data.Status
                                             },
                                             success: function () {
-                                                window.location.href = "/Admin/Customer/CustomerMeters";
+                                                debugger;
+                                                $(but).removeClass("btn-danger deact").addClass("btn-success act").text("Activate")
+                                                //window.location.href = "/Admin/Customer/CustomerMeters";
                                                 //location.reload();
                                             },
 
                                             error: function (xhr, ajaxOptions, thrownError) {
+                                                debugger;
                                                 alert(xhr.status);
                                                 alert(thrownError);
                                             }
@@ -280,13 +284,14 @@
                                         //e.preventDefault()
                                         debugger
                                         var data = {};
+                                        var but = $(this)
                                         data.DeviceId = $(this).attr("id");
                                         data.Status = true;
                                         var token = $('input[name="__RequestVerificationToken"]').val();
                                         debugger
                                         $.ajax({
-                                            url: "/Admin/Customer/UpdateCustomereProductStatus",
-                                            type: 'POST',
+                                            url: "/api/smartmeterlog/" + data.DeviceId,
+                                            type: 'PUT',
                                             //data: {
                                             //    __RequestVerificationToken: token, 
                                             //    data:data},
@@ -296,7 +301,8 @@
                                                 Status: data.Status
                                             },
                                             success: function () {
-                                                window.location.href = "/Admin/Customer/CustomerMeters";
+                                                $(but).removeClass("btn-success act").addClass("btn-danger deact").text("Deactivate")
+                                                //window.location.href = "/Admin/Customer/CustomerMeters";
                                                 //location.reload();
                                             },
 
