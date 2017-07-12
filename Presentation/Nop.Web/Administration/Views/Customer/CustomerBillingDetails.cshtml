@@ -1,0 +1,251 @@
+﻿@model Nop.Web.Models.Customer.CustomerMeterDetailsModel
+@using System.Globalization;
+
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    //page title
+    ViewBag.Title = T("Customers").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Dashboard");
+    Html.AppendCssFileParts("~/Administration/Content/bootstrap/css/bootstrap.min.css");
+    Html.AppendScriptParts("~/Administration/Scripts/bootstrap/bootstrap.min.js");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Customer Billing Details
+        </h1>
+        <br/>
+        <div class="content">
+            <div class="form-horizontal">
+                <div class="panel-group">
+                    <div class="panel panel-default panel-search">
+                        <div class="panel-body">
+                            <div class='form-horizontal well'>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <fieldset>
+                                                    <legend>Consumer Details</legend>
+                                                    <div class="control-group">
+                                                        <table class="meter-details">
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Meter ID <span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.meterId
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Customer Name<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.customerName
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Billing Unit<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.BillingUnit
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Location<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.location
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <fieldset>
+                                                    <legend>Consumption Details</legend>
+                                                    <div class="control-group">
+                                                        <table class="meter-details">
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Current Consumption<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.ConsumptionUnitReading Kwh
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Previous Consumptio<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.PreviousConsumptionUnitReading Kwh
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="background-color:#ccc">
+                                        <fieldset>
+                                            <legend>Billing Details</legend>
+                                            <div class="control-group">
+                                                <table class="meter-details">
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Period From<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillPeriodFrom
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Period To<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillPeriodTo
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Amount<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillAmount
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Payment Date<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillPaymentDate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Due Date<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillDueDate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Last Bill Amount<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.LastBillAmount
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Last Bill Payment Date<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.LastBillPaymentDate
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                             
+                            
+                            
+
+                            <script>
+    $(document).ready(function () {
+        $(".deact").bind("click", function (e) {
+            //e.preventDefault()
+            debugger
+            var data = {};
+            data.DeviceId = $(this).attr("id");
+            data.Status = false;
+            var token = $('input[name="__RequestVerificationToken"]').val();
+            debugger
+            $.ajax({
+                url: "/Admin/Customer/UpdateCustomereProductStatus",
+                type: 'POST',
+                //data: {
+                //    __RequestVerificationToken: token,
+                //    data:data},
+                data: {
+                    __RequestVerificationToken: token,
+                    DeviceId: data.DeviceId,
+                    Status: data.Status
+                },
+                success: function () {
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    //location.reload();
+                },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                }
+            });
+
+        })
+        $(".act").bind("click", function (e) {
+            //e.preventDefault()
+            debugger
+            var data = {};
+            data.DeviceId = $(this).attr("id");
+            data.Status = true;
+            var token = $('input[name="__RequestVerificationToken"]').val();
+            debugger
+            $.ajax({
+                url: "/Admin/Customer/UpdateCustomereProductStatus",
+                type: 'POST',
+                //data: {
+                //    __RequestVerificationToken: token,
+                //    data:data},
+                data: {
+                    __RequestVerificationToken: token,
+                    DeviceId: data.DeviceId,
+                    Status: data.Status
+                },
+                success: function () {
+                    debugger;
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    // location.reload();
+                },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                }
+            });
+
+        })
+    });
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        }
