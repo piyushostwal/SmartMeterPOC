@@ -47,7 +47,7 @@
                             <br/>
                             <br />
                             <div class="">
-                                <label>User Id:</label> <input type="text"/>   
+                                <label>User Id:</label> <select id="products"></select> 
                             </div>
                         </div>
                         <div class="box-body">
@@ -168,6 +168,21 @@
 </div>
 
 <script>
+    var datasets = {
+        label: "",
+        fillColor: "white",
+        strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+        pointBorderWidth: 1,
+        data: [],
+        fill: false
+    }
     var osConfig = {
         type: 'line',
         data: {
@@ -329,6 +344,103 @@
 
     });
     $('#chart-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
+
+        // create MultiSelect from select HTML element
+        var required = $("#products").kendoMultiSelect({
+            placeholder: "Select User...",
+            dataTextField: "customerName",
+            dataValueField: "deviceId",
+            autoBind: false,
+            dataSource: {
+                type: "json",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "http://localhost:15536/api/device/search/c",
+                    }
+                }
+            },
+            filtering: function (e) {
+                //get filter descriptor
+                var filter = e.filter;
+                console.log(filter)
+
+                // handle the event
+            },
+            change: function (e) {
+                var value = this.value();
+                console.log(this)
+                var osLabels = [];
+                var osData = [];
+                window.chart = { "users": value, "filter": $("#chart-box .bg-light-blue").text() }
+                $.ajax({
+                    url: "/api/SmartMeterLog/graph",
+                    type: 'POST',
+                    headers: {
+                        "content-type": "application/json",
+                        "cache-control": "no-cache",
+                    },
+                    dataType: 'json',
+                    //data: data,
+                    data: JSON.stringify({
+                        deviceId: value,
+                        TimeInterval:"45",
+                        StartDate:"2015-5-22 12:45:34.243",
+                        EndDate:"2016-1-22 12:45:34.243"
+                    }),
+                    success: function (result) {
+
+                        data = result;
+                        for (var i = 0; i <= data.length; i++) {
+
+                            if (i <= 9) {
+                                var date = new Date(data[i].loggingTime)
+                                osLabels.push(date.getHours() + ":" + date.getMinutes());
+                                osData.push(data[i].consumption);
+                            } else {
+                                break; 
+                            }
+
+                        }
+
+                        if (!window.orderStatistics) {
+
+                            osConfig.data.labels = osLabels;
+                            osConfig.data.datasets.push(datasets);
+                            var data_len = osConfig.data.datasets.length
+                            osConfig.data.datasets[--data_len].label = "testing"
+                            osConfig.data.datasets[--data_len].data = osData;
+
+                            osConfig.data.scales =
+                            window.orderStatistics2 = new Chart(document.getElementById("chart").getContext("2d"), osConfig);
+                        } else {
+
+                            window.orderStatistics.config.data.labels = osLabels;
+                            window.orderStatistics.config.data.datasets.push(datasets)
+                            var data_len = window.orderStatistics.config.data.datasets.length
+                            window.orderStatistics.config.data.datasets[--data_len].data = osData;
+                            osConfig.data.datasets[--data_len].label = "testing"
+                            window.orderStatistics.update();
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+
+                        alert(xhr.status);
+                    }
+                });
+
+                // Use the value of the widget
+            }
+
+        });
+        var multiselect = $("#products").data("kendoMultiSelect");
+        multiselect.bind("filtering", function (e) {
+            //get filter descriptor
+            var filter = e.filter;
+            console.log(filter)
+
+            // handle the event
+        });
 </script>
 
 <script>

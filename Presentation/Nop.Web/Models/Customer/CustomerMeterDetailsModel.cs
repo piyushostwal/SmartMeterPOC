@@ -23,6 +23,7 @@ namespace Nop.Web.Models.Customer
         public int PreviousConsumptionUnitReading { get; set; }
         public decimal? LastBillAmount { get; set; }
         public string LastBillPaymentDate { get; set; }
+        public int CustomerId { get; set; }
     }
 
     public class CustomerDashboardDetailsModel

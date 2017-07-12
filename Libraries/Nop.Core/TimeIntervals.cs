@@ -14,7 +14,7 @@ namespace Nop.Core
         public const int Sixty = 60;
         public const int Day = 1440;
         public const int Week = 10080;
-        public const int Month = 43800;
+        public const int Month = 44850;
         public const int Year = 525600;
 
 
