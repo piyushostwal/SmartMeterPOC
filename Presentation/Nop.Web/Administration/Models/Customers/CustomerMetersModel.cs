@@ -12,5 +12,6 @@ namespace Nop.Admin.Models.Customers
         public string BillingUnit { get; set; }
         public bool? IsBillPaid { get; set; }
         public string CustomerFullName { get; set; }
+        public string MeterType { get; set; }
     }
 }

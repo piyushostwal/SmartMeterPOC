@@ -1533,7 +1533,9 @@ namespace Nop.Web.Controllers
                         MeterId = m.DeviceId.ToString(),
                         Status = m.Status,
                         BillingUnit = m.BillingUnit,
-                        IsBillPaid=customerbilling.IsBillPaid
+                        IsBillPaid=customerbilling.IsBillPaid,
+                        CustomerFullName = m.Customer.GetFullName(),
+                        MeterType = m.CustomerMeterType != null ? m.CustomerMeterType.MeterType : string.Empty
                     });
                 }
                 

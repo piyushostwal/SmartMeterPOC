@@ -122,6 +122,7 @@
     <Compile Include="Domain\Common\SearchTerm.cs" />
     <Compile Include="Domain\Customers\CustomerBilling.cs" />
     <Compile Include="Domain\Customers\CustomerBillUnitRate.cs" />
+    <Compile Include="Domain\Customers\CustomerMeterType.cs" />
     <Compile Include="Domain\Customers\CustomerPassword.cs" />
     <Compile Include="Domain\Customers\CustomerAttribute.cs" />
     <Compile Include="Domain\Customers\CustomerAttributeValue.cs" />

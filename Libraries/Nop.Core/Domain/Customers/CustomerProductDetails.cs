@@ -14,6 +14,7 @@ namespace Nop.Core.Domain.Customers
 
         #region Proeprties
         public int CustomerId { get; set; }
+        public int MeterTypeId { get; set; }
         public Guid DeviceId { get; set; }
         public string BillingUnit { get; set; }
         public bool Status { get; set; }
@@ -25,6 +26,7 @@ namespace Nop.Core.Domain.Customers
         public DateTime? UpdateOn { get; set; }
         public int? UpdatedBy { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual CustomerMeterType CustomerMeterType { get; set; }
         #endregion
 
     }
