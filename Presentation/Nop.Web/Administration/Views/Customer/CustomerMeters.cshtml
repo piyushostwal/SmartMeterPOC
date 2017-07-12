@@ -153,6 +153,7 @@
                                                         Status: { type: "bool" },
                                                         MeterId: { type: "string" },
                                                         IsBillPaid: { type: "bool" },
+                                                        Metertype:{type:"string"},
                                                         //Status: { type: "string" },
                                                         //Id: { type: "number" },
                                                         //Payment: { type: "string" },
@@ -192,6 +193,13 @@
                                                 field: "Id",
                                                 title: "Device Id",
                                                 template: '<a href="CustomerMeterDetails/' + '#= MeterId #' + '">' + '#= MeterId #' + '</a>',
+                                                attributes: { style: "text-align:center" },
+                                                width: 300
+                                            },
+                                            {
+                                                field: "Metertype",
+                                                title: "Meter type",
+                                                template: '#= MeterType #',
                                                 attributes: { style: "text-align:center" },
                                                 width: 300
                                             },
