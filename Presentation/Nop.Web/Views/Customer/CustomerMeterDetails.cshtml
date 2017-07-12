@@ -201,11 +201,11 @@
                             </div>
                     </div>
                     <div class="box-body">
-                        <button class="btn btn-xs btn-info btn-flat margin-r-5 btn-arrow" title="your-tooltip-here"><span class="glyphicon glyphicon-fast-backward"></span></button>
+                        
                         <div class="chart" style="height: 300px;">
                             <canvas id="@(prefix)-chart" height="300"></canvas>
                         </div>
-                        <button class="btn btn-xs btn-info btn-flat margin-r-5 btn-arrow-right" title="your-tooltip-here"><span class="glyphicon  glyphicon-fast-forward"></span></button>
+                        
                     </div>
                 </div>
             </div>
@@ -398,7 +398,12 @@
                         data: JSON.stringify(data1),
                         success: function (result) {
                             data = result;
+                            if (!data.length) {
+                                alert("No data for the filter")
+                                return false
+                            }
                             var res = data.filter(function (v) {
+                                
                                 return deviceId.indexOf(v.deviceId) > -1;
                             });
                             for (var i = 0; i < res.length; i++) {
@@ -476,129 +481,129 @@
         </div>
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
         <script>
-            var billingArray = JSON.parse('@Html.Raw(Json.Encode(Model.PreviousBills))');
-            var previousBillings = [];
-            var monthNames = ["January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
+    var billingArray = JSON.parse('@Html.Raw(Json.Encode(Model.PreviousBills))');
+    var previousBillings = [];
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
-            for (i = 0; i < billingArray.length; i++) {
-                var billingDate = new Date(parseInt(billingArray[i].BillPeriodFrom.toString().substr(6, 13)));
-                var singleBill = {
-                    amount: billingArray[i].BillAmount,
-                    billId: billingArray[i].Id,
-                    consumptionUnitReading: billingArray[i].ConsumptionUnitReading,
-                    isBillPaid: billingArray[i].IsBillPaid,
-                    billPeriod: monthNames[billingDate.getMonth()] + ' ' + billingDate.getFullYear()
-                };
-                //console.log('SIngle Bill =', singleBill);
-                previousBillings.push(singleBill);
-            }
-            var arrayOfArrays = [
-                {
-                    "billPeriod": "July-2017",
-                    "amount": "206",
-                    "transactionId": "12345",
-                    "billId": "45645"
-                },
-                {
-                    "billPeriod": "August-2017",
-                    "amount": "25",
-                    "transactionId": "45645",
-                    "billId": "456456"
-                },
-                {
-                    "billPeriod": "20-july-2017",
-                    "amount": "2546",
-                    "transactionId": "4546",
-                    "billId": "45645"
-                }
-            ]
+    for (i = 0; i < billingArray.length; i++) {
+        var billingDate = new Date(parseInt(billingArray[i].BillPeriodFrom.toString().substr(6, 13)));
+        var singleBill = {
+            amount: billingArray[i].BillAmount,
+            billId: billingArray[i].Id,
+            consumptionUnitReading: billingArray[i].ConsumptionUnitReading,
+            isBillPaid: billingArray[i].IsBillPaid,
+            billPeriod: monthNames[billingDate.getMonth()] + ' ' + billingDate.getFullYear()
+        };
+        //console.log('SIngle Bill =', singleBill);
+        previousBillings.push(singleBill);
+    }
+    var arrayOfArrays = [
+        {
+            "billPeriod": "July-2017",
+            "amount": "206",
+            "transactionId": "12345",
+            "billId": "45645"
+        },
+        {
+            "billPeriod": "August-2017",
+            "amount": "25",
+            "transactionId": "45645",
+            "billId": "456456"
+        },
+        {
+            "billPeriod": "20-july-2017",
+            "amount": "2546",
+            "transactionId": "4546",
+            "billId": "45645"
+        }
+    ]
 
-            console.log(arrayOfArrays)
-            $("#products-grid").kendoGrid({
-                dataSource: {
-                    data: previousBillings,
-                    schema: {
-                        model: {
-                            fields: {
-                                consumptionUnitReading: { type: "string" },
-                                billPeriod: { type: "string" },
-                                billId: { type: "string" },
-                                amount: { type: "string" },
-                                isBillPaid: { type: "bool" }
-                            }
-                        }
-                    },
-                    error: function (e) {
-                        display_kendoui_grid_error(e);
-                        // Cancel the changes
-                        this.cancelChanges();
-                    },
-                    serverPaging: true,
-                    serverFiltering: true,
-                    serverSorting: true,
-                    pageSize: 20
-                },
-                pageable: {
-                    input: true,
-                    numeric: false
-                },
-                scrollable: false,
-                sortable: true,
-                filterable: true,
-                columns: [
-                    {
-                        field: "billId",
-                        title: "Bill Id",
-                        template: '<a href="BillingDetails/#= billId #">#= billId #</a>',
-                        //template:'#= MeterId #',
-                        attributes: { style: "text-align:center" },
-                        width: 300
-                    },
-                    {
-                        field: "billPeriod",
-                        title: "Bill Month",
-                        //template:'#= MeterId #',
-                        attributes: { style: "text-align:center" },
-                        width: 300
-                    },
-                    {
-                        field: "amount",
-                        title: "Amount",
-                        //template:'#= MeterId #',
-                        attributes: { style: "text-align:center" },
-                        width: 300
-                    },
-                    {
-                        field: "consumptionUnitReading",
-                        title: "Meter Reading",
-                        //template:'#= MeterId #',
-                        attributes: { style: "text-align:center" },
-                        width: 300
-                    },
-                    {
-                        field: "isBillPaid",
-                        title: "Bill Paid",
-                        //template:'#= MeterId #',
-                        attributes: { style: "text-align:center" },
-                        width: 300
+    console.log(arrayOfArrays)
+    $("#products-grid").kendoGrid({
+        dataSource: {
+            data: previousBillings,
+            schema: {
+                model: {
+                    fields: {
+                        consumptionUnitReading: { type: "string" },
+                        billPeriod: { type: "string" },
+                        billId: { type: "string" },
+                        amount: { type: "string" },
+                        isBillPaid: { type: "bool" }
                     }
-                ]
-            });
+                }
+            },
+            error: function (e) {
+                display_kendoui_grid_error(e);
+                // Cancel the changes
+                this.cancelChanges();
+            },
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            pageSize: 20
+        },
+        pageable: {
+            input: true,
+            numeric: false
+        },
+        scrollable: false,
+        sortable: true,
+        filterable: true,
+        columns: [
+            {
+                field: "billId",
+                title: "Bill Id",
+                template: '<a href="BillingDetails/#= billId #">#= billId #</a>',
+                //template:'#= MeterId #',
+                attributes: { style: "text-align:center" },
+                width: 300
+            },
+            {
+                field: "billPeriod",
+                title: "Bill Month",
+                //template:'#= MeterId #',
+                attributes: { style: "text-align:center" },
+                width: 300
+            },
+            {
+                field: "amount",
+                title: "Amount",
+                //template:'#= MeterId #',
+                attributes: { style: "text-align:center" },
+                width: 300
+            },
+            {
+                field: "consumptionUnitReading",
+                title: "Meter Reading",
+                //template:'#= MeterId #',
+                attributes: { style: "text-align:center" },
+                width: 300
+            },
+            {
+                field: "isBillPaid",
+                title: "Bill Paid",
+                //template:'#= MeterId #',
+                attributes: { style: "text-align:center" },
+                width: 300
+            }
+        ]
+    });
 
-            var config = {
-                apiKey: "AIzaSyDIXCGE7OJgPvn8zO_jqKRkSHpziBbB2z4",
-                authDomain: "smarthome.firebaseapp.com",
-                databaseURL: "https://smarthome-46be4.firebaseio.com",
-                messagingSenderId: "994315037246",
-                storageBucket: "smarthome-46be4.appspot.com"
-            };
-            firebase.initializeApp(config);
+    var config = {
+        apiKey: "AIzaSyDIXCGE7OJgPvn8zO_jqKRkSHpziBbB2z4",
+        authDomain: "smarthome.firebaseapp.com",
+        databaseURL: "https://smarthome-46be4.firebaseio.com",
+        messagingSenderId: "994315037246",
+        storageBucket: "smarthome-46be4.appspot.com"
+    };
+    firebase.initializeApp(config);
 
-            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.DeviceId/');
+    var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.DeviceId/');
             customerMeterDetails.on('value', function (snapshot) {
-                alert(' Refresh Values');
+                $('.bg-light-blue').trigger('click');
             });
 
 
