@@ -80,7 +80,12 @@ namespace Nop.Web.Controllers
         public IHttpActionResult GetCustomerGraphData(SmartMeterLogCustomerGraphModel filterModel)
         {
             IPagedList<SmartMeterLogByTimeInterval> meterlogs = GetCustomerLogsFromService(filterModel.TimeInterval, filterModel.CustomerID, filterModel.TimeIntervalDate);
-            return Ok(meterlogs);
+            var formattedList = meterlogs.GroupBy(l => l.DeviceID, (key, g) => 
+                new { deviceId = key, 
+                    consumptionList = g.Select(l => new ConsumptionList() { Consumption = l.Consumption, LoggingTime = l.LoggingTime }), 
+                    solarGeneratedUnitsList = g.Select(l => new SolarGeneratedUnitsList() { LoggingTime = l.LoggingTime, SolarGeneratedUnits = l.SolarGeneratedUnits }) }).ToList();
+
+            return Ok(formattedList);
         }
 
         // GET api/smartmetergraph
