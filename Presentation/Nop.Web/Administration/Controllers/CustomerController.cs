@@ -1657,7 +1657,7 @@ namespace Nop.Admin.Controllers
                         MeterId = m.DeviceId.ToString(),
                         Status = m.Status,
                         BillingUnit = m.BillingUnit,
-                        IsBillPaid = customerbilling.IsBillPaid,
+                        IsBillPaid = customerbilling !=null ?customerbilling.IsBillPaid:false,
                         CustomerFullName = m.Customer.GetFullName(),
                         MeterType = m.CustomerMeterType != null ? m.CustomerMeterType.MeterType : string.Empty
                     });
