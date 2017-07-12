@@ -13,6 +13,7 @@ namespace Nop.Core.Domain.Customers
 
         }
         public Guid DeviceId { get; set; }
+        public int MeterId { get; set; }
         public DateTime BillPeriodFrom { get; set; }
         public DateTime BillPeriodTo { get; set; }
         public int ConsumptionUnitReading { get; set; }

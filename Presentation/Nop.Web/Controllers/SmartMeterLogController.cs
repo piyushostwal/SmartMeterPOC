@@ -140,11 +140,12 @@ namespace Nop.Web.Controllers
                     smartMeterLog.SolarGeneratedUnits = smartMeterLogModel.SolarGeneratedUnits;
                     var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
 
-                    data.TimeInterval = settingsData.TimeInterval;
-                    //data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
-                    data.IsActive = customerData.Status;
 
-                    return Ok(data);
+                    data.Result.TimeInterval = settingsData.TimeInterval;
+                    //data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
+                    data.Result.IsActive = customerData.Status;
+
+                    return Ok(data.Result);
                 }
             }
             return Unauthorized();

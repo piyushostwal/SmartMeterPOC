@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -78,13 +79,30 @@ namespace Nop.Services.SmartMeterLogs
             return customers;
         }
 
-        public SmartMeterLog SaveMeterLog(SmartMeterLog meterLog)
+        public async Task<SmartMeterLog> SaveMeterLog(SmartMeterLog meterLog)
         {
             if (meterLog != null)
             {
                 _meterRepository.Insert(meterLog);
                 //event notification
                 _eventPublisher.EntityInserted(meterLog);
+                var deviceId = meterLog.DeviceID;
+                Uri serviceRoot = new Uri("https://smarthome-46be4.firebaseio.com/smartmeterslogs/" + deviceId + ".json");
+                string requestUrl = "https://smarthome-46be4.firebaseio.com/smartmeterslogs/" + deviceId + ".json";
+
+                HttpClient hc = new HttpClient();
+                //hc.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                hc.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
+
+                var method = new HttpMethod("PATCH");
+
+                var request = new HttpRequestMessage(method, requestUrl)
+                {
+                    Content = new StringContent("{ \"isActive\": \"true \" }", Encoding.UTF8, "application/json")
+                };
+
+                HttpResponseMessage hrm = await hc.SendAsync(request);
+    
             }
             return meterLog;
         }
