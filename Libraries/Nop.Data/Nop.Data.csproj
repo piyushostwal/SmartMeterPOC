@@ -71,6 +71,7 @@
     <Compile Include="Mapping\Customers\CustomerMeterTypeMap.cs" />
     <Compile Include="Mapping\Customers\CustomerPasswordMap.cs" />
     <Compile Include="Mapping\Customers\CustomerProductDetailsMap.cs" />
+    <Compile Include="Mapping\SmartMeterLogs\SmartMeterLogsByLocationMap.cs" />
     <Compile Include="Mapping\Forums\ForumPostVoteMap.cs" />
     <Compile Include="Mapping\Orders\ReturnRequestReason.cs" />
     <Compile Include="Mapping\Orders\ReturnRequestAction.cs" />
