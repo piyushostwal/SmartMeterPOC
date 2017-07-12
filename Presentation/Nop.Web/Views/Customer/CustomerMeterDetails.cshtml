@@ -187,13 +187,13 @@
                         </h3>
                         <div class="box-tools pull-right">
 
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>          } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>          } data-chart-role="toggle-chart" data-chart-period="60">Hour</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
+                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="60">Hour</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
+                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
                             <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
                                 @if (hidePanel)
                                 {
@@ -313,7 +313,7 @@
                     }
                 };
                 function createDataset(osLabels_new, osData_new, label) {
-                    
+
                     if (!window.orderStatistics) {
                         osConfig.data.labels = osLabels_new;
                         //osConfig.data.datasets.push(datasets);
@@ -366,7 +366,7 @@
                     if (window.orderStatistics) {
                         window.orderStatistics.config.data.datasets = [];
                     }
-                   
+
                     var osLabels = [];
                     var osData = [];
                     var data1 = {};
@@ -398,7 +398,7 @@
                                 solar = res[i].solarGeneratedUnitsList;
                                 for (var j = 0; j < cons.length; j++) {
                                     var date = new Date(cons[j].loggingTime)
-                                    switch(period) {
+                                    switch (period) {
                                         case "year":
                                             osLabels.push(date.getFullYear());
                                             break;
@@ -406,13 +406,13 @@
                                             osLabels.push(month[date.getMonth()]);
                                             break;
                                         case "week":
-                                            osLabels.push("Week:"+j+" "+month[date.getMonth()]);
-                                            break;                                        
-                                            
+                                            osLabels.push("Week:" + j + " " + month[date.getMonth()]);
+                                            break;
+
                                         default:
                                             osLabels.push(date.getHours() + ":" + date.getMinutes());
-                                    } 
-                                    
+                                    }
+
                                     osData.push(cons[j].consumption);
 
                                 }
@@ -466,6 +466,24 @@
         </div>
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
         <script>
+            var billingArray = JSON.parse('@Html.Raw(Json.Encode(Model.PreviousBills))');
+            var previousBillings = [];
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            for (i = 0; i < billingArray.length; i++) {
+                var billingDate = new Date(parseInt(billingArray[i].BillPeriodFrom.toString().substr(6, 13)));
+                var singleBill = {
+                    amount: billingArray[i].BillAmount,
+                    billId: billingArray[i].Id,
+                    consumptionUnitReading: billingArray[i].ConsumptionUnitReading,
+                    isBillPaid: billingArray[i].IsBillPaid,
+                    billPeriod: monthNames[billingDate.getMonth()] + ' ' + billingDate.getFullYear()
+                };
+                //console.log('SIngle Bill =', singleBill);
+                previousBillings.push(singleBill);
+            }
             var arrayOfArrays = [
                 {
                     "billPeriod": "July-2017",
@@ -486,17 +504,19 @@
                     "billId": "45645"
                 }
             ]
+
             console.log(arrayOfArrays)
             $("#products-grid").kendoGrid({
                 dataSource: {
-                    data: arrayOfArrays,
+                    data: previousBillings,
                     schema: {
                         model: {
                             fields: {
-                                transactionId: { type: "string" },
+                                consumptionUnitReading: { type: "string" },
                                 billPeriod: { type: "string" },
                                 billId: { type: "string" },
-                                amount: { type: "string" }
+                                amount: { type: "string" },
+                                isBillPaid: { type: "bool" }
                             }
                         }
                     },
@@ -521,7 +541,7 @@
                     {
                         field: "billId",
                         title: "Bill Id",
-                        template: '<a href="CustomerMeterDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
+                        template: '<a href="BillingDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
                         //template:'#= MeterId #',
                         attributes: { style: "text-align:center" },
                         width: 300
@@ -541,17 +561,21 @@
                         width: 300
                     },
                     {
-                        field: "transactionId",
-                        title: "Transaction Id",
+                        field: "consumptionUnitReading",
+                        title: "Meter Reading",
                         //template:'#= MeterId #',
                         attributes: { style: "text-align:center" },
                         width: 300
                     },
-
-
+                    {
+                        field: "isBillPaid",
+                        title: "Bill Paid",
+                        //template:'#= MeterId #',
+                        attributes: { style: "text-align:center" },
+                        width: 300
+                    }
                 ]
             });
-            //});
 
             var config = {
                 apiKey: "AIzaSyDIXCGE7OJgPvn8zO_jqKRkSHpziBbB2z4",
@@ -562,12 +586,14 @@
             };
             firebase.initializeApp(config);
 
-                            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.DeviceId/');
-                            customerMeterDetails.on('value', function (snapshot) {
-                                alert(' Refresh Values');
-                            });
+            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.DeviceId/');
+            customerMeterDetails.on('value', function (snapshot) {
+                alert(' Refresh Values');
+            });
+
 
         </script>
+
     </div>
 
 </div>

@@ -1548,6 +1548,7 @@ namespace Nop.Web.Controllers
             var meterdatils = _customerProductDetailsService.
                 GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
             var customerbilling = _customerBillingService.GetCustomerCurrentBill(deviceId);
+            var previousBills = _customerBillingService.GetCustomerPreviousBills(deviceId);
             var smartMeterLogs = _smartmeterLogService.GetMeterLog(deviceId);
             CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
             
@@ -1568,6 +1569,7 @@ namespace Nop.Web.Controllers
                 model.LastBillPaymentDate = customerbilling.LastBillPaymentDate!=null?
                     customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy"):string.Empty;
                 model.CustomerId = _workContext.CurrentCustomer.Id;
+                model.PreviousBills = previousBills.ToList<CustomerBilling>();
             }
             if (meterdatils != null)
             {
