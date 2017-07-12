@@ -137,6 +137,7 @@ namespace Nop.Web.Controllers
                     smartMeterLog.IsActive = smartMeterLogModel.IsActive;
                     smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
                     smartMeterLog.Reading = smartMeterLogModel.Reading;
+                    smartMeterLog.SolarGeneratedUnits = smartMeterLogModel.SolarGeneratedUnits;
                     var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
 
                     data.TimeInterval = settingsData.TimeInterval;

@@ -14,9 +14,10 @@ namespace Nop.Web.Models.SmartMeterLogs
         public string Longitude { get; set; }
         public double Consumption { get; set; }
         public int TimeInterval { get; set; }
-        public DateTime TimeIntervalSetTime { get; set; }
+        //public DateTime TimeIntervalSetTime { get; set; }
         public bool IsActive { get; set; }
         public DateTime LoggingTime { get; set; }
         public int Reading { get; set; }
+        public int SolarGeneratedUnits { get; set; }
     }
 }

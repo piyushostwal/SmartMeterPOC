@@ -739,6 +739,12 @@ namespace Nop.Web.Infrastructure
                     new { controller = "SmartMeterLog", action = "Get" },
                     new[] { "Nop.Web.Controllers" });
 
+            //Smartmeterlogs route
+            routes.MapRoute("SmartMeterGraph",
+                    "api/SmartMeterGraph",
+                    new { controller = "SmartMeterGraph", action = "Get" },
+                    new[] { "Nop.Web.Controllers" });
+
             //page not found
             routes.MapLocalizedRoute("PageNotFound",
                             "page-not-found",
