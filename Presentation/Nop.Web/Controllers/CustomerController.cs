@@ -1583,6 +1583,47 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult CustomerBillingDetails(Guid deviceId)
+        {
+            var meterdatils = _customerProductDetailsService.
+                GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
+            var customerbilling = _customerBillingService.GetCustomerCurrentBill(deviceId);
+            var previousBills = _customerBillingService.GetCustomerPreviousBills(deviceId);
+            var smartMeterLogs = _smartmeterLogService.GetMeterLog(deviceId);
+            CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
+
+            model.customerName = _workContext.CurrentCustomer.GetFullName();
+            if (customerbilling != null)
+            {
+                model.meterId = customerbilling.MeterId.ToString();
+                model.DeviceId = customerbilling.DeviceId.ToString();
+                model.ConsumptionUnitReading = customerbilling.ConsumptionUnitReading;
+                model.BillPeriodFrom = customerbilling.BillPeriodFrom.ToString("MM/dd/yyyy");
+                model.BillPeriodTo = customerbilling.BillPeriodTo.ToString("MM/dd/yyyy");
+                model.BillAmount = customerbilling.BillAmount;
+                model.BillPaymentDate = customerbilling.BillPaymentDate != null ?
+                    customerbilling.BillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+                model.BillDueDate = customerbilling.BillDueDate.ToString("MM/dd/yyyy");
+                model.PreviousConsumptionUnitReading = customerbilling.PreviousConsumbptionUnitReading;
+                model.LastBillAmount = customerbilling.LastBillAmount.Value;
+                model.LastBillPaymentDate = customerbilling.LastBillPaymentDate != null ?
+                    customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+                model.CustomerId = _workContext.CurrentCustomer.Id;
+                model.PreviousBills = previousBills.ToList<CustomerBilling>();
+            }
+            if (meterdatils != null)
+            {
+                model.BillingUnit =
+                    meterdatils.FirstOrDefault(m => m.DeviceId == deviceId).BillingUnit;
+            }
+            if (smartMeterLogs.Count > 0)
+                model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
+
+
+            return View(model);
+        }
+
         #endregion
         #region My Account- Dashboard
         [HttpGet]
