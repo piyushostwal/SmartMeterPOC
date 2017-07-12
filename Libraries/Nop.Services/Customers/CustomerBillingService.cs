@@ -62,12 +62,20 @@ namespace Nop.Services.Customers
         #endregion
         #region methods
 
-        public virtual IPagedList<CustomerBilling> GetAllCustomerBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue)
+        public virtual IPagedList<CustomerBilling> GetCustomerPreviousBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _customerBilling.Table;
-            query = query.Where(m => m.DeviceId == deviceId);
+            query = query.Where(m => m.DeviceId == deviceId).Where(m=>m.IsCurrentBill==false);
             query = query.OrderByDescending(c => c.Id);
             var customers = new PagedList<CustomerBilling>(query, pageIndex, pageSize);
+            return customers;
+        }
+        public virtual CustomerBilling GetCustomerBillById(int id)
+        {
+            var query = _customerBilling.Table;
+            query = query.Where(m => m.Id == id);
+            query = query.OrderByDescending(c => c.Id);
+            var customers = query.FirstOrDefault();
             return customers;
         }
         public virtual CustomerBilling GetCustomerCurrentBill(Guid deviceId)
@@ -80,6 +88,7 @@ namespace Nop.Services.Customers
             return customers;
         }
 
+
         public virtual IPagedList<CustomerBilling> GetDefaulterCustomers()
         {
             var query = _customerBilling.Table;
@@ -89,6 +98,17 @@ namespace Nop.Services.Customers
             query = query.OrderByDescending(c => c.Id);
             var customers = new PagedList<CustomerBilling>(query, 0, int.MaxValue);
             return customers;
+
+        public virtual void UpdateCustomerPayment(int id)
+        {
+            var customerBill = GetCustomerBillById(id);
+            if(customerBill!=null)
+            {
+                customerBill.IsBillPaid = true;
+                customerBill.BillPaymentDate = DateTime.Now;
+                _customerBilling.Update(customerBill);
+                _eventPublisher.EntityUpdated(customerBill);
+            }
         }
         #endregion
     }

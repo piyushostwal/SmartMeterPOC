@@ -34,10 +34,40 @@
                                                 <fieldset>
                                                     <legend>Consumer Details</legend>
                                                     <div class="control-group">
-                                                        <label class="control-label">Meter ID: @Model.meterId</label><br />
-                                                        <label class="control-label">Customer Name: @Model.customerName</label><br />
-                                                        <label class="control-label">Billing Unit: @Model.BillingUnit</label><br />
-                                                        <label class="control-label">Location:@Model.location</label><br />
+                                                        <table class="meter-details">
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Meter ID <span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.meterId
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Customer Name<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.customerName
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Billing Unit<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.BillingUnit
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Location<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.location
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -48,9 +78,24 @@
                                                 <fieldset>
                                                     <legend>Consumption Details</legend>
                                                     <div class="control-group">
-                                                        <label class="control-label">Consumption Unit Reading:@Model.ConsumptionUnitReading</label><br />
-                                                        <label class="control-label">Previous Consumbption Unit Reading:@Model.PreviousConsumptionUnitReading</label><br />
-                                                        @*<label class="control-label">Billing Unit: BillingUnit</label>*@<br />
+                                                        <table class="meter-details">
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Current Consumption<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.ConsumptionUnitReading Kwh
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="label-td">
+                                                                    Previous Consumptio<span class="right-float">:</span>
+                                                                </td>
+                                                                <td class="value-td">
+                                                                    @Model.PreviousConsumptionUnitReading Kwh
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -60,20 +105,71 @@
                                         <fieldset>
                                             <legend>Billing Details</legend>
                                             <div class="control-group">
-                                                <label class="control-label">Bill Period From: @Model.BillPeriodFrom</label><br />
-                                                <label class="control-label">Bill Period To:@Model.BillPeriodFrom</label><br />
-                                                <label class="control-label">Bill Amount: @Model.BillAmount $</label><br />
-                                                <label class="control-label">Bill Payment Date: @Model.BillPaymentDate</label><br />
-                                                <label class="control-label">Bill Due Date: @Model.BillDueDate</label><br />
-                                                <label class="control-label">Last Bill Amount: @Model.LastBillAmount</label><br />
-                                                <label class="control-label">Last Bill Payment Date: @Model.LastBillPaymentDate</label><br />
+                                                <table class="meter-details">
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Period From<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillPeriodFrom
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Period To<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillPeriodTo
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Amount<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillAmount
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Payment Date<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillPaymentDate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Bill Due Date<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.BillDueDate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Last Bill Amount<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.LastBillAmount
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-td">
+                                                            Last Bill Payment Date<span class="right-float">:</span>
+                                                        </td>
+                                                        <td class="value-td">
+                                                            @Model.LastBillPaymentDate
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </fieldset>
                                     </div>
                                 </div>
 
                             </div>
-                            
+                           
                             @if (@Model.Status)
                             {
                                 <button class="btn btn-danger deact" id="@Model.meterId" data-status="@Model.Status">Deactivate</button>
