@@ -158,15 +158,17 @@ namespace Nop.Services.SmartMeterLogs
 
 
             //prepare parameters
+            var CustomerId = _dataProvider.GetParameter();
+            CustomerId.ParameterName = "CustomerId";
+            CustomerId.Value = customerId;
+            CustomerId.DbType = DbType.Int32; 
+            
             var TimeInterval = _dataProvider.GetParameter();
             TimeInterval.ParameterName = "TimeInterval";
             TimeInterval.Value = timeInterval;
             TimeInterval.DbType = DbType.Int32;
 
-            var CustomerId = _dataProvider.GetParameter();
-            TimeInterval.ParameterName = "CustomerId";
-            TimeInterval.Value = customerId;
-            TimeInterval.DbType = DbType.Int32;
+           
 
             var totalRecordsParameter = _dataProvider.GetParameter();
             totalRecordsParameter.ParameterName = "TotalRecords";
@@ -174,8 +176,8 @@ namespace Nop.Services.SmartMeterLogs
             totalRecordsParameter.DbType = DbType.Int32;
 
             //invoke stored procedure
-            var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>("UspSelectSmartmeterLogsByCustomerId",
-                TimeInterval, totalRecordsParameter);
+            var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>(
+                "UspSelectSmartmeterLogsByCustomerId",CustomerId,TimeInterval,totalRecordsParameter);
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
             //paging
