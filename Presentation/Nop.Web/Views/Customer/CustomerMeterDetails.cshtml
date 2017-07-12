@@ -363,6 +363,7 @@
                     }
                 }
                 function changeOsPeriod(period) {
+
                     if (window.orderStatistics) {
                         window.orderStatistics.config.data.datasets = [];
                     }
@@ -371,7 +372,7 @@
                     var osData = [];
                     var data1 = {};
                     var data;
-                    var deviceId = ["@Model.meterId"]
+                    var deviceId = ["@Model.DeviceId"]
 
                     data1.CustomerID = "@Model.CustomerId";
                     data1.TimeInterval = period;
