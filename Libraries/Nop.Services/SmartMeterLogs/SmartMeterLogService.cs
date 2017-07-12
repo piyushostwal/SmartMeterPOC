@@ -139,8 +139,6 @@ namespace Nop.Services.SmartMeterLogs
             TimeInterval.Value = timeInterval;
             TimeInterval.DbType = DbType.Int32;
 
-
-
             var totalRecordsParameter = _dataProvider.GetParameter();
             totalRecordsParameter.ParameterName = "TotalRecords";
             totalRecordsParameter.Direction = ParameterDirection.Output;
@@ -148,6 +146,35 @@ namespace Nop.Services.SmartMeterLogs
 
             //invoke stored procedure
             var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>("UspSelectSmartmeterLogs",
+                TimeInterval, totalRecordsParameter);
+            var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
+
+            //paging
+            return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize);
+        }
+        public virtual IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByCustomerId(int timeInterval, int customerId, 
+            int pageIndex = 0, int pageSize = int.MaxValue)
+        {
+
+
+            //prepare parameters
+            var TimeInterval = _dataProvider.GetParameter();
+            TimeInterval.ParameterName = "TimeInterval";
+            TimeInterval.Value = timeInterval;
+            TimeInterval.DbType = DbType.Int32;
+
+            var CustomerId = _dataProvider.GetParameter();
+            TimeInterval.ParameterName = "CustomerId";
+            TimeInterval.Value = customerId;
+            TimeInterval.DbType = DbType.Int32;
+
+            var totalRecordsParameter = _dataProvider.GetParameter();
+            totalRecordsParameter.ParameterName = "TotalRecords";
+            totalRecordsParameter.Direction = ParameterDirection.Output;
+            totalRecordsParameter.DbType = DbType.Int32;
+
+            //invoke stored procedure
+            var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogByTimeInterval>("UspSelectSmartmeterLogsByCustomerId",
                 TimeInterval, totalRecordsParameter);
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 

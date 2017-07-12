@@ -15,5 +15,7 @@ namespace Nop.Services.SmartMeterLogs
         IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByTimeInterval(int timeInterval, int pageIndex = 0, int pageSize = int.MaxValue);
 
         IPagedList<SmartMeterLog> GetMeterLogForMultipleDeviceIds(Guid[] deviceIds, int pageIndex = 0, int pageSize = int.MaxValue);
+        IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByCustomerId(int timeInterval, int customerId,
+            int pageIndex = 0, int pageSize = int.MaxValue);
     }
 }

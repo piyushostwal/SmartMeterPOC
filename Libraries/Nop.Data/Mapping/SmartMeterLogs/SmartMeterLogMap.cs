@@ -18,10 +18,10 @@ namespace Nop.Data.Mapping.SmartMeterLogs
             this.Property(u => u.Longitude).IsRequired();
             this.Property(u => u.Consumption).IsRequired();
             this.Property(u => u.TimeInterval).IsRequired();
-            this.Property(u => u.TimeIntervalSetTime).IsRequired();
             this.Property(u => u.IsActive).IsRequired();
             this.Property(u => u.LoggingTime).IsRequired();
             this.Property(u => u.Reading);
+            this.Property(u => u.SolarGeneratedUnits);
         }
     }
 }

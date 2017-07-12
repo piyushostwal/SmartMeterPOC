@@ -13,5 +13,8 @@ namespace Nop.Core.Domain.SmartMeterLogs
         public int TimeInterval { get; set; }
         public double Consumption { get; set; }
         public int Reading { get; set; }
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerAddress { get; set; }
     }
 }
