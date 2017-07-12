@@ -98,7 +98,7 @@ namespace Nop.Services.SmartMeterLogs
 
                 var request = new HttpRequestMessage(method, requestUrl)
                 {
-                    Content = new StringContent("{ \"DateTime\": "+new DateTime().Ticks+" }", Encoding.UTF8, "application/json")
+                    Content = new StringContent("{ \"DateTime\": " + new DateTime().Ticks + " }", Encoding.UTF8, "application/json")
                 };
 
                 HttpResponseMessage hrm = await hc.SendAsync(request);
@@ -110,7 +110,7 @@ namespace Nop.Services.SmartMeterLogs
                 {
                     return meterLog;
                 }
-    
+
             }
             return meterLog;
         }
@@ -224,14 +224,13 @@ namespace Nop.Services.SmartMeterLogs
             return new PagedList<SmartMeterLogByTimeInterval>(smartMeterLogs, pageIndex, pageSize);
         }
 
-
-
         public virtual IPagedList<SmartMeterLog> GetMeterLogForMultipleDeviceIds(Guid[] deviceIds, int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _meterRepository.Table.Where(m => deviceIds.Contains(m.DeviceID)).OrderByDescending(c => c.LoggingTime);
             var customers = new PagedList<SmartMeterLog>(query, pageIndex, pageSize);
             return customers;
         }
+
         #endregion
     }
 }
