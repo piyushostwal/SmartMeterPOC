@@ -10,6 +10,7 @@ namespace Nop.Web.Models.Customer
     public class CustomerMeterDetailsModel
     {
         public string meterId { get; set; }
+        public string DeviceId { get; set; }
         public string customerName { get; set; }
         public string location { get; set; }
         public string BillingUnit { get; set; }

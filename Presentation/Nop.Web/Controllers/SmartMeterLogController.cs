@@ -119,7 +119,7 @@ namespace Nop.Web.Controllers
         }
 
         // POST api/smartmeterlog
-        public IHttpActionResult Post([FromBody]SmartMeterLogModel smartMeterLogModel)
+        public async Task<IHttpActionResult> Post([FromBody]SmartMeterLogModel smartMeterLogModel)
         {
             var settingsData = _customerBillUnitRateService.GetBillingRateInformation();
             var customerData = _customerProductDetailsService.GetCustomerProductDetailsByDeviceId(smartMeterLogModel.DeviceID);
@@ -138,14 +138,14 @@ namespace Nop.Web.Controllers
                     smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
                     smartMeterLog.Reading = smartMeterLogModel.Reading;
                     smartMeterLog.SolarGeneratedUnits = smartMeterLogModel.SolarGeneratedUnits;
-                    var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
+                    var data = await _smartMeterLogService.SaveMeterLog(smartMeterLog);
 
 
-                    data.Result.TimeInterval = settingsData.TimeInterval;
+                    data.TimeInterval = settingsData.TimeInterval;
                     //data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
-                    data.Result.IsActive = customerData.Status;
+                    data.IsActive = customerData.Status;
 
-                    return Ok(data.Result);
+                    return Ok(data);
                 }
             }
             return Unauthorized();

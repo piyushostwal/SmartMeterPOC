@@ -35,7 +35,7 @@
                                 <fieldset>
                                     <legend>Consumer Details</legend>
                                     <div class="control-group">
-                                        <label class="control-label">Meter ID: @Model.meterId</label><br />
+                                        <label class="control-label">Meter ID: @Model.DeviceId</label><br />
                                         <label class="control-label">Customer Name: @Model.customerName</label><br />
                                         <label class="control-label">Billing Unit: @Model.BillingUnit</label><br />
                                         <label class="control-label">Location: @Model.location</label><br />
@@ -374,7 +374,7 @@
                             };
                             firebase.initializeApp(config);
 
-                            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.meterId/');
+                            var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.DeviceId/');
                             customerMeterDetails.on('value', function (snapshot) {
                                 alert(' Refresh Values');
                             });

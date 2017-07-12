@@ -98,10 +98,18 @@ namespace Nop.Services.SmartMeterLogs
 
                 var request = new HttpRequestMessage(method, requestUrl)
                 {
-                    Content = new StringContent("{ \"isActive\": \"true \" }", Encoding.UTF8, "application/json")
+                    Content = new StringContent("{ \"DateTime\": "+new DateTime().Ticks+" }", Encoding.UTF8, "application/json")
                 };
 
                 HttpResponseMessage hrm = await hc.SendAsync(request);
+                if (hrm.IsSuccessStatusCode)
+                {
+                    return meterLog;
+                }
+                else
+                {
+                    return meterLog;
+                }
     
             }
             return meterLog;

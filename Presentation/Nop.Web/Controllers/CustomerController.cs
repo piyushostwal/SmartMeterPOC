@@ -1554,7 +1554,8 @@ namespace Nop.Web.Controllers
             model.customerName = _workContext.CurrentCustomer.GetFullName();
             if(customerbilling!=null)
             {
-                model.meterId = customerbilling.DeviceId.ToString();
+                model.meterId = customerbilling.MeterId.ToString();
+                model.DeviceId = customerbilling.DeviceId.ToString();
                 model.ConsumptionUnitReading = customerbilling.ConsumptionUnitReading;
                 model.BillPeriodFrom = customerbilling.BillPeriodFrom.ToString("MM/dd/yyyy");
                 model.BillPeriodTo = customerbilling.BillPeriodTo.ToString("MM/dd/yyyy");
