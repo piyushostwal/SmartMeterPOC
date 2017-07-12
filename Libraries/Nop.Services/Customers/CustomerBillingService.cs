@@ -87,6 +87,18 @@ namespace Nop.Services.Customers
             var customers = query.FirstOrDefault();
             return customers;
         }
+        public virtual void UpdateCustomerPayment(int id)
+        {
+            var customerBill = GetCustomerBillById(id);
+            if(customerBill!=null)
+            {
+                customerBill.IsBillPaid = true;
+                customerBill.BillPaymentDate = DateTime.Now;
+                _customerBilling.Update(customerBill);
+                _eventPublisher.EntityUpdated(customerBill);
+            }
+
+        }
         #endregion
     }
 }
