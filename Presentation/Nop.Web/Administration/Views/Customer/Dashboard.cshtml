@@ -244,6 +244,10 @@
                                         data: JSON.stringify(data1),
                                         success: function (result) {
                                             res = result;
+                                            if (!res.length) {
+                                                alert("No data for the filter")
+                                                return false
+                                            }
                                             for (var i = 0; i < res.length; i++) {
                                                 osLabels = []
                                                 osData = []
