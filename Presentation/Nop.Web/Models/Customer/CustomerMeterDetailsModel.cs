@@ -9,6 +9,10 @@ namespace Nop.Web.Models.Customer
 {
     public class CustomerMeterDetailsModel
     {
+        public CustomerMeterDetailsModel()
+        {
+            PreviousBills = new List<CustomerBilling>();
+        }
         public string meterId { get; set; }
         public string DeviceId { get; set; }
         public string customerName { get; set; }
@@ -23,6 +27,7 @@ namespace Nop.Web.Models.Customer
         public int PreviousConsumptionUnitReading { get; set; }
         public decimal? LastBillAmount { get; set; }
         public string LastBillPaymentDate { get; set; }
+        public List<CustomerBilling> PreviousBills { get; set; }
     }
 
     public class CustomerDashboardDetailsModel

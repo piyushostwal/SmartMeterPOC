@@ -278,6 +278,24 @@
         </div>
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
         <script>
+            var billingArray = JSON.parse('@Html.Raw(Json.Encode(Model.PreviousBills))');
+            var previousBillings = [];
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            for (i = 0; i < billingArray.length; i++) {
+                var billingDate = new Date(parseInt(billingArray[i].BillPeriodFrom.toString().substr(6, 13)));
+                var singleBill = {
+                    amount: billingArray[i].BillAmount,
+                    billId: billingArray[i].Id,
+                    consumptionUnitReading: billingArray[i].ConsumptionUnitReading,
+                    isBillPaid: billingArray[i].IsBillPaid,
+                    billPeriod: monthNames[billingDate.getMonth()] + ' ' + billingDate.getFullYear()
+                };
+                //console.log('SIngle Bill =', singleBill);
+                previousBillings.push(singleBill);
+            }
             var arrayOfArrays = [
                 {
                     "billPeriod": "July-2017",
@@ -301,14 +319,15 @@
                             console.log(arrayOfArrays)
                             $("#products-grid").kendoGrid({
                                 dataSource: {
-                                    data: arrayOfArrays,
+                                    data: previousBillings,
                                     schema: {
                                         model: {
                                             fields: {
-                                                transactionId: { type: "string" },
+                                                consumptionUnitReading: { type: "string" },
                                                 billPeriod: { type: "string" },
                                                 billId: { type: "string" },
-                                                amount: {type:"string"}
+                                                amount: {type:"string"},
+                                                isBillPaid: { type: "bool" }
                                             }
                                         }
                                     },
@@ -333,7 +352,7 @@
                                     {
                                         field: "billId",
                                         title: "Bill Id",
-                                        template: '<a href="CustomerMeterDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
+                                        template: '<a href="BillingDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
                                         //template:'#= MeterId #',
                                         attributes: { style: "text-align:center" },
                                         width: 300
@@ -353,14 +372,19 @@
                                         width: 300
                                     },
                                     {
-                                        field: "transactionId",
-                                        title: "Transaction Id",
+                                        field: "consumptionUnitReading",
+                                        title: "Meter Reading",
                                         //template:'#= MeterId #',
                                         attributes: { style: "text-align:center" },
                                         width: 300
                                     },
-                                                     
-
+                                    {
+                                        field: "isBillPaid",
+                                        title: "Bill Paid",
+                                        //template:'#= MeterId #',
+                                        attributes: { style: "text-align:center" },
+                                        width: 300
+                                    }
                                 ]
                             });
                             //});
@@ -378,7 +402,7 @@
                             customerMeterDetails.on('value', function (snapshot) {
                                 alert(' Refresh Values');
                             });
-        </script>
+</script>
     </div>
 
 </div>
