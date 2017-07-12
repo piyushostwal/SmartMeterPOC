@@ -13,6 +13,7 @@
     Html.AppendCssFileParts("~/Administration/Content/bootstrap/css/bootstrap.min.css");
     Html.AppendCssFileParts("~/Administration/Content/adminLTE/AdminLTE-2.3.0.min.css");
     Html.AppendScriptParts("~/Administration/Scripts/bootstrap/bootstrap.min.js");
+    Html.AppendScriptParts("~/Administration/Scripts/bootstrap/bootstrap.min.js");
     const string prefix = "order-statistics";
     const string hidePanelAttributeName = "HideOrderStatisticsPanel";
     var hidePanel = false;
@@ -25,6 +26,8 @@
     <div class="page-title">
         <h1>Meter Details - @Model.meterId</h1>
     </div>
+   
+
     <div class="page-body">
         <div class="fieldset">
             <div class='form-horizontal well'>
@@ -186,25 +189,16 @@
                             Consumption Statistics
                         </h3>
                         <div class="box-tools pull-right">
-
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>           } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="60">Hour</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
-                            <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
-                                @if (hidePanel)
-                                {
-                                    <text><i class="fa fa-plus"></i></text>
-                                }
-                                else
-                                {
-                                    <text><i class="fa fa-minus"></i></text>
-                                }
-                            </button>
-                        </div>
+                                
+                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
+                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
+                                <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>            } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
+                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
+                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="60">Hour</button>
+                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>              } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
+                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>              } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
+                                <input id="datetimepicker" title="datetimepicker" style="width: 35%;" />
+                            </div>
                     </div>
                     <div class="box-body">
                         <button class="btn btn-xs btn-info btn-flat margin-r-5 btn-arrow" title="your-tooltip-here"><span class="glyphicon glyphicon-fast-backward"></span></button>
@@ -218,6 +212,21 @@
         </div>
         <script>
             $(document).ready(function () {
+                var today = new Date()
+                $("#datepicker").kendoDatePicker();
+                // create Calendar from div HTML element
+                $("#datetimepicker").kendoDatePicker({
+                    value: today,
+                    max: today
+
+                });
+                var datepicker = $("#datetimepicker").data("kendoDatePicker");
+                datepicker.bind("change", function () {
+                    var value = this.value();
+                    datepicker.value(value)
+                    console.log(datepicker.value().toISOString())
+                });
+                var calendar_value = datepicker.value().toISOString();
                 var month = new Array();
                 month[0] = "January";
                 month[1] = "February";
@@ -376,7 +385,7 @@
 
                     data1.CustomerID = "@Model.CustomerId";
                     data1.TimeInterval = period;
-                    data1.TimeIntervalDate = "2017-07-10";
+                    data1.TimeIntervalDate = datepicker.value().toISOString();
 
                     $.ajax({
                         url: "/api/customer/graph",
@@ -542,7 +551,7 @@
                     {
                         field: "billId",
                         title: "Bill Id",
-                        template: '<a href="BillingDetails/' + 'billId' + '">' + '#= billId #' + '</a>',
+                        template: '<a href="BillingDetails/' + '#= billId #' + '">' + '#= billId #' + '</a>',
                         //template:'#= MeterId #',
                         attributes: { style: "text-align:center" },
                         width: 300
