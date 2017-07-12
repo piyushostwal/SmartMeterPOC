@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nop.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,30 +11,37 @@ namespace Nop.Services.SmartMeterLogs
     {
         public static int ConvertToMinutes(string timeInterval)
         {
+            int returnValue = 0;
             switch (timeInterval)
             {
-                case "15":
-                    return 15;
-                case "30":
-                    return 30;
-                case "45":
-                    return 45;
-                case "60":
-                    return 60;
-                case "day":
-                    return 24 * 60;
-                case "week":
-                    return 24 * 7 * 60;
-                case "month":
-                    return 0;
-                case "year":
-                    return 365 * 24 * 60;
+                case TimeIntervals.SFifteen:
+                    returnValue = TimeIntervals.Fifteen;
+                    break;
+                case TimeIntervals.SThirty:
+                    returnValue = TimeIntervals.Thirty;
+                    break;
+                case TimeIntervals.SFortyFive:
+                    returnValue = TimeIntervals.FortyFive;
+                    break;
+                case TimeIntervals.SSixty:
+                    returnValue = TimeIntervals.Sixty;
+                    break;
+                case TimeIntervals.SDay:
+                    returnValue = TimeIntervals.Day; //24 * 60;
+                    break;
+                case TimeIntervals.SWeek:
+                    returnValue = TimeIntervals.Week; // 24 * 7 * 60;
+                    break;
+                case TimeIntervals.SMonth:
+                    return TimeIntervals.Month;
+                case TimeIntervals.SYear:
+                    returnValue = TimeIntervals.Year; //365 * 24 * 60;
+                    break;
                 default:
-                    return 0;
-
-
-
+                    returnValue = 0;
+                    break;
             }
+            return returnValue / 15;
         }
     }
 }

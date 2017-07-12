@@ -1,5 +1,6 @@
 ﻿using Nop.Core;
 using Nop.Core.Domain.Localization;
+using Nop.Core.Domain.SmartMeterLogs;
 using Nop.Services.Customers;
 using Nop.Services.Events;
 using Nop.Services.Localization;
@@ -8,6 +9,7 @@ using Nop.Services.Security;
 using Nop.Services.SmartMeterLogs;
 using Nop.Web.Factories;
 using Nop.Web.Framework.Security.Captcha;
+using Nop.Web.Models.SmartMeterLogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,12 +75,12 @@ namespace Nop.Web.Controllers
 
         #endregion
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/customer/graph")]
-        public IHttpActionResult GetCustomerGraphData()
+        public IHttpActionResult GetCustomerGraphData(SmartMeterLogCustomerGraphModel filterModel)
         {
-
-            return Ok();
+            IPagedList<SmartMeterLogByTimeInterval> meterlogs = GetCustomerLogsFromService(filterModel.TimeInterval, filterModel.CustomerID, filterModel.TimeIntervalDate);
+            return Ok(meterlogs);
         }
 
         // GET api/smartmetergraph
@@ -107,5 +109,33 @@ namespace Nop.Web.Controllers
         public void Delete(int id)
         {
         }
+
+        #region private methods
+        public IPagedList<SmartMeterLogByTimeInterval> GetCustomerLogsFromService(string timeInterval, int customerId, DateTime date)
+        {
+            switch (timeInterval)
+            {
+                case TimeIntervals.SFifteen:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.Fifteen / 15, customerId, 0, 0, date);
+                case TimeIntervals.SThirty:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.Thirty / 15, customerId, 0, 0, date);
+                case TimeIntervals.SFortyFive:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.FortyFive / 15, customerId, 0, 0, date);
+                case TimeIntervals.SSixty:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.Sixty / 15, customerId, 0, 0, date);
+                case TimeIntervals.SDay:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.Day / 15, customerId, 0, 0, date); //24 * 60;
+                case TimeIntervals.SWeek:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.Week / 15, customerId, date.Month, date.Year); // 24 * 7 * 60;
+                case TimeIntervals.SMonth:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.Month / 15, customerId, 0, date.Year);
+                case TimeIntervals.SYear:
+                    return _smartMeterLogService.GetMeterlogsByCustomerId(TimeIntervals.Year / 15, customerId, 0, date.Year); //365 * 24 * 60;
+
+                default:
+                    return null;
+            }
+        }
+        #endregion
     }
 }
