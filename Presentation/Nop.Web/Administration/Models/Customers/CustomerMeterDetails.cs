@@ -20,6 +20,7 @@ namespace Nop.Admin.Models.Customers
         public int PreviousConsumptionUnitReading { get; set; }
         public decimal? LastBillAmount { get; set; }
         public string LastBillPaymentDate { get; set; }
+        public bool Status { get; set; }
         
     }
 }

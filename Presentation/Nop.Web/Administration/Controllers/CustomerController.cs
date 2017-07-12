@@ -1690,6 +1690,7 @@ namespace Nop.Admin.Controllers
                 model.LastBillAmount = customerbilling.LastBillAmount.Value;
                 model.LastBillPaymentDate = customerbilling.LastBillPaymentDate != null ?
                     customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
+                model.Status = meterdatils.Status;
             }
             if (meterdatils != null)
             {

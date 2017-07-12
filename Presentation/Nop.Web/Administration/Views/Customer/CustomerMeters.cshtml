@@ -143,34 +143,7 @@
                                 $(document).ready(function () {
                                     
                                     
-                                    function Activate(DeviceId, Status) {
-                                        var data;
-                                        data.DeviceId = DeviceId;
-                                        data.Status=Status
-                                        $.ajax({
-                                            url: "Customer/UpdateCustomereProductStatus",
-                                            type: 'POST',
-                                            data:data,
-                                            error: function (xhr, ajaxOptions, thrownError) {
-                                                alert(xhr.status);
-                                                alert(thrownError);
-                                            }
-                                        });
-                                    }
-                                    function Deactivate(DeviceId, Status) {
-                                        var data ;
-                                        data.DeviceId = DeviceId;
-                                        data.Status = Status
-                                        $.ajax({
-                                            url: "Customer/UpdateCustomereProductStatus",
-                                            type: 'POST',
-                                            data: data,
-                                            error: function (xhr, ajaxOptions, thrownError) {
-                                                alert(xhr.status);
-                                                alert(thrownError);
-                                            }
-                                        });
-                                    }
+                                    
                                     $("#customers-grid").kendoGrid({
                                         dataSource: {
                                             data: arrayOfArrays,
@@ -284,7 +257,8 @@
                                                 Status: data.Status
                                             },
                                             success: function () {
-                                                location.reload();
+                                                window.location.href = "/Admin/Customer/CustomerMeters";
+                                                //location.reload();
                                             },
 
                                             error: function (xhr, ajaxOptions, thrownError) {
@@ -314,7 +288,8 @@
                                                 Status: data.Status
                                             },
                                             success: function () {
-                                                location.reload();
+                                                window.location.href = "/Admin/Customer/CustomerMeters";
+                                                //location.reload();
                                             },
 
                                             error: function (xhr, ajaxOptions, thrownError) {
