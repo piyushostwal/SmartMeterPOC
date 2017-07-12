@@ -28,6 +28,10 @@ namespace Nop.Data.Mapping.Customers
                 .WithMany()
                 .HasForeignKey(c => c.CustomerId)
                 .WillCascadeOnDelete(false);
+            this.HasRequired(c => c.CustomerMeterType)
+                .WithMany()
+                .HasForeignKey(c => c.MeterTypeId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

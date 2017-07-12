@@ -1658,7 +1658,8 @@ namespace Nop.Admin.Controllers
                         Status = m.Status,
                         BillingUnit = m.BillingUnit,
                         IsBillPaid = customerbilling.IsBillPaid,
-                        CustomerFullName=m.Customer.GetFullName()
+                        CustomerFullName = m.Customer.GetFullName(),
+                        MeterType = m.CustomerMeterType != null ? m.CustomerMeterType.MeterType : string.Empty
                     });
                 }
 
