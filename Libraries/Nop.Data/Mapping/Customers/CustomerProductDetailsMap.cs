@@ -16,6 +16,9 @@ namespace Nop.Data.Mapping.Customers
             this.Property(c => c.DeviceId);
             this.Property(c => c.BillingUnit).HasMaxLength(50);
             this.Property(c => c.Status);
+            this.Property(c => c.MeterId);
+            this.Property(c => c.MaxConsumptionPerMonth);
+            this.Property(c => c.IsHighConsumption);
             this.Property(c => c.CreatedBy);
             this.Property(c => c.Createdon);
             this.Property(c => c.UpdatedBy);

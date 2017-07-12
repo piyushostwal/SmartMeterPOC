@@ -14,6 +14,7 @@ namespace Nop.Data.Mapping.Customers
             this.ToTable("CustomerBilling");
             this.HasKey(c => c.Id);
             this.Property(c => c.DeviceId);
+            this.Property(c => c.MeterId);
             this.Property(c => c.BillPeriodFrom);
             this.Property(c => c.BillPeriodTo);
             this.Property(c => c.ConsumptionUnitReading);

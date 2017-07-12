@@ -17,6 +17,9 @@ namespace Nop.Core.Domain.Customers
         public Guid DeviceId { get; set; }
         public string BillingUnit { get; set; }
         public bool Status { get; set; }
+        public int MeterId { get; set; }
+        public int MaxConsumptionPerMonth { get; set; }
+        public bool IsHighConsumption { get; set; }
         public DateTime Createdon { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? UpdateOn { get; set; }
