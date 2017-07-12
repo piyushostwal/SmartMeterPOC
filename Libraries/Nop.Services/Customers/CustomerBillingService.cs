@@ -79,6 +79,17 @@ namespace Nop.Services.Customers
             var customers = query.FirstOrDefault();
             return customers;
         }
+
+        public virtual IPagedList<CustomerBilling> GetDefaulterCustomers()
+        {
+            var query = _customerBilling.Table;
+            DateTime testDate = DateTime.Now.AddMonths(-2);
+            query = query.Where(m => m.IsBillPaid == false && testDate > m.BillDueDate);
+            //var customers = query.ToList();
+            query = query.OrderByDescending(c => c.Id);
+            var customers = new PagedList<CustomerBilling>(query, 0, int.MaxValue);
+            return customers;
+        }
         #endregion
     }
 }

@@ -12,5 +12,6 @@ namespace Nop.Services.Customers
     {
         IPagedList<CustomerBilling> GetAllCustomerBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue);
         CustomerBilling GetCustomerCurrentBill(Guid deviceId);
+        IPagedList<CustomerBilling> GetDefaulterCustomers();
     }
 }
