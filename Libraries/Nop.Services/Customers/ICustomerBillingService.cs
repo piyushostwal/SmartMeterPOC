@@ -10,7 +10,8 @@ namespace Nop.Services.Customers
 {
     public partial interface ICustomerBillingService
     {
-        IPagedList<CustomerBilling> GetAllCustomerBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue);
+        IPagedList<CustomerBilling> GetCustomerPreviousBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue);
         CustomerBilling GetCustomerCurrentBill(Guid deviceId);
+        CustomerBilling GetCustomerBillById(int id);
     }
 }
