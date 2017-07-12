@@ -11,7 +11,7 @@ namespace Nop.Core.Domain.SmartMeterLogs
         public Guid DeviceID { get; set; }
         public string Lattitude { get; set; }
         public string Longitude { get; set; }
-        public double Consumption { get; set; }
+        public int Consumption { get; set; }
         public int TimeInterval { get; set; }
         public bool IsActive { get; set; }
         public DateTime LoggingTime { get; set; }
