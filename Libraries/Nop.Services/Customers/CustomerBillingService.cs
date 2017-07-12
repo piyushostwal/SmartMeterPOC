@@ -98,6 +98,7 @@ namespace Nop.Services.Customers
             query = query.OrderByDescending(c => c.Id);
             var customers = new PagedList<CustomerBilling>(query, 0, int.MaxValue);
             return customers;
+        }
 
         public virtual void UpdateCustomerPayment(int id)
         {
