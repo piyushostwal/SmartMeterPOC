@@ -87,6 +87,18 @@ namespace Nop.Services.Customers
             var customers = query.FirstOrDefault();
             return customers;
         }
+
+
+        public virtual IPagedList<CustomerBilling> GetDefaulterCustomers()
+        {
+            var query = _customerBilling.Table;
+            DateTime testDate = DateTime.Now.AddMonths(-2);
+            query = query.Where(m => m.IsBillPaid == false && testDate > m.BillDueDate);
+            //var customers = query.ToList();
+            query = query.OrderByDescending(c => c.Id);
+            var customers = new PagedList<CustomerBilling>(query, 0, int.MaxValue);
+            return customers;
+
         public virtual void UpdateCustomerPayment(int id)
         {
             var customerBill = GetCustomerBillById(id);
@@ -97,7 +109,6 @@ namespace Nop.Services.Customers
                 _customerBilling.Update(customerBill);
                 _eventPublisher.EntityUpdated(customerBill);
             }
-
         }
         #endregion
     }
