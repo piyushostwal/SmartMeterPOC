@@ -10,6 +10,8 @@
     ViewBag.Title = T("Customers").Text;
     //active menu item (system name)
     Html.SetActiveMenuItemSystemName("Meter Dashboard");
+
+    const string prefix = "order-statistics";
     //var Meterlist = @Model;
 }
 
@@ -23,897 +25,292 @@
             <div class="panel panel-default panel-search">
                 <div class="panel-body">
                     @*Chart 1 *@
-                    <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="chart-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                <i class="fa fa-shopping-cart"></i>
-                                Timely report
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>    } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>    } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                                <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>    } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                                <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
-                                    @if (hidePanel)
-                                    {
-                                        <text><i class="fa fa-plus"></i></text>
-                                    }
-                                    else
-                                    {
-                                        <text><i class="fa fa-minus"></i></text>
-                                    }
-                                </button>
-                            </div>
-                            <br/>
-                            <br />
-                            <div class="">
-                                <label>User Id:</label> <select id="products"></select> 
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="chart" style="height: 300px;">
-                                <canvas id="chart" height="300"></canvas>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="@(prefix)-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Consumption Statistics
+                                    </h3>
+                                    <div class="box-tools pull-right">
+
+                                        <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
+                                        <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
+                                        <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>             } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
+                                        <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>              } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
+                                        <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>              } data-chart-role="toggle-chart" data-chart-period="60">Hour</button>
+                                        <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>               } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
+                                        <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>               } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
+                                        <input id="datetimepicker" title="datetimepicker" style="width: 35%;" />
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    
+                                    <div class="chart" style="height: 300px;">
+                                        <canvas id="@(prefix)-chart" height="300"></canvas>
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
+                        
+                        
+                        <script>
+    $(document).ready(function () {
+        var today = new Date()
+        $("#datepicker").kendoDatePicker();
+        // create Calendar from div HTML element
+        $("#datetimepicker").kendoDatePicker({
+            value: today,
+            max: today
 
-                    @*Chart 2 *@
-                    <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="chart2-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                <i class="fa fa-shopping-cart"></i>
-                                Datewise Report
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                                <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                                <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
-                                    @if (hidePanel)
-                                    {
-                                        <text><i class="fa fa-plus"></i></text>
-                                    }
-                                    else
-                                    {
-                                        <text><i class="fa fa-minus"></i></text>
-                                    }
-                                </button>
-                            </div>
-                            <br />
-                            <br />
-                            <div class="">
-                                <label>User Id:</label> <input type="text" />
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="chart2" style="height: 300px;">
-                                <canvas id="chart2" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
+        });
+        var datepicker = $("#datetimepicker").data("kendoDatePicker");
+        datepicker.bind("change", function () {
+            var value = this.value();
+            datepicker.value(value)
+            console.log(datepicker.value().toISOString())
+        });
+        var calendar_value = datepicker.value().toISOString();
+        var month = new Array();
+        month[0] = "January";
+        month[1] = "February";
+        month[2] = "March";
+        month[3] = "April";
+        month[4] = "May";
+        month[5] = "June";
+        month[6] = "July";
+        month[7] = "August";
+        month[8] = "September";
+        month[9] = "October";
+        month[10] = "November";
+        month[11] = "December";
+        var osCurrentPeriod;
+        var datasets = {
+            label: "XYZ",
+            fillColor: "rgba(60,141,188,0.9)",
+            strokeColor: "rgba(60,141,188,0.8)",
+            pointColor: "#3b8bba",
+            pointStrokeColor: "rgba(60,141,188,1)",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(60,141,188,1)",
+            borderColor: 'rgba(60, 141, 188, 0.7)',
+            pointBorderColor: 'rgba(37, 103, 142, 0.9)',
+            pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+            pointBorderWidth: 1,
+            data: []
+        }
+        var data =
+            [{ "date": "29 Thursday", "value": "0" }, { "date": "30 Friday", "value": "0" }, { "date": "1 Saturday", "value": "0" }, { "date": "2 Sunday", "value": "0" }, { "date": "3 Monday", "value": "0" }, { "date": "4 Tuesday", "value": "6" }, { "date": "5 Wednesday", "value": "2" }, { "date": "6 Thursday", "value": "0" }]
 
-                    @*Chart 3 *@
-                    <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="chart3-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                <i class="fa fa-shopping-cart"></i>
-                                Day types Reports
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                                <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                                <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
-                                    @if (hidePanel)
-                                    {
-                                        <text><i class="fa fa-plus"></i></text>
-                                    }
-                                    else
-                                    {
-                                        <text><i class="fa fa-minus"></i></text>
-                                    }
-                                </button>
-                            </div>
-                            <br />
-                            <br />
-                            <div class="">
-                                <label>User Id:</label> <input type="text" />
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="chart3" style="height: 300px;">
-                                <canvas id="chart3" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
+        $('#@(prefix)-box').on('click', 'button[data-widget="collapse"]', function () {
+            var collapsed = !$('#@(prefix)-box').hasClass('collapsed-box');
+            if (!collapsed) {
+                $('#@(prefix)-box button[data-chart-role="toggle-chart"]').removeAttr('disabled');
+                if (!osCurrentPeriod) {
+                    $('#@(prefix)-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
+                }
+            } else {
+                $('#@(prefix)-box button[data-chart-role="toggle-chart"]').attr('disabled', 'disabled');
+            }
+        });
 
-                    @*Chart 4 *@
-                    <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="chart4-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                <i class="fa fa-shopping-cart"></i>
-                                Customer type reports
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="year">@T("Admin.SalesReport.OrderStatistics.Year")</button>
-                                <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="month">@T("Admin.SalesReport.OrderStatistics.Month")</button>
-                                <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>     } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                                <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
-                                    @if (hidePanel)
-                                    {
-                                        <text><i class="fa fa-plus"></i></text>
-                                    }
-                                    else
-                                    {
-                                        <text><i class="fa fa-minus"></i></text>
-                                    }
-                                </button>
-                            </div>
-                            <br />
-                            <br />
-                            <div class="">
-                                <label>User Id:</label> <input type="text" />
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="chart4" style="height: 300px;">
-                                <canvas id="chart4" height="300"></canvas>
-                            </div>
-                        </div>
+        var osConfig = {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+
+                ]
+            },
+            options: {
+                legend: {
+                    display: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: {
+                            userCallback: function (dataLabel, index) {
+                                if (window.orderStatistics && window.orderStatistics.config.data.labels.length > 12) {
+                                    return index % 5 === 0 ? dataLabel : '';
+                                }
+                                return dataLabel;
+                            }
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            userCallback: function (dataLabel, index) {
+                                return (dataLabel ^ 0) === dataLabel ? dataLabel : '';
+                            },
+                            min: 0
+                        }
+                    }]
+                },
+                showScale: true,
+                scaleShowGridLines: false,
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+                scaleGridLineWidth: 1,
+                scaleShowHorizontalLines: true,
+                scaleShowVerticalLines: true,
+                bezierCurve: true,
+                pointDot: false,
+                pointDotRadius: 4,
+                pointDotStrokeWidth: 1,
+                pointHitDetectionRadius: 20,
+                datasetStroke: true,
+                datasetFill: true,
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        };
+        function createDataset(osLabels_new, osData_new, label) {
+
+            if (!window.orderStatistics) {
+                osConfig.data.labels = osLabels_new;
+                //osConfig.data.datasets.push(datasets);
+                var data_len = osConfig.data.datasets.length
+                osConfig.data.datasets[data_len] = {
+                    label: "XYZ",
+                    fillColor: "rgba(60,141,188,0.9)",
+                    strokeColor: "rgba(60,141,188,0.8)",
+                    pointColor: "#3b8bba",
+                    pointStrokeColor: "rgba(60,141,188,1)",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(60,141,188,1)",
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
+                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    pointBorderWidth: 1,
+                    data: []
+                }
+                osConfig.data.datasets[data_len].label = label;
+                osConfig.data.datasets[data_len].data = osData_new;
+
+                osConfig.data.scales =
+                window.orderStatistics = new Chart(document.getElementById("@(prefix)-chart").getContext("2d"), osConfig);
+            } else {
+
+                window.orderStatistics.config.data.labels = osLabels_new;
+                datasets.borderColor = "#" + ((1 << 24) * Math.random() | 0).toString(16)
+                //window.orderStatistics.config.data.datasets.push(datasets)
+                var data_len = window.orderStatistics.config.data.datasets.length
+                window.orderStatistics.config.data.datasets[data_len] = {
+                    label: "XYZ",
+                    fillColor: "rgba(60,141,188,0.9)",
+                    strokeColor: "rgba(60,141,188,0.8)",
+                    pointColor: "#3b8bba",
+                    pointStrokeColor: "rgba(60,141,188,1)",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(60,141,188,1)",
+                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
+                    pointBorderColor: 'rgba(37, 103, 142, 0.9)',
+                    pointBackgroundColor: 'rgba(60, 141, 188, 0.4)',
+                    pointBorderWidth: 1,
+                    data: []
+                }
+                window.orderStatistics.config.data.datasets[data_len].data = osData_new;
+                osConfig.data.datasets[data_len].label = label;
+                window.orderStatistics.update();
+            }
+        }
+        function changeOsPeriod(period) {
+
+            if (window.orderStatistics) {
+                window.orderStatistics.config.data.datasets = [];
+            }
+
+            var osLabels = [];
+            var osData = [];
+            var data1 = {};
+            var data;
+
+                                    data1.CustomerID = location.search.substr(1).split("=")[1];
+                                    data1.TimeInterval = period;
+                                    data1.TimeIntervalDate = datepicker.value().toISOString();
+
+                                    $.ajax({
+                                        url: "/api/customer/graph",
+                                        type: 'POST',
+                                        headers: {
+                                            "content-type": "application/json",
+                                            "cache-control": "no-cache",
+                                        },
+                                        dataType: 'json',
+                                        data: JSON.stringify(data1),
+                                        success: function (result) {
+                                            res = result;
+                                            for (var i = 0; i < res.length; i++) {
+                                                osLabels = []
+                                                osData = []
+                                                cons = res[i].consumptionList;
+                                                solar = res[i].solarGeneratedUnitsList;
+                                                for (var j = 0; j < cons.length; j++) {
+                                                    var date = new Date(cons[j].loggingTime)
+                                                    switch (period) {
+                                                        case "year":
+                                                            osLabels.push(date.getFullYear());
+                                                            break;
+                                                        case "month":
+                                                            osLabels.push(month[date.getMonth()]);
+                                                            break;
+                                                        case "week":
+                                                            osLabels.push("Week:" + j + " " + month[date.getMonth()]);
+                                                            break;
+
+                                                        default:
+                                                            osLabels.push(date.getHours() + ":" + date.getMinutes());
+                                                    }
+
+                                                    osData.push(cons[j].consumption);
+
+                                                }
+                                                createDataset(osLabels, osData, "Meter");
+                                                osData = []
+                                                for (var k = 0; k < solar.length; k++) {
+                                                    var date = new Date(solar[k].loggingTime)
+                                                    osData.push(solar[k].solarGeneratedUnits);
+
+                                                }
+                                                createDataset(osLabels, osData, "Solar");
+
+                                            }
+
+
+                                        },
+                                        error: function (xhr, ajaxOptions, thrownError) {
+
+                                            alert(xhr.status);
+                                            alert(thrownError);
+                                        }
+                                    });
+
+                                    return true
+                                }
+
+                                $('#@(prefix)-box button[data-chart-role="toggle-chart"]').on('click', function () {
+            var period = $(this).attr('data-chart-period');
+            osCurrentPeriod = period;
+            changeOsPeriod(period);
+            $('#@(prefix)-box button[data-chart-role="toggle-chart"]').removeClass('bg-light-blue');
+            $(this).addClass('bg-light-blue');
+        });
+
+        @if (!hidePanel)
+        {
+            <text>
+        $('#@(prefix)-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
+        </text>
+        }
+    });
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    var datasets = {
-        label: "",
-        fillColor: "white",
-        strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointBorderWidth: 1,
-        data: [],
-        fill: false
-    }
-    var osConfig = {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [
-                {
-                    label: "Piyush Ostwal",
-                    fillColor: "white",
-                    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBorderWidth: 1,
-                    data: [],
-                    fill: false
-                },
-                 {
-                     label: "Manish Patil",
-                     fillColor: "white",
-                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBorderWidth: 1,
-                     data: [],
-                     fill: false
-                 }
-            ]
-        },
-        options: {
-            legend: {
-                display: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            if (window.orderStatistics && window.orderStatistics.config.data.labels.length > 12) {
-                                return index % 5 === 0 ? dataLabel : '';
-                            }
-                            return dataLabel;
-                        }
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            return (dataLabel ^ 0) === dataLabel ? dataLabel : '';
-                        },
-                        min: 0
-                    }
-                }]
-            },
-            showScale: true,
-            scaleShowGridLines: false,
-            scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleGridLineWidth: 1,
-            scaleShowHorizontalLines: true,
-            scaleShowVerticalLines: true,
-            bezierCurve: false,
-            pointDot: true,
-            pointDotRadius: 4,
-            pointDotStrokeWidth: 1,
-            pointHitDetectionRadius: 20,
-            datasetStroke: true,
-            datasetFill: false,
-            maintainAspectRatio: false,
-            responsive: true
-        }
-    };
-    function changeOsPeriod(period) {
-
-        var osLabels = [];
-        var osData = [];
-        var osLabels1 = [];
-        var osData1 = [];
-        var data;
-        var data1 = {};
-        data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 45;
-        data1.StartDate = "2015-5-22 12:45:34.243";
-        data1.EndDate = "2016-1-22 12:45:34.243";
-
-        $.ajax({
-            url: "/api/SmartMeterLog/graph",
-            type: 'POST',
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-            },
-            dataType: 'json',
-            //data: data,
-            data: JSON.stringify({
-                DeviceID: "c56a2690-f588-4758-a874-baddda23c166",
-                TimeInterval: 45,
-                StartDate: "2017-5-01 12:45:34.243",
-                EndDate: "2017-5-31 12:45:34.243"
-            }),
-            success: function (result) {
-
-                console.log(result);
-                data = result;
-                for (var i = 0; i <= data.length; i++) {
-                    
-                    if (i <= 9) {
-                        var date = new Date(data[i].loggingTime)
-                        osLabels.push(date.getHours() + ":" + date.getMinutes());
-                        osData.push(data[i].consumption);
-                    } else {
-                        if (i > 9 && i <= 19) {
-                            var date = new Date(data[i].loggingTime)
-                            osLabels1.push(date.getHours() + ":" + date.getMinutes());
-                            osData1.push(data[i].consumption);
-                        } else { break;}
-                    }
-
-                }
-
-                if (!window.orderStatistics) {
-                    
-                    osConfig.data.labels = osLabels;
-                    osConfig.data.datasets[0].data = osData;
-                    osConfig.data.datasets[1].data = osData1;
-                    osConfig.data.scales =
-                    window.orderStatistics = new Chart(document.getElementById("chart").getContext("2d"), osConfig);
-                } else {
-                    
-                    window.orderStatistics.config.data.labels = osLabels;
-                    window.orderStatistics.config.data.datasets[0].data = osData;
-                    window.orderStatistics.config.data.datasets[1].data = osData1;
-                    window.orderStatistics.update();
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        });
-        
-        return true
-    }
-    $('#chart-box button[data-chart-role="toggle-chart"]').on('click', function () {
-        var period = $(this).attr('data-chart-period');
-        osCurrentPeriod = period;
-        changeOsPeriod(period);
-        $('#chart-box button[data-chart-role="toggle-chart"]').removeClass('bg-light-blue');
-        $(this).addClass('bg-light-blue');
-
-    });
-    $('#chart-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
-
-        // create MultiSelect from select HTML element
-        var required = $("#products").kendoMultiSelect({
-            placeholder: "Select User...",
-            dataTextField: "customerName",
-            dataValueField: "deviceId",
-            autoBind: false,
-            dataSource: {
-                type: "json",
-                serverFiltering: true,
-                transport: {
-                    read: {
-                        url: "http://localhost:15536/api/device/search/c",
-                    }
-                }
-            },
-            filtering: function (e) {
-                //get filter descriptor
-                var filter = e.filter;
-                console.log(filter)
-
-                // handle the event
-            },
-            change: function (e) {
-                var value = this.value();
-                console.log(this)
-                var osLabels = [];
-                var osData = [];
-                window.chart = { "users": value, "filter": $("#chart-box .bg-light-blue").text() }
-                $.ajax({
-                    url: "/api/SmartMeterLog/graph",
-                    type: 'POST',
-                    headers: {
-                        "content-type": "application/json",
-                        "cache-control": "no-cache",
-                    },
-                    dataType: 'json',
-                    //data: data,
-                    data: JSON.stringify({
-                        deviceId: value,
-                        TimeInterval:"45",
-                        StartDate:"2015-5-22 12:45:34.243",
-                        EndDate:"2016-1-22 12:45:34.243"
-                    }),
-                    success: function (result) {
-
-                        data = result;
-                        for (var i = 0; i <= data.length; i++) {
-
-                            if (i <= 9) {
-                                var date = new Date(data[i].loggingTime)
-                                osLabels.push(date.getHours() + ":" + date.getMinutes());
-                                osData.push(data[i].consumption);
-                            } else {
-                                break; 
-                            }
-
-                        }
-
-                        if (!window.orderStatistics) {
-
-                            osConfig.data.labels = osLabels;
-                            osConfig.data.datasets.push(datasets);
-                            var data_len = osConfig.data.datasets.length
-                            osConfig.data.datasets[--data_len].label = "testing"
-                            osConfig.data.datasets[--data_len].data = osData;
-
-                            osConfig.data.scales =
-                            window.orderStatistics2 = new Chart(document.getElementById("chart").getContext("2d"), osConfig);
-                        } else {
-
-                            window.orderStatistics.config.data.labels = osLabels;
-                            window.orderStatistics.config.data.datasets.push(datasets)
-                            var data_len = window.orderStatistics.config.data.datasets.length
-                            window.orderStatistics.config.data.datasets[--data_len].data = osData;
-                            osConfig.data.datasets[--data_len].label = "testing"
-                            window.orderStatistics.update();
-                        }
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-
-                        alert(xhr.status);
-                    }
-                });
-
-                // Use the value of the widget
-            }
-
-        });
-        var multiselect = $("#products").data("kendoMultiSelect");
-        multiselect.bind("filtering", function (e) {
-            //get filter descriptor
-            var filter = e.filter;
-            console.log(filter)
-
-            // handle the event
-        });
-</script>
-
-<script>
-    var osConfig2 = {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [
-                {
-                    label: "Piyush Ostwal",
-                    fillColor: "white",
-                    strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                   pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBorderWidth: 1,
-                    data: [],
-                    fill: false
-                },
-                 {
-                     label: "Manish Patil",
-                     fillColor: "white",
-                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-                    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-                     pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBorderWidth: 1,
-                     data: [],
-                     fill: false
-                 }
-            ]
-        },
-        options: {
-            legend: {
-                display: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            if (window.orderStatistics2 && window.orderStatistics2.config.data.labels.length > 12) {
-                                return index % 5 === 0 ? dataLabel : '';
-                            }
-                            return dataLabel;
-                        }
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            return (dataLabel ^ 0) === dataLabel ? dataLabel : '';
-                        },
-                        min: 0
-                    }
-                }]
-            },
-            showScale: true,
-            scaleShowGridLines: false,
-            scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleGridLineWidth: 1,
-            scaleShowHorizontalLines: true,
-            scaleShowVerticalLines: true,
-            bezierCurve: false,
-            pointDot: true,
-            pointDotRadius: 4,
-            pointDotStrokeWidth: 1,
-            pointHitDetectionRadius: 20,
-            datasetStroke: true,
-            datasetFill: false,
-            maintainAspectRatio: false,
-            responsive: true
-        }
-    };
-    function changeOsPeriod2(period) {
-
-        var osLabels = [];
-        var osData = [];
-        var osLabels1 = [];
-        var osData1 = [];
-        var data;
-        var data1 = {};
-        data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 600;
-        data1.StartDate = "2015-5-22 12:45:34.243";
-        data1.EndDate = "2016-1-22 12:45:34.243";
-
-        $.ajax({
-            url: "/api/SmartMeterLog/graph",
-            type: 'POST',
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-            },
-            dataType: 'json',
-            //data: data,
-            data: JSON.stringify(data1),
-            success: function (result) {
-
-                console.log(result);
-                data = result;
-                for (var i = 0; i <= data.length; i++) {
-
-                    if (i <= 9) {
-                        var date = new Date(data[i].loggingTime)
-                        osLabels.push(date.getHours() + ":" + date.getMinutes());
-                        osData.push(data[i].consumption);
-                    } else {
-                        if (i > 9 && i <= 19) {
-                            var date = new Date(data[i].loggingTime)
-                            osLabels1.push(date.getHours() + ":" + date.getMinutes());
-                            osData1.push(data[i].consumption);
-                        } else { break; }
-                    }
-
-                }
-
-                if (!window.orderStatistics2) {
-
-                    osConfig2.data.labels = osLabels;
-                    osConfig2.data.datasets[0].data = osData;
-                    osConfig2.data.datasets[1].data = osData1;
-                    osConfig2.data.scales =
-                    window.orderStatistics2 = new Chart(document.getElementById("chart2").getContext("2d"), osConfig2);
-                } else {
-
-                    window.orderStatistics2.config.data.labels = osLabels;
-                    window.orderStatistics2.config.data.datasets[0].data = osData;
-                    window.orderStatistics2.config.data.datasets[1].data = osData1;
-                    window.orderStatistics2.update();
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        });
-
-        return true
-    }
-    $('#chart2-box button[data-chart-role="toggle-chart"]').on('click', function () {
-        var period = $(this).attr('data-chart-period');
-        var osCurrentPeriod = period;
-        changeOsPeriod2(period);
-        $('#chart2-box button[data-chart-role="toggle-chart"]').removeClass('bg-light-blue');
-        $(this).addClass('bg-light-blue');
-
-    });
-    $('#chart2-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
-</script>
-<script>
-    var osConfig3 = {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [
-    {
-        label: "Piyush Ostwal",
-        fillColor: "white",
-        strokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-        pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-        pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-        pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-        pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-        borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-        pointBorderWidth: 1,
-        data: [],
-        fill: false
-    },
-    {
-        label: "Manish Patil",
-        fillColor: "white",
-    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-    pointColor:"#"+((1<<24)*Math.random()|0).toString(16),
-    pointStrokeColor:"#"+((1<<24)*Math.random()|0).toString(16),
-    pointHighlightFill:"#"+((1<<24)*Math.random()|0).toString(16),
-    pointHighlightStroke:"#"+((1<<24)*Math.random()|0).toString(16),
-    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-    pointBorderWidth: 1,
-    data: [],
-    fill: false
-    }
-    ]
-        },
-        options: {
-            legend: {
-                display: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            if (window.orderStatistics3 && window.orderStatistics3.config.data.labels.length > 12) {
-                                return index % 5 === 0 ? dataLabel : '';
-                            }
-                            return dataLabel;
-                        }
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            return (dataLabel ^ 0) === dataLabel ? dataLabel : '';
-                        },
-                        min: 0
-                    }
-                }]
-            },
-            showScale: true,
-            scaleShowGridLines: false,
-            scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleGridLineWidth: 1,
-            scaleShowHorizontalLines: true,
-            scaleShowVerticalLines: true,
-            bezierCurve: false,
-            pointDot: true,
-            pointDotRadius: 4,
-            pointDotStrokeWidth: 1,
-            pointHitDetectionRadius: 20,
-            datasetStroke: true,
-            datasetFill: false,
-            maintainAspectRatio: false,
-            responsive: true
-        }
-    };
-    function changeOsPeriod3(period) {
-
-        var osLabels = [];
-        var osData = [];
-        var osLabels1 = [];
-        var osData1 = [];
-        var data;
-        var data1 = {};
-        data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 410;
-        data1.StartDate = "2015-5-22 12:45:34.243";
-        data1.EndDate = "2016-1-22 12:45:34.243";
-
-        $.ajax({
-            url: "/api/SmartMeterLog/graph",
-            type: 'POST',
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-            },
-            dataType: 'json',
-            //data: data,
-            data: JSON.stringify(data1),
-            success: function (result) {
-
-                console.log(result);
-                data = result;
-                for (var i = 0; i <= data.length; i++) {
-
-                    if (i <= 9) {
-                        var date = new Date(data[i].loggingTime)
-                        osLabels.push(date.getHours() + ":" + date.getMinutes());
-                        osData.push(data[i].consumption);
-                    } else {
-                        if (i > 9 && i <= 19) {
-                            var date = new Date(data[i].loggingTime)
-                            osLabels1.push(date.getHours() + ":" + date.getMinutes());
-                            osData1.push(data[i].consumption);
-                        } else { break; }
-                    }
-
-                }
-
-                if (!window.orderStatistics3) {
-
-                    osConfig3.data.labels = osLabels;
-                    osConfig3.data.datasets[0].data = osData;
-                    osConfig3.data.datasets[1].data = osData1;
-                    osConfig3.data.scales =
-                    window.orderStatistics3 = new Chart(document.getElementById("chart3").getContext("2d"), osConfig3);
-                } else {
-
-                    window.orderStatistics3.config.data.labels = osLabels;
-                    window.orderStatistics3.config.data.datasets[0].data = osData;
-                    window.orderStatistics3.config.data.datasets[1].data = osData1;
-                    window.orderStatistics3.update();
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        });
-
-        return true
-    }
-    $('#chart3-box button[data-chart-role="toggle-chart"]').on('click', function () {
-        var period = $(this).attr('data-chart-period');
-       var osCurrentPeriod = period;
-        changeOsPeriod3(period);
-        $('#chart3-box button[data-chart-role="toggle-chart"]').removeClass('bg-light-blue');
-        $(this).addClass('bg-light-blue');
-
-    });
-    $('#chart3-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
-</script>
-<script>
-    var osConfig4 = {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [
-                {
-                    label: "Piyush Ostwal",
-                    fillColor: "white",
-                    strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                    pointBorderWidth: 1,
-                    data: [],
-                    fill: false
-                },
-                 {
-                     label: "Manish Patil",
-                     fillColor: "white",
-                     strokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointStrokeColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointHighlightFill: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointHighlightStroke: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     borderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBorderColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBackgroundColor: "#" + ((1 << 24) * Math.random() | 0).toString(16),
-                     pointBorderWidth: 1,
-                     data: [],
-                     fill: false
-                 }
-            ]
-        },
-        options: {
-            legend: {
-                display: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            if (window.orderStatistics4 && window.orderStatistics4.config.data.labels.length > 12) {
-                                return index % 5 === 0 ? dataLabel : '';
-                            }
-                            return dataLabel;
-                        }
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        userCallback: function (dataLabel, index) {
-                            return (dataLabel ^ 0) === dataLabel ? dataLabel : '';
-                        },
-                        min: 0
-                    }
-                }]
-            },
-            showScale: true,
-            scaleShowGridLines: false,
-            scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleGridLineWidth: 1,
-            scaleShowHorizontalLines: true,
-            scaleShowVerticalLines: true,
-            bezierCurve: false,
-            pointDot: true,
-            pointDotRadius: 4,
-            pointDotStrokeWidth: 1,
-            pointHitDetectionRadius: 20,
-            datasetStroke: true,
-            datasetFill: false,
-            maintainAspectRatio: false,
-            responsive: true
-        }
-    };
-    function changeOsPeriod4(period) {
-
-        var osLabels = [];
-        var osData = [];
-        var osLabels1 = [];
-        var osData1 = [];
-        var data;
-        var data1 = {};
-        data1.deviceId = "c56a2690-f588-4758-a874-baddda23c166";
-        data1.TimeInterval = 300;
-        data1.StartDate = "2015-5-22 12:45:34.243";
-        data1.EndDate = "2016-1-22 12:45:34.243";
-
-        $.ajax({
-            url: "/api/SmartMeterLog/graph",
-            type: 'POST',
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-            },
-            dataType: 'json',
-            //data: data,
-            data: JSON.stringify(data1),
-            success: function (result) {
-
-                console.log(result);
-                data = result;
-                for (var i = 0; i <= data.length; i++) {
-
-                    if (i <= 9) {
-                        var date = new Date(data[i].loggingTime)
-                        osLabels.push(date.getHours() + ":" + date.getMinutes());
-                        osData.push(data[i].consumption);
-                    } else {
-                        if (i > 9 && i <= 19) {
-                            var date = new Date(data[i].loggingTime)
-                            osLabels1.push(date.getHours() + ":" + date.getMinutes());
-                            osData1.push(data[i].consumption);
-                        } else { break; }
-                    }
-
-                }
-
-                if (!window.orderStatistics4) {
-
-                    osConfig4.data.labels = osLabels;
-                    osConfig4.data.datasets[0].data = osData;
-                    osConfig4.data.datasets[1].data = osData1;
-                    osConfig4.data.scales =
-                    window.orderStatistics4 = new Chart(document.getElementById("chart4").getContext("2d"), osConfig4);
-                } else {
-
-                    window.orderStatistics4.config.data.labels = osLabels;
-                    window.orderStatistics4.config.data.datasets[0].data = osData;
-                    window.orderStatistics4.config.data.datasets[1].data = osData1;
-                    window.orderStatistics4.update();
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        });
-
-        return true
-    }
-    $('#chart4-box button[data-chart-role="toggle-chart"]').on('click', function () {
-        var period = $(this).attr('data-chart-period');
-       var  osCurrentPeriod = period;
-        changeOsPeriod4(period);
-        $('#chart4-box button[data-chart-role="toggle-chart"]').removeClass('bg-light-blue');
-        $(this).addClass('bg-light-blue');
-
-    });
-    $('#chart4-box button[data-chart-role="toggle-chart"][data-chart-period="week"]').trigger('click');
-</script>
