@@ -70,7 +70,7 @@ namespace Nop.Web.Factories
 
         public IPagedList<CustomerBilling> PrepareCustomerBillingPagingFilteringModel(Guid deviceId)
         {
-            return _customerBillingService.GetAllCustomerBills(deviceId);
+            return _customerBillingService.GetCustomerPreviousBills(deviceId);
         }
 
         

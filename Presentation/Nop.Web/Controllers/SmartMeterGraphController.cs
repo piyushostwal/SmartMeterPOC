@@ -80,12 +80,23 @@ namespace Nop.Web.Controllers
         public IHttpActionResult GetCustomerGraphData(SmartMeterLogCustomerGraphModel filterModel)
         {
             IPagedList<SmartMeterLogByTimeInterval> meterlogs = GetCustomerLogsFromService(filterModel.TimeInterval, filterModel.CustomerID, filterModel.TimeIntervalDate);
-            var formattedList = meterlogs.GroupBy(l => l.DeviceID, (key, g) => 
-                new { deviceId = key, 
-                    consumptionList = g.Select(l => new ConsumptionList() { Consumption = l.Consumption, LoggingTime = l.LoggingTime }), 
-                    solarGeneratedUnitsList = g.Select(l => new SolarGeneratedUnitsList() { LoggingTime = l.LoggingTime, SolarGeneratedUnits = l.SolarGeneratedUnits }) }).ToList();
+            var formattedList = meterlogs.GroupBy(l => l.DeviceID, (key, g) =>
+                new
+                {
+                    deviceId = key,
+                    consumptionList = g.Select(l => new ConsumptionList() { Consumption = l.Consumption, LoggingTime = l.LoggingTime }),
+                    solarGeneratedUnitsList = g.Select(l => new SolarGeneratedUnitsList() { LoggingTime = l.LoggingTime, SolarGeneratedUnits = l.SolarGeneratedUnits })
+                }).ToList();
 
             return Ok(formattedList);
+        }
+
+        [HttpGet]
+        [Route("api/heatmap")]
+        public IHttpActionResult GetHeatMapData(SmartMeterLogHeatMapModel heaatMapModel)
+        {
+            var tempData = GetHeatMapSampleData();
+            return Ok(tempData);
         }
 
         // GET api/smartmetergraph
@@ -116,7 +127,7 @@ namespace Nop.Web.Controllers
         }
 
         #region private methods
-        public IPagedList<SmartMeterLogByTimeInterval> GetCustomerLogsFromService(string timeInterval, int customerId, DateTime date)
+        private IPagedList<SmartMeterLogByTimeInterval> GetCustomerLogsFromService(string timeInterval, int customerId, DateTime date)
         {
             switch (timeInterval)
             {
@@ -140,6 +151,36 @@ namespace Nop.Web.Controllers
                 default:
                     return null;
             }
+        }
+
+        private List<SmartMeterHeatMapResponseModel> GetHeatMapSampleData()
+        {
+            List<SmartMeterHeatMapResponseModel> data = new List<SmartMeterHeatMapResponseModel>() {
+                new SmartMeterHeatMapResponseModel(){
+                    DeviceId=new Guid("03f00e0a-4661-4ba9-b6d5-0524c963da6c"),
+                    Lattitude="18.531007",
+                    Longitude="73.830409",
+                    Consumption=9623,
+                    Reading=962300,
+                    CustomerName="Aslam Shrimali",
+                    CustomerId=12,
+                    CustomerAddress="test address",
+                    MeterType="1",
+                },
+                new SmartMeterHeatMapResponseModel(){
+                    DeviceId=new Guid("322da26e-cddd-43fb-bc38-3296ffcb6845"),
+                    Lattitude="18.583008",
+                    Longitude="73.782570",
+                    Consumption=2718,
+                    Reading=271800,
+                    CustomerName="James Pan",
+                    CustomerId=4,
+                    CustomerAddress="test address 1",
+                    MeterType="2",
+                }
+            };
+
+            return data;
         }
         #endregion
     }

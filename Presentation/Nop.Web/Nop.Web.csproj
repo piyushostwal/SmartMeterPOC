@@ -407,6 +407,8 @@
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogGraphFilterModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogGraphModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogGraphResponseModel.cs" />
+    <Compile Include="Models\SmartMeterLogs\SmartMeterLogHeatMapModel.cs" />
+    <Compile Include="Models\SmartMeterLogs\SmartMeterHeatMapResponseModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterSearchModel.cs" />
     <Compile Include="Models\Vendors\ApplyVendorModel.cs" />

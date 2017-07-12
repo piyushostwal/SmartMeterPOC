@@ -1533,7 +1533,7 @@ namespace Nop.Web.Controllers
                         MeterId = m.DeviceId.ToString(),
                         Status = m.Status,
                         BillingUnit = m.BillingUnit,
-                        IsBillPaid=customerbilling.IsBillPaid,
+                        IsBillPaid = customerbilling != null ? customerbilling.IsBillPaid : false,
                         CustomerFullName = m.Customer.GetFullName(),
                         MeterType = m.CustomerMeterType != null ? m.CustomerMeterType.MeterType : string.Empty
                     });
@@ -1548,13 +1548,15 @@ namespace Nop.Web.Controllers
             var meterdatils = _customerProductDetailsService.
                 GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
             var customerbilling = _customerBillingService.GetCustomerCurrentBill(deviceId);
+            var previousBills = _customerBillingService.GetCustomerPreviousBills(deviceId);
             var smartMeterLogs = _smartmeterLogService.GetMeterLog(deviceId);
             CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
             
             model.customerName = _workContext.CurrentCustomer.GetFullName();
             if(customerbilling!=null)
             {
-                model.meterId = customerbilling.DeviceId.ToString();
+                model.meterId = customerbilling.MeterId.ToString();
+                model.DeviceId = customerbilling.DeviceId.ToString();
                 model.ConsumptionUnitReading = customerbilling.ConsumptionUnitReading;
                 model.BillPeriodFrom = customerbilling.BillPeriodFrom.ToString("MM/dd/yyyy");
                 model.BillPeriodTo = customerbilling.BillPeriodTo.ToString("MM/dd/yyyy");
@@ -1566,6 +1568,8 @@ namespace Nop.Web.Controllers
                 model.LastBillAmount = customerbilling.LastBillAmount.Value;
                 model.LastBillPaymentDate = customerbilling.LastBillPaymentDate!=null?
                     customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy"):string.Empty;
+                model.CustomerId = _workContext.CurrentCustomer.Id;
+                model.PreviousBills = previousBills.ToList<CustomerBilling>();
             }
             if (meterdatils != null)
             {

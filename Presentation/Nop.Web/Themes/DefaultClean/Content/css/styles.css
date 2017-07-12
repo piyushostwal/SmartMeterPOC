@@ -59,7 +59,36 @@ script {
 
 /*********** GLOBAL STYLES **********/
 
+.meter-details tr .label-td {
+    font-weight: 600;
 
+}
+.meter-details td {
+    width: 50%;
+
+}    
+
+.right-float {
+    float: right;
+    padding-right: 10px;
+} 
+.left-float {
+    float: left;
+    padding-right: 10px;
+}
+
+.btn-arrow {
+        position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+        z-index: 999999999999999;
+}
+.btn-arrow-right {
+        position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right:0;
+}
 
 body {
     max-width: 100%;
@@ -6889,5 +6918,6 @@ pre {
     width: 930px;
     max-width: 100%;
 }
+
 
 }
