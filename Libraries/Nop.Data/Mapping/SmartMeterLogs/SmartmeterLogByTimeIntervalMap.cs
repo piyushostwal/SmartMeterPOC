@@ -19,6 +19,9 @@ namespace Nop.Data.Mapping.SmartMeterLogs
             this.Property(u => u.Reading);
             this.Property(u => u.TimeInterval);
             this.Property(u => u.LoggingTime);
+            this.Property(u => u.CustomerId);
+            this.Property(u => u.CustomerName);
+            this.Property(u => u.CustomerAddress);
            
         }
     }

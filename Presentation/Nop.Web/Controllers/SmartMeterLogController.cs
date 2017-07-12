@@ -133,14 +133,14 @@ namespace Nop.Web.Controllers
                     smartMeterLog.Longitude = smartMeterLogModel.Longitude;
                     smartMeterLog.Consumption = smartMeterLogModel.Consumption;
                     smartMeterLog.TimeInterval = smartMeterLogModel.TimeInterval;
-                    smartMeterLog.TimeIntervalSetTime = smartMeterLogModel.TimeIntervalSetTime;
+                    //smartMeterLog.TimeIntervalSetTime = smartMeterLogModel.TimeIntervalSetTime;
                     smartMeterLog.IsActive = smartMeterLogModel.IsActive;
                     smartMeterLog.LoggingTime = smartMeterLogModel.LoggingTime;
                     smartMeterLog.Reading = smartMeterLogModel.Reading;
                     var data = _smartMeterLogService.SaveMeterLog(smartMeterLog);
 
                     data.TimeInterval = settingsData.TimeInterval;
-                    data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
+                    //data.TimeIntervalSetTime = settingsData.TimeIntervalSetTime;
                     data.IsActive = customerData.Status;
 
                     return Ok(data);
