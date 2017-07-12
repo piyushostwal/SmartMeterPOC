@@ -146,7 +146,7 @@ namespace Nop.Services.Customers
         /// <returns>Number of deleted customers</returns>
         int DeleteGuestCustomers(DateTime? createdFromUtc, DateTime? createdToUtc, bool onlyWithoutShoppingCart);
 
-        IPagedList<Customer> SearchCustomer(string searchString, int pageSize = 0, int pageIndex = 0);
+        IPagedList<Customer> SearchCustomer(string searchString, int pageIndex = 0, int pageSize = int.MaxValue);
         #endregion
 
         #region Customer roles
