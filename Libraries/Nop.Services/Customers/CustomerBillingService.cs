@@ -99,6 +99,7 @@ namespace Nop.Services.Customers
             var customers = new PagedList<CustomerBilling>(query, 0, int.MaxValue);
             return customers;
         }
+
         public virtual void UpdateCustomerPayment(int id)
         {
             var customerBill = GetCustomerBillById(id);

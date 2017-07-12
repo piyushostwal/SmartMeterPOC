@@ -12,11 +12,9 @@ namespace Nop.Services.Customers
     {
         IPagedList<CustomerBilling> GetCustomerPreviousBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue);
         CustomerBilling GetCustomerCurrentBill(Guid deviceId);
-
         IPagedList<CustomerBilling> GetDefaulterCustomers();
 
         CustomerBilling GetCustomerBillById(int id);
         void UpdateCustomerPayment(int id);
-
     }
 }
