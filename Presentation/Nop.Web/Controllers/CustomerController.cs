@@ -1582,7 +1582,10 @@ namespace Nop.Web.Controllers
         [HttpGet]
         public ActionResult Dashboard()
         {
-            return View();
+            CustomerDashboardDetailsModel model = new CustomerDashboardDetailsModel();
+            model.Meters = _customerProductDetailsService.GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
+
+            return View(model);
         }
         #endregion
     }

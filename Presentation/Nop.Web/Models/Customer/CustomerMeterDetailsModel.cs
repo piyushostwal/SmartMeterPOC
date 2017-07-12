@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nop.Core;
+using Nop.Core.Domain.Customers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,9 +22,11 @@ namespace Nop.Web.Models.Customer
         public int PreviousConsumptionUnitReading { get; set; }
         public decimal? LastBillAmount { get; set; }
         public string LastBillPaymentDate { get; set; }
-        
-        
-        
-        
+    }
+
+    public class CustomerDashboardDetailsModel
+    {
+        public string CustomerName { get; set; }
+        public IPagedList<CustomerProductDetails> Meters { get; set; }
     }
 }
