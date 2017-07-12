@@ -61,6 +61,7 @@
                     fields: {
                         status: { type: "bool" },
                         MeterId: { type: "string" },
+                        Metertype: { type: "string" },
                         IsBillPaid: { type: "bool" }
                     }
                 }
@@ -92,12 +93,19 @@
                 width: 300
             },
                                     {
-                                        field: "IsBillPaid",
-                                        title: "Payment",
-                                        template: '# if(IsBillPaid) {# <span class="label label-success">Active</span> #} else {# <span class="label label-danger">Inactive</span>#} #',
+                                        field: "Metertype",
+                                        title: "Meter Type",
+                                        template: '#= MeterType #',
                                         attributes: { style: "text-align:center" },
                                         width: 300
                                     },
+                                     {
+                                         field: "IsBillPaid",
+                                         title: "Payment",
+                                         template: '# if(IsBillPaid) {# <span class="label label-success">Active</span> #} else {# <span class="label label-danger">Inactive</span>#} #',
+                                         attributes: { style: "text-align:center" },
+                                         width: 300
+                                     },
                                     {
                                         field: "status",
                                         title: "Status",
