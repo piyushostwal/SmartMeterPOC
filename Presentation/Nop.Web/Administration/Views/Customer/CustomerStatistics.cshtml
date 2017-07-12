@@ -3,7 +3,7 @@
 
 @{
     Html.AppendScriptParts("~/Administration/Scripts/chartjs/Chart.min.js");
-
+    Html.SetActiveMenuItemSystemName("Heat Map");
     const string prefix = "customer-statistics";
     const string hidePanelAttributeName = "HideCustomerStatisticsPanel";
     var hidePanel = EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.GetAttribute<bool>(hidePanelAttributeName);
