@@ -250,6 +250,7 @@
                                         debugger
                                         var data = {};
                                         var but = $(this)
+                                        console.log(but);
                                         data.DeviceId = $(this).attr("id");
                                         data.Status = false;
                                         var token = $('input[name="__RequestVerificationToken"]').val();
@@ -267,9 +268,17 @@
                                             },
                                             success: function () {
                                                 debugger;
-                                                $(but).removeClass("btn-danger deact").addClass("btn-success act").text("Activate")
-                                                //window.location.href = "/Admin/Customer/CustomerMeters";
-                                                //location.reload();
+                                                if ($(but).attr('class') == "btn btn-success act") {
+
+
+                                                    $(but).removeClass("btn-success act").addClass("btn-danger deact").text("Deactivate")
+                                                    var lbl = but.parent().prev().children()
+                                                    lbl.removeClass("label-danger").addClass("label-success").text("Active")
+                                                } else {
+                                                    $(but).removeClass("btn-danger deact").addClass("btn-success act").text("Activate")
+                                                    var lbl = but.parent().prev().children()
+                                                    lbl.removeClass("label-success").addClass("label-danger").text("Inactive")
+                                                }
                                             },
 
                                             error: function (xhr, ajaxOptions, thrownError) {
@@ -285,6 +294,7 @@
                                         debugger
                                         var data = {};
                                         var but = $(this)
+                                        console.log(but);
                                         data.DeviceId = $(this).attr("id");
                                         data.Status = true;
                                         var token = $('input[name="__RequestVerificationToken"]').val();
@@ -301,7 +311,17 @@
                                                 Status: data.Status
                                             },
                                             success: function () {
-                                                $(but).removeClass("btn-success act").addClass("btn-danger deact").text("Deactivate")
+                                                if ($(but).attr('class') == "btn btn-success act") {
+
+
+                                                    $(but).removeClass("btn-success act").addClass("btn-danger deact").text("Deactivate")
+                                                    var lbl = but.parent().prev().children()
+                                                    lbl.removeClass("label-danger").addClass("label-success").text("Active")
+                                                } else {
+                                                    $(but).removeClass("btn-danger deact").addClass("btn-success act").text("Activate")
+                                                    var lbl = but.parent().prev().children()
+                                                    lbl.removeClass("label-success").addClass("label-danger").text("Inactive")
+                                                }
                                                 //window.location.href = "/Admin/Customer/CustomerMeters";
                                                 //location.reload();
                                             },
