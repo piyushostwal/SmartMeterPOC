@@ -1056,6 +1056,7 @@
     <Content Include="Views\Customer\CustomerMeterDetails.cshtml" />
     <Content Include="Views\Customer\CustomerMeters.cshtml" />
     <Content Include="Views\Customer\Dashboard.cshtml" />
+    <Content Include="Views\Customer\CustomerBillingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
-    Html.AddTitleParts("My Account-My Meters");
+    Html.AddTitleParts("Billing Details");
     //page class
     Html.AppendPageCssClassParts("html-account-page");
     Html.AppendPageCssClassParts("html-customer-info-page");
@@ -17,6 +17,7 @@
     const string prefix = "order-statistics";
     const string hidePanelAttributeName = "HideOrderStatisticsPanel";
     var hidePanel = false;
+    //var BillMonth = monthNames[billingDate.getMonth()] + ' ' + billingDate.getFullYear();
 }
 @section left
 {
@@ -24,7 +25,7 @@
 }
 <div class="page account-page customer-info-page">
     <div class="page-title">
-        <h1>Meter Details - @Model.meterId</h1>
+        <h1>Billing Details - @Model.meterId  </h1>
     </div>
    
 
@@ -36,40 +37,64 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <fieldset>
-                                    <legend>Consumer Details</legend>
+                                    <legend>Billing Details</legend>
                                     <div class="control-group">
 
                                         <table class="meter-details">
                                             <tr>
                                                 <td class="label-td">
-                                                    Meter ID <span class="right-float">:</span>
+                                                    Bill Period From<span class="right-float">:</span>
                                                 </td>
                                                 <td class="value-td">
-                                                    @Model.meterId
+                                                    @Model.BillPeriodFrom
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="label-td">
-                                                    Customer Name<span class="right-float">:</span>
+                                                    Bill Period To<span class="right-float">:</span>
                                                 </td>
                                                 <td class="value-td">
-                                                    @Model.customerName
+                                                    @Model.BillPeriodTo
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="label-td">
-                                                    Billing Unit<span class="right-float">:</span>
+                                                    Bill Amount<span class="right-float">:</span>
                                                 </td>
                                                 <td class="value-td">
-                                                    @Model.BillingUnit
+                                                    @Model.BillAmount
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="label-td">
-                                                    Location<span class="right-float">:</span>
+                                                    Bill Payment Date<span class="right-float">:</span>
                                                 </td>
                                                 <td class="value-td">
-                                                    @Model.location
+                                                    @Model.BillPaymentDate
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-td">
+                                                    Bill Due Date<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.BillDueDate
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-td">
+                                                    Last Bill Amount<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.LastBillAmount
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-td">
+                                                    Last Bill Payment Date<span class="right-float">:</span>
+                                                </td>
+                                                <td class="value-td">
+                                                    @Model.LastBillPaymentDate
                                                 </td>
                                             </tr>
                                         </table>
@@ -81,7 +106,7 @@
 
                         </div>
                         <br />
-                        <div class="row">
+                        @*<div class="row">
                             <div class="col-md-12">
                                 <fieldset>
                                     <legend>Consumption Details</legend>
@@ -109,9 +134,9 @@
                                     </div>
                                 </fieldset>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="background-color:#ccc">
+                    @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="background-color:#ccc">
                         <fieldset>
                             <legend>Billing Details</legend>
                             <div class="control-group">
@@ -175,12 +200,12 @@
                                 </table>
                             </div>
                         </fieldset>
-                    </div>
+                    </div>*@
                 </div>
 
             </div>
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-md-12">
                 <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="@(prefix)-box">
                     <div class="box-header with-border">
@@ -209,7 +234,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         <script>
             $(document).ready(function () {
                 var today = new Date()
@@ -472,7 +497,7 @@
         </script>
 
     </div>
-    <div class="page-title">
+    @*<div class="page-title">
         <h1>Payment History</h1>
         <div class="row">
             <div class="col-md-12">
@@ -610,6 +635,6 @@
 
         </script>
 
-    </div>
+    </div>*@
 
 </div>
