@@ -117,34 +117,53 @@ namespace Nop.Web.Controllers
             return Ok(formattedData);
         }
 
-        //[HttpPost]
-        //[Route("api/customerdetailconsumption")]
-        //public IHttpActionResult GetCustomerdetailconsumption(CustomerDetailConsumptionFilterModel filterModel)
-        //{
+        [HttpPost]
+        [Route("api/customerdetailconsumption")]
+        public IHttpActionResult GetCustomerdetailconsumption(CustomerDetailConsumptionFilterModel filterModel)
+        {
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
         #region private methods
 
         private IPagedList<SmartMeterLogsByLocation> GetCustomerLogsByLocation(SmartMeterLogHeatMapModel heatMapModel)
         {
-            if (string.IsNullOrEmpty(heatMapModel.Filter))
+
+            if (heatMapModel != null)
             {
-                //var temp = _smartMeterLogService.GetMeterlogsByLocation("18.620245", "73.718760", "18.442511", "73.976252", Convert.ToDateTime("2016-01-01 00:00:00"), Convert.ToDateTime("2017-07-08 00:00:00"));
-                return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate);
+
+                if (!string.IsNullOrEmpty(heatMapModel.Filter) && heatMapModel.Filter.Equals("weekends"))
+                    return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.MeterTypeId, "", heatMapModel.Filter);
+                if (!string.IsNullOrEmpty(heatMapModel.Filter) && heatMapModel.Filter.Equals("holidays"))
+                    return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.MeterTypeId, "", string.Empty, heatMapModel.Filter);
+                return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.MeterTypeId, "");
+
             }
-            else if (heatMapModel.Filter.Equals("weekends"))
-            {
-                return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.Filter);
-            }
-            else if (heatMapModel.Filter.Equals("holidays"))
-            {
-                return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.Filter);
-            }
-            return null;
+            return _smartMeterLogService.GetMeterlogsByLocation();
 
         }
+
+        //private IPagedList<SmartMeterLogsByLocation> GetCustomerLogsByLocation(SmartMeterLogHeatMapModel heatMapModel)
+        //{
+
+        //    if (string.IsNullOrEmpty(heatMapModel.Filter))
+        //    {
+        //        return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate);
+        //    }
+        //    else if (heatMapModel.Filter.Equals("weekends"))
+        //    {
+        //        return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.Filter);
+        //    }
+        //    else if (heatMapModel.Filter.Equals("holidays"))
+        //    {
+        //        return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.Filter);
+        //    }
+        //    return null;
+
+        //}
+
+       
 
         private IPagedList<SmartMeterLogByTimeInterval> GetCustomerLogsFromService(string timeInterval, int customerId, DateTime date)
         {
