@@ -113,6 +113,7 @@ namespace Nop.Web.Controllers
                 Reading = d.Reading,
                 CustomerName = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.name).FirstOrDefault(),
                 CustomerAddress = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.address).FirstOrDefault(),
+                SolarGeneratedConsumption = d.SolarGeneratedUnits
             });
             return Ok(formattedData);
         }
@@ -121,11 +122,41 @@ namespace Nop.Web.Controllers
         [Route("api/customerdetailconsumption")]
         public IHttpActionResult GetCustomerdetailconsumption(CustomerDetailConsumptionFilterModel filterModel)
         {
+            var data = GetCustomerLogsByDeviceId(filterModel);
+            var allCustomers = data.Select(c => c.CustomerId).ToArray();
+            var customersObjs = _customerService.GetCustomersByIds(allCustomers);
+            var customerFiltered = customersObjs.Select(c => new { customerId = c.Id, name = c.GetAttribute<string>(SystemCustomerAttributeNames.FirstName) + " " + c.GetAttribute<string>(SystemCustomerAttributeNames.LastName) }).ToList();
 
-            return Ok();
+            var formattedData = data.Select(d => new CustomerDetailConsumptionDetailResponseModel()
+            {
+                Consumption = d.Consumption,
+                CustomerId = d.CustomerId,
+                CustomerName = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.name).FirstOrDefault(),
+                DeviceID = d.DeviceID,
+                Reading = d.Reading,
+                LoggingTime=d.LoggingTime,
+                SolarGeneratedConsumption = d.SolarGeneratedUnits
+
+            });
+
+
+            return Ok(formattedData);
         }
 
         #region private methods
+
+        private IPagedList<SmartMeterLogsByDeviceId> GetCustomerLogsByDeviceId(CustomerDetailConsumptionFilterModel filterModel)
+        {
+            if (!string.IsNullOrEmpty(filterModel.Filter) && filterModel.Filter.Equals("weekends"))
+            {
+                return _smartMeterLogService.GetMeterlogsByDeviceIdAndParameters(filterModel.DeviceID, filterModel.TimeInterval, filterModel.StartDate, filterModel.EndDate, filterModel.Filter);
+            }
+            else if (!string.IsNullOrEmpty(filterModel.Filter) && filterModel.Filter.Equals("holidays"))
+            {
+                return _smartMeterLogService.GetMeterlogsByDeviceIdAndParameters(filterModel.DeviceID, filterModel.TimeInterval, filterModel.StartDate, filterModel.EndDate, string.Empty, filterModel.Filter);
+            }
+            return _smartMeterLogService.GetMeterlogsByDeviceIdAndParameters(filterModel.DeviceID, filterModel.TimeInterval, filterModel.StartDate, filterModel.EndDate);
+        }
 
         private IPagedList<SmartMeterLogsByLocation> GetCustomerLogsByLocation(SmartMeterLogHeatMapModel heatMapModel)
         {
@@ -163,7 +194,7 @@ namespace Nop.Web.Controllers
 
         //}
 
-       
+
 
         private IPagedList<SmartMeterLogByTimeInterval> GetCustomerLogsFromService(string timeInterval, int customerId, DateTime date)
         {

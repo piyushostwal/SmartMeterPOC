@@ -403,6 +403,7 @@
     <Compile Include="Models\Customer\CustomerSearchResultModel.cs" />
     <Compile Include="Models\Customer\Dashboard.cs" />
     <Compile Include="Models\Customer\EmailRevalidationModel.cs" />
+    <Compile Include="Models\SmartMeterLogs\CustomerDetailConsumptionDetailResponseModel.cs" />
     <Compile Include="Models\SmartMeterLogs\CustomerDetailConsumptionFilterModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogCustomerGraphModel.cs" />
     <Compile Include="Models\SmartMeterLogs\SmartMeterLogGraphFilterModel.cs" />

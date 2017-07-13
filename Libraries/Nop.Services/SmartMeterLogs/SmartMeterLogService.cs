@@ -328,12 +328,12 @@ namespace Nop.Services.SmartMeterLogs
 
             var WeekEnd = _dataProvider.GetParameter();
             WeekEnd.ParameterName = "WeekEnd";
-            WeekEnd.Value = !string.IsNullOrEmpty(weekEnd) ? weekEnd : string.Empty;
+            WeekEnd.Value = !string.IsNullOrEmpty(weekEnd) ? weekEnd : System.Data.SqlTypes.SqlString.Null;
             WeekEnd.DbType = DbType.String;
 
             var Holiday = _dataProvider.GetParameter();
             Holiday.ParameterName = "Holiday";
-            Holiday.Value = !string.IsNullOrEmpty(holiday) ? holiday : string.Empty;
+            Holiday.Value = !string.IsNullOrEmpty(holiday) ? holiday : System.Data.SqlTypes.SqlString.Null;
             Holiday.DbType = DbType.String;
 
             var totalRecordsParameter = _dataProvider.GetParameter();
@@ -343,7 +343,7 @@ namespace Nop.Services.SmartMeterLogs
 
             //invoke stored procedure
             var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogsByDeviceId>(
-                "UspSelectSmartMeterLogByDeviceIdAndParameter", DeviceId, TimeInterval, StartDate, EndDate, WeekEnd, Holiday, totalRecordsParameter);
+                "UspSelectSmartMeterLogByDeviceIdAndParameter", TimeInterval, DeviceId, StartDate, EndDate, WeekEnd, Holiday, totalRecordsParameter);
 
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
