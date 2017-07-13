@@ -3813,7 +3813,7 @@
                     }
                 });
                 marker['infowindow'] = new google.maps.InfoWindow({
-                    content: '<b>Customer Name: </b> ' + data_new[i].customerName + '<br/><b>Consumption:  </b> ' + data_new[i].consumption + '<br/><b>Reading: </b> ' + data_new[i].reading
+                content: '<b>Customer Name: </b> ' + data_new[i].customerName + '<br/><b>Consumption:  </b> ' + data_new[i].consumption + '<br/><b>Reading: </b> ' + data_new[i].reading+'<br/><b>Solar: </b> ' + data_new[i].solarGeneratedConsumption
                 });
                 google.maps.event.addListener(marker, 'mouseover', function () {
                     this['infowindow'].open(map, this);
