@@ -1632,6 +1632,7 @@ namespace Nop.Web.Controllers
         public ActionResult Dashboard()
         {
             CustomerDashboardDetailsModel model = new CustomerDashboardDetailsModel();
+            model.CustomerName=_workContext.CurrentCustomer.GetFullName();
             model.Meters = _customerProductDetailsService.GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
             List<Guid> allIds = model.Meters.Select(m => m.DeviceId).ToList();
             IPagedList<CustomerBilling> previousBills = _customerBillingService.GetCustomerPreviousBills(allIds);

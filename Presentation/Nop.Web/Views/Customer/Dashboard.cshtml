@@ -25,16 +25,21 @@
 }
 <div class="page account-page customer-info-page">
     <div class="page-title">
-        <h1>Dashboard</h1>
+        <h1>Customer Name : @Model.CustomerName</h1>
     </div>
     <div class="page-body">
 
         @{if (Model.Meters.Count > 0)
         {
+
+
+            
             foreach (var item in Model.Meters)
             {
                 <div class="row">
-                    <h2>Statistics for Meter Id @item.MeterId</h2>
+                    <div class="col-md-12">
+                        <h2>Statistics for Meter Id @item.MeterId</h2>
+                    </div>
                     <div class="col-md-6 col-sm-12">
 
                         <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="@(item.MeterId)-box">
