@@ -301,6 +301,56 @@ namespace Nop.Services.SmartMeterLogs
             //paging
             return new PagedList<SmartMeterLogsByLocation>(smartMeterLogs, pageIndex, pageSize);
         }
+
+        public virtual IPagedList<SmartMeterLogsByDeviceId> GetMeterlogsByDeviceIdAndParameters(Guid deviceId, int? timeInterval, DateTime? startDate = null,
+          DateTime? endDate = null, string weekEnd = "", string holiday = "", int pageIndex = 0, int pageSize = int.MaxValue)
+        {
+            //prepare parameters
+            var DeviceId = _dataProvider.GetParameter();
+            DeviceId.ParameterName = "DeviceId";
+            DeviceId.Value = deviceId.ToString();
+            DeviceId.DbType = DbType.String;
+
+            var TimeInterval = _dataProvider.GetParameter();
+            TimeInterval.ParameterName = "TimeInterval";
+            TimeInterval.Value = timeInterval.HasValue ? timeInterval.Value : System.Data.SqlTypes.SqlInt32.Null;
+            TimeInterval.DbType = DbType.Int32;
+
+            var StartDate = _dataProvider.GetParameter();
+            StartDate.ParameterName = "StartDate";
+            StartDate.Value = startDate != null ? Convert.ToDateTime(startDate.Value) : System.Data.SqlTypes.SqlDateTime.Null;
+            StartDate.DbType = DbType.DateTime;
+
+            var EndDate = _dataProvider.GetParameter();
+            EndDate.ParameterName = "EndDate";
+            EndDate.Value = endDate != null ? Convert.ToDateTime(endDate.Value) : System.Data.SqlTypes.SqlDateTime.Null; ;
+            EndDate.DbType = DbType.DateTime;
+
+            var WeekEnd = _dataProvider.GetParameter();
+            WeekEnd.ParameterName = "WeekEnd";
+            WeekEnd.Value = !string.IsNullOrEmpty(weekEnd) ? weekEnd : string.Empty;
+            WeekEnd.DbType = DbType.String;
+
+            var Holiday = _dataProvider.GetParameter();
+            Holiday.ParameterName = "Holiday";
+            Holiday.Value = !string.IsNullOrEmpty(holiday) ? holiday : string.Empty;
+            Holiday.DbType = DbType.String;
+
+            var totalRecordsParameter = _dataProvider.GetParameter();
+            totalRecordsParameter.ParameterName = "TotalRecords";
+            totalRecordsParameter.Direction = ParameterDirection.Output;
+            totalRecordsParameter.DbType = DbType.Int32;
+
+            //invoke stored procedure
+            var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogsByDeviceId>(
+                "UspSelectSmartMeterLogByDeviceIdAndParameter", DeviceId, TimeInterval, StartDate, EndDate, WeekEnd, Holiday, totalRecordsParameter);
+
+            var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
+
+            //paging
+            return new PagedList<SmartMeterLogsByDeviceId>(smartMeterLogs, pageIndex, pageSize);
+        }
+
         #endregion
     }
 }
