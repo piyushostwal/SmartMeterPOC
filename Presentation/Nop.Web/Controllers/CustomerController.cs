@@ -1583,14 +1583,16 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
+
         [HttpGet]
-        public ActionResult CustomerBillingDetails(Guid deviceId)
+        public ActionResult CustomerBillingDetails(int id)
         {
+            
             var meterdatils = _customerProductDetailsService.
                 GetCustomerProductDetails(_workContext.CurrentCustomer.Id);
-            var customerbilling = _customerBillingService.GetCustomerCurrentBill(deviceId);
-            var previousBills = _customerBillingService.GetCustomerPreviousBills(deviceId);
-            var smartMeterLogs = _smartmeterLogService.GetMeterLog(deviceId);
+            var customerbilling = _customerBillingService.GetCustomerBillById(id);
+            //var previousBills = _customerBillingService.GetCustomerPreviousBills(deviceId);
+            //var smartMeterLogs = _smartmeterLogService.GetMeterLog(deviceId);
             CustomerMeterDetailsModel model = new CustomerMeterDetailsModel();
 
             model.customerName = _workContext.CurrentCustomer.GetFullName();
@@ -1610,15 +1612,15 @@ namespace Nop.Web.Controllers
                 model.LastBillPaymentDate = customerbilling.LastBillPaymentDate != null ?
                     customerbilling.LastBillPaymentDate.Value.ToString("MM/dd/yyyy") : string.Empty;
                 model.CustomerId = _workContext.CurrentCustomer.Id;
-                model.PreviousBills = previousBills.ToList<CustomerBilling>();
+                //model.PreviousBills = previousBills.ToList<CustomerBilling>();
             }
-            if (meterdatils != null)
-            {
-                model.BillingUnit =
-                    meterdatils.FirstOrDefault(m => m.DeviceId == deviceId).BillingUnit;
-            }
-            if (smartMeterLogs.Count > 0)
-                model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
+            //if (meterdatils != null)
+            //{
+            //    model.BillingUnit =
+            //        meterdatils.FirstOrDefault(m => m.DeviceId == deviceId).BillingUnit;
+            //}
+            //if (smartMeterLogs.Count > 0)
+            //    model.location = smartMeterLogs.FirstOrDefault().Longitude + "," + smartMeterLogs.FirstOrDefault().Lattitude;
 
 
             return View(model);
