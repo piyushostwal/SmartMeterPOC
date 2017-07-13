@@ -135,8 +135,9 @@ namespace Nop.Web.Controllers
                 DeviceID = d.DeviceID,
                 Reading = d.Reading,
                 LoggingTime = d.LoggingTime,
-                SolarGeneratedConsumption = d.SolarGeneratedUnits
-
+                SolarGeneratedConsumption = d.SolarGeneratedUnits,
+                WeekendName = d.WeekendName,
+                HolidayName = d.HolidayName
             });
 
 

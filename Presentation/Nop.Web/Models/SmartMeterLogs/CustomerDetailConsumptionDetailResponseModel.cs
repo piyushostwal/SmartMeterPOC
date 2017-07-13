@@ -16,6 +16,7 @@ namespace Nop.Web.Models.SmartMeterLogs
         public int SolarGeneratedConsumption { get; set; }
         public string CustomerName { get; set; }
         public DateTime LoggingTime { get; set; }
-
+        public string WeekendName { get; set; }
+        public string HolidayName { get; set; }
     }
 }

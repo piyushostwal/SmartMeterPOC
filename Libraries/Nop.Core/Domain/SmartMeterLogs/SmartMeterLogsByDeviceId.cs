@@ -17,5 +17,7 @@ namespace Nop.Core.Domain.SmartMeterLogs
         public int Reading { get; set; }
         public int SolarGeneratedUnits { get; set; }
         public DateTime LoggingTime { get; set; }
+        public string WeekendName { get; set; }
+        public string HolidayName { get; set; }
     }
 }
