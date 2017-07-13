@@ -28,63 +28,75 @@
     </div>
     <div class="page-body">
 
-        <div class="row">
-            <h2>Statistics for 112545646</h2>
-            <div class="col-md-6 col-sm-12">
+        @{if (Model.Meters.Count > 0) { 
+            foreach (var item in Model.Meters)
+            {
+                <div class="row">
+                    <h2>Statistics for Meter Id @item.MeterId</h2>
+                    <div class="col-md-6 col-sm-12">
 
-                <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="@(prefix)-box">
-                    <div class="box-header with-border row">
+                        <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="@(prefix)-box">
+                            <div class="box-header with-border row">
 
-                        <h3 class="box-title">
-                            <i class="fa fa-shopping-cart"></i>
-                            Consumption Statistics
-                        </h3>
-                        <div class="box-tools pull-right">
+                                <h3 class="box-title">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Consumption Statistics
+                                </h3>
+                                <div class="box-tools pull-right">
 
 
-                            <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>       } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="hour">Hour</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
-                            <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
-                            <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
-                                @if (hidePanel)
-                                {
-                                    <text><i class="fa fa-plus"></i></text>
-                                }
-                                else
-                                {
-                                    <text><i class="fa fa-minus"></i></text>
-                                }
-                            </button>
+                                    <button class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
+                                    <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="day">Day</button>
+                                    <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="hour">Hour</button>
+                                    <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>          } data-chart-role="toggle-chart" data-chart-period="15">30 min.</button>
+                                    <button class="btn btn-xs btn-info btn-flat margin-r-5" @if (hidePanel) { <text> disabled="disabled" </text>          } data-chart-role="toggle-chart" data-chart-period="30">15 min.</button>
+                                    <button class="btn btn-box-tool margin-l-10" data-widget="collapse">
+                                        @if (hidePanel)
+                                        {
+                                            <text><i class="fa fa-plus"></i></text>
+                                        }
+                                        else
+                                        {
+                                            <text><i class="fa fa-minus"></i></text>
+                                        }
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="chart" style="height: 300px;">
+                                    <canvas id="@(prefix)-chart" height="300"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="box-body">
-                        <div class="chart" style="height: 300px;">
-                            <canvas id="@(prefix)-chart" height="300"></canvas>
+                    <div class="col-md-6 col-sm-12">
+
+                        <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="@(prefix1)-box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Bill Statistics
+                                </h3>
+                                <br />
+                                <button style="display:none;" class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>         } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
+                            </div>
+                            <div class="box-body">
+                                <div class="chart" style="height: 300px;">
+                                    <canvas id="@(prefix1)-chart" height="300"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
+            }
+          }
+          else
+          {
+            <h2>You are not subscribed to any of the Meter</h2>
+          }
+}
 
-                <div class="box box-info @if (hidePanel){<text>collapsed-box</text>}" id="@(prefix1)-box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">
-                            <i class="fa fa-shopping-cart"></i>
-                            Bill Statistics
-                        </h3>
-                        <br />
-                        <button style="display:none;" class="btn btn-xs btn-info btn-flat" @if (hidePanel) { <text> disabled="disabled" </text>        } data-chart-role="toggle-chart" data-chart-period="week">@T("Admin.SalesReport.OrderStatistics.Week")</button>
-                    </div>
-                    <div class="box-body">
-                        <div class="chart" style="height: 300px;">
-                            <canvas id="@(prefix1)-chart" height="300"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <script>
             $(document).ready(function () {
                 var osCurrentPeriod;
