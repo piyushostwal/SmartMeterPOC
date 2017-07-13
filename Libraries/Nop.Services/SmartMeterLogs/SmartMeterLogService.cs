@@ -313,7 +313,7 @@ namespace Nop.Services.SmartMeterLogs
 
             var TimeInterval = _dataProvider.GetParameter();
             TimeInterval.ParameterName = "TimeInterval";
-            TimeInterval.Value = timeInterval.HasValue ? timeInterval.Value : System.Data.SqlTypes.SqlInt32.Null;
+            TimeInterval.Value = timeInterval.HasValue ? timeInterval.Value : 2880;
             TimeInterval.DbType = DbType.Int32;
 
             var StartDate = _dataProvider.GetParameter();
