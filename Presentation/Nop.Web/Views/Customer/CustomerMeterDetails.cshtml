@@ -224,6 +224,7 @@
                 datepicker.bind("change", function () {
                     var value = this.value();
                     datepicker.value(value)
+                    $('.bg-light-blue').trigger('click');
                     console.log(datepicker.value().toISOString())
                 });
                 var calendar_value = datepicker.value().toISOString();

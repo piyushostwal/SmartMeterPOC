@@ -108,7 +108,7 @@ namespace Nop.Web.Controllers
                 CustomerId = d.CustomerId,
                 DeviceId = d.DeviceID,
                 Lattitude = d.Lattitude,
-                Longitude = d.Lattitude,
+                Longitude = d.Longitude,
                 MeterType = d.Consumption > 100000 ? d.MeterType + " - High Consumption" : d.MeterType,
                 Reading = d.Reading,
                 CustomerName = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.name).FirstOrDefault(),

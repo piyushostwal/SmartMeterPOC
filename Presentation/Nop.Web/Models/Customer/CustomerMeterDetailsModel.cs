@@ -35,5 +35,6 @@ namespace Nop.Web.Models.Customer
     {
         public string CustomerName { get; set; }
         public IPagedList<CustomerProductDetails> Meters { get; set; }
+        public List<CustomerBilling> PreviousBills { get; set; }
     }
 }
