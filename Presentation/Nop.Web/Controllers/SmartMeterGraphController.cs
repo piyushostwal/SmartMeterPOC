@@ -16,6 +16,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Nop.Services.Common;
+using Nop.Core.Domain.Customers;
 
 namespace Nop.Web.Controllers
 {
@@ -91,12 +93,28 @@ namespace Nop.Web.Controllers
             return Ok(formattedList);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/heatmap")]
-        public IHttpActionResult GetHeatMapData(SmartMeterLogHeatMapModel heaatMapModel)
+        public IHttpActionResult GetHeatMapData(SmartMeterLogHeatMapModel heatMapModel)
         {
-            var tempData = GetHeatMapSampleData();
-            return Ok(tempData);
+            var data = GetCustomerLogsByLocation(heatMapModel);
+            var allCustomers = data.Select(c => c.CustomerId).ToArray();
+            var customersObjs = _customerService.GetCustomersByIds(allCustomers);
+            var customerFiltered = customersObjs.Select(c => new { customerId = c.Id, name = c.GetAttribute<string>(SystemCustomerAttributeNames.FirstName) + " " + c.GetAttribute<string>(SystemCustomerAttributeNames.LastName), address = c.GetAttribute<string>(SystemCustomerAttributeNames.StreetAddress) }).ToList();
+
+            var formattedData = data.Select(d => new SmartMeterHeatMapResponseModel()
+            {
+                Consumption = d.Consumption,
+                CustomerId = d.CustomerId,
+                DeviceId = d.DeviceID,
+                Lattitude = d.Lattitude,
+                Longitude = d.Lattitude,
+                MeterType = d.MeterType,
+                Reading = d.Reading,
+                CustomerName = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.name).FirstOrDefault(),
+                CustomerAddress = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.address).FirstOrDefault(),
+            });
+            return Ok(formattedData);
         }
 
         // GET api/smartmetergraph
@@ -127,6 +145,26 @@ namespace Nop.Web.Controllers
         }
 
         #region private methods
+
+        private IPagedList<SmartMeterLogsByLocation> GetCustomerLogsByLocation(SmartMeterLogHeatMapModel heatMapModel)
+        {
+            if (string.IsNullOrEmpty(heatMapModel.Filter))
+            {
+                //var temp = _smartMeterLogService.GetMeterlogsByLocation("18.620245", "73.718760", "18.442511", "73.976252", Convert.ToDateTime("2016-01-01 00:00:00"), Convert.ToDateTime("2017-07-08 00:00:00"));
+                return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate);
+            }
+            else if (heatMapModel.Filter.Equals("weekends"))
+            {
+                return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.Filter);
+            }
+            else if (heatMapModel.Filter.Equals("holidays"))
+            {
+                return _smartMeterLogService.GetMeterlogsByLocation(heatMapModel.MinLattitude, heatMapModel.MinLongitude, heatMapModel.MaxLattiude, heatMapModel.MaxLongitude, heatMapModel.StartDate, heatMapModel.EndDate, heatMapModel.Filter);
+            }
+            return null;
+
+        }
+
         private IPagedList<SmartMeterLogByTimeInterval> GetCustomerLogsFromService(string timeInterval, int customerId, DateTime date)
         {
             switch (timeInterval)
@@ -177,6 +215,17 @@ namespace Nop.Web.Controllers
                     CustomerId=4,
                     CustomerAddress="test address 1",
                     MeterType="2",
+                },
+                new SmartMeterHeatMapResponseModel(){
+                    DeviceId=new Guid("C56A2690-F588-4758-A874-BADDDA23C166"),
+                    Lattitude="18.553661",
+                    Longitude="73.806960",
+                    Consumption=3687,
+                    Reading=368700,
+                    CustomerName="Piyush Ostwal",
+                    CustomerId=15,
+                    CustomerAddress="test address 2",
+                    MeterType="1",
                 }
             };
 
