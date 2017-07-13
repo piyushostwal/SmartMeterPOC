@@ -11,7 +11,7 @@ namespace Nop.Data.Mapping.SmartMeterLogs
     {
         public SmartMeterLogsByDeviceIdMap()
         {
-            this.ToTable("SmartMeterLogsByLocation");
+            this.ToTable("SmartMeterLogsByDeviceId");
             this.HasKey(c => c.Id);
             this.Property(u => u.DeviceID);
             this.Property(u => u.Consumption);
