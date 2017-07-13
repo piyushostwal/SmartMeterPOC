@@ -84,15 +84,15 @@
                                                                     Current Consumption<span class="right-float">:</span>
                                                                 </td>
                                                                 <td class="value-td">
-                                                                    @Model.ConsumptionUnitReading Kwh
+                                                                    @Model.ConsumptionUnitReading kWh
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="label-td">
-                                                                    Previous Consumptio<span class="right-float">:</span>
+                                                                    Previous Consumption<span class="right-float">:</span>
                                                                 </td>
                                                                 <td class="value-td">
-                                                                    @Model.PreviousConsumptionUnitReading Kwh
+                                                                    @Model.PreviousConsumptionUnitReading kWh
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -127,7 +127,7 @@
                                                             Bill Amount<span class="right-float">:</span>
                                                         </td>
                                                         <td class="value-td">
-                                                            @Model.BillAmount
+                                                            ₹ @Model.BillAmount
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -151,7 +151,7 @@
                                                             Last Bill Amount<span class="right-float">:</span>
                                                         </td>
                                                         <td class="value-td">
-                                                            @Model.LastBillAmount
+                                                            ₹ @Model.LastBillAmount
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -170,14 +170,14 @@
 
                             </div>
                            
-                            @if (@Model.Status)
+                            @*@if (@Model.Status)
                             {
                                 <button class="btn btn-danger deact" id="@Model.meterId" data-status="@Model.Status">Deactivate</button>
                             }
                             else
                             {
                                 <button class="btn btn-success act" id="@Model.meterId" data-status="@Model.Status">Activate</button>
-                            }
+                            }*@
                                 
                             
                             
@@ -195,7 +195,8 @@
             var token = $('input[name="__RequestVerificationToken"]').val();
             debugger
             $.ajax({
-                url: "/Admin/Customer/UpdateCustomereProductStatus",
+                //url: "/api/smartmeterlog/" + data.DeviceId,
+                url: "UpdateCustomereProductStatus",
                 type: 'POST',
                 //data: {
                 //    __RequestVerificationToken: token,
@@ -206,13 +207,23 @@
                     Status: data.Status
                 },
                 success: function () {
-                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    $(but).removeClass("btn-danger deact").addClass("btn-success act").text("Activate")
+                    location.reload();
+                    //e.preventDefault()
+
+                    //window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
                     //location.reload();
                 },
 
                 error: function (xhr, ajaxOptions, thrownError) {
                     debugger;
-                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    $(but).removeClass("btn-danger deact").addClass("btn-success act").text("Activate")
+
+                    //location.reload();
+                    //e.preventDefault()
+
+
+                    
                 }
             });
 
@@ -226,7 +237,8 @@
             var token = $('input[name="__RequestVerificationToken"]').val();
             debugger
             $.ajax({
-                url: "/Admin/Customer/UpdateCustomereProductStatus",
+                //url: "/api/smartmeterlog/" + data.DeviceId,
+                url: "UpdateCustomereProductStatus",
                 type: 'POST',
                 //data: {
                 //    __RequestVerificationToken: token,
@@ -237,14 +249,18 @@
                     Status: data.Status
                 },
                 success: function () {
-                    debugger;
-                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    $(but).removeClass("btn-success act").addClass("btn-danger deact").text("Deactivate")
+                    //e.preventDefault()
+                    //window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    //location.reload();
                     // location.reload();
                 },
 
                 error: function (xhr, ajaxOptions, thrownError) {
                     debugger;
-                    window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
+                    //e.preventDefault()
+                    location.reload();
+                    //window.location.href = "/Admin/Customer/CustomerMeterDetails/@Model.meterId"
                 }
             });
 
