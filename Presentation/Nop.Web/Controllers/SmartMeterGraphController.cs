@@ -100,7 +100,7 @@ namespace Nop.Web.Controllers
             var data = GetCustomerLogsByLocation(heatMapModel);
             var allCustomers = data.Select(c => c.CustomerId).ToArray();
             var customersObjs = _customerService.GetCustomersByIds(allCustomers);
-            var customerFiltered = customersObjs.Select(c => new { customerId = c.Id, name = c.GetAttribute<string>(SystemCustomerAttributeNames.FirstName) + " " + c.GetAttribute<string>(SystemCustomerAttributeNames.LastName), address = c.GetAttribute<string>(SystemCustomerAttributeNames.StreetAddress) }).ToList();
+            var customerFiltered = customersObjs.Select(c => new { customerId = c.Id, name = c.GetAttribute<string>(SystemCustomerAttributeNames.FirstName) + " " + c.GetAttribute<string>(SystemCustomerAttributeNames.LastName), address = c.BillingAddress != null ? c.BillingAddress.Address1 + c.BillingAddress.Address2 : string.Empty }).ToList();
 
             var formattedData = data.Select(d => new SmartMeterHeatMapResponseModel()
             {
