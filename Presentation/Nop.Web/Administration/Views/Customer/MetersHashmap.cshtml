@@ -21,6 +21,17 @@
     @Html.AntiForgeryToken()
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyB6XiVGCwZGXLQBblbioG9jRf6B4h_jebo"></script>
+
+    <style>
+        tr.footable-header th {
+            color: #337ab7;
+        }
+
+        table.footable {
+            font-weight: bold;
+        }
+    </style>
+
     <div class="content-header clearfix">
         <h1 class="pull-left">
             Meters Heat map
@@ -3744,62 +3755,62 @@
       "longitude": "73.379112"
   }
                 ]
-                
-            
-            
-                   data = stat
-            var opt = {
-                "legend": {
-                    "Postpaid": "#4286f4",
-                    "Solar": "#f4d641",
-                    "Prepaid": "#41e2f4",
-                    "Postpaid - High Consumption": "#f44141",
-                    "Solar - High Consumption": "#f441c1",
-                    "Solar - High Consumption": "#f44141"
-                }
-            };
-            createGrid(data)
-            var markers = [];
-            for (var i = 0; i < data.length; i++) {
 
-                var accident_LatLng = new google.maps.LatLng(Number(data[i].lattitude), Number(data[i].longitude));
-                var marker = new google.maps.Marker({
-                    position: accident_LatLng,
-                    title: data[i].meterType,
-                    label: {
-                        text: data[i].consumption + " Kwh",
-                        fontWeight: "600",
-                        color: data[i].meterType == "Postpaid - High Consumption" || "Solar - High Consumption" || "Solar - High Consumption" ? "red" : "blue",
-                        animation: data[i].meterType == "two" ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP
 
+
+                data = stat
+                var opt = {
+                    "legend": {
+                        "Postpaid": "#4286f4",
+                        "Solar": "#f4d641",
+                        "Prepaid": "#41e2f4",
+                        "Postpaid - High Consumption": "#f44141",
+                        "Solar - High Consumption": "#f441c1",
+                        "Solar - High Consumption": "#f44141"
                     }
-                });
-                marker['infowindow'] = new google.maps.InfoWindow({
-                    content: '<b>Customer Name: </b> ' + data[i].customerName + '<br/><b>Consumption:  </b> ' + data[i].consumption + '<br/><b>Reading: </b> ' + data[i].reading
-                });
-                google.maps.event.addListener(marker, 'mouseover', function () {
-                    this['infowindow'].open(map, this);
-                });
-                google.maps.event.addListener(marker, 'mouseout', function () {
-                    this['infowindow'].close(map, this);
-                });
-                markers.push(marker);
-            }
+                };
+                createGrid(data)
+                var markers = [];
+                for (var i = 0; i < data.length; i++) {
 
-            var markerCluster = new MarkerClusterer(map, markers, opt);
-            google.maps.event.addListener(markerCluster, 'clusterclick', function (cluster) {
-                var bounds = cluster.bounds_.toJSON();
-                var returnedData = $.grep(data, function (element, index) {
-                    return element.lattitude >= bounds.south && element.lattitude <= bounds.north && element.longitude >= bounds.west && element.longitude <= bounds.east;
-                });
-                console.log(returnedData)
-                if (returnedData.length) {
-                    createGrid(returnedData);
-                } else {
-                    return false;
+                    var accident_LatLng = new google.maps.LatLng(Number(data[i].lattitude), Number(data[i].longitude));
+                    var marker = new google.maps.Marker({
+                        position: accident_LatLng,
+                        title: data[i].meterType,
+                        label: {
+                            text: data[i].consumption + " Kwh",
+                            fontWeight: "600",
+                            color: data[i].meterType == "Postpaid - High Consumption" || "Solar - High Consumption" || "Solar - High Consumption" ? "red" : "blue",
+                            animation: data[i].meterType == "two" ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP
+
+                        }
+                    });
+                    marker['infowindow'] = new google.maps.InfoWindow({
+                        content: '<b>Customer Name: </b> ' + data[i].customerName + '<br/><b>Consumption:  </b> ' + data[i].consumption + '<br/><b>Reading: </b> ' + data[i].reading
+                    });
+                    google.maps.event.addListener(marker, 'mouseover', function () {
+                        this['infowindow'].open(map, this);
+                    });
+                    google.maps.event.addListener(marker, 'mouseout', function () {
+                        this['infowindow'].close(map, this);
+                    });
+                    markers.push(marker);
                 }
 
-            });
+                var markerCluster = new MarkerClusterer(map, markers, opt);
+                google.maps.event.addListener(markerCluster, 'clusterclick', function (cluster) {
+                    var bounds = cluster.bounds_.toJSON();
+                    var returnedData = $.grep(data, function (element, index) {
+                        return element.lattitude >= bounds.south && element.lattitude <= bounds.north && element.longitude >= bounds.west && element.longitude <= bounds.east;
+                    });
+                    console.log(returnedData)
+                    if (returnedData.length) {
+                        createGrid(returnedData);
+                    } else {
+                        return false;
+                    }
+
+                });
             }
 
 
