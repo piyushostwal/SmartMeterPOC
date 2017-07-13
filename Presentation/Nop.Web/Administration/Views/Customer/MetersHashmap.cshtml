@@ -11,8 +11,10 @@
     Html.SetActiveMenuItemSystemName("Heat Map");
     const string prefix = "order-statistics";
     Html.AppendScriptParts("~/Administration/Scripts/chart-markerclusterer.js");
-
-
+    Html.AppendScriptParts("~/Administration/Scripts/moment.js");
+    Html.AppendScriptParts("~/Administration/Scripts/footable.min.js");
+    Html.AppendCssFileParts("~/Administration/Content/footable.bootstrap.min.css");
+    
 }
 
 @using (Html.BeginForm())
@@ -31,15 +33,19 @@
                 <div class="panel-group">
                     <div class="panel panel-default panel-search">
                         <div class="panel-body">
-                            <div>
-                                <div id="map-container" style=" padding: 6px; border-width: 1px; border-style: solid; border-color: #ccc #ccc #999 #ccc; -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px; -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px; box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px; width: 100%;">
-                                    <div id="map" style="width: 100%; height: 600px; "></div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div id="map-container" style=" padding: 6px; border-width: 1px; border-style: solid; border-color: #ccc #ccc #999 #ccc; -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px; -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px; box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px; width: 100%;">
+                                        <div id="map" style="width: 100%; height: 600px; "></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <br/>
-                            <br />
-                            <br />
-                            <div id="customers-grid"></div>
+                                <div class="col-md-6 col-sm-12">
+                                    @*<div id="customers-grid">
+
+                                    </div>*@
+                                    <table class="table" data-paging="true" data-sorting="true" data-filtering="true"></table>
+                                </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -50,10 +56,11 @@
             function initialize() {
                 var center = new google.maps.LatLng(18.5204, 73.8567);
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 12,
+                    zoom: 6,
                     center: center,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
+                
                 var data = [
 {
     "deviceId": "03f00e0a-4661-4ba9-b6d5-0524c963da6c",
@@ -4489,6 +4496,7 @@
                         "2": "#FF9933",
                     }
                 };
+                createGrid(data)
                 var markers = [];
                 for (var i = 0; i < data.length; i++) {
 
@@ -4518,102 +4526,154 @@
 
                 var markerCluster = new MarkerClusterer(map, markers, opt);
                 google.maps.event.addListener(markerCluster, 'clusterclick', function (cluster) {
-                    console.log(cluster.getBounds().toJSON())
-                    var bounds = cluster.getBounds().toJSON();
+                    var bounds = cluster.bounds_.toJSON();
                     var returnedData = $.grep(data, function (element, index) {
                         return element.lattitude >= bounds.south && element.lattitude <= bounds.north && element.longitude >= bounds.west && element.longitude <= bounds.east;
                     });
                     console.log(returnedData)
-                    createGrid(returnedData);
+                    if (returnedData.length) {
+                        createGrid(returnedData);
+                    } else {
+                        return false;
+                    }
+                    
                 });
             }
 
 
             google.load("visualization", "1", { packages: ["corechart"], callback: initialize });
             function createGrid(new_grid) {
-                $("#customers-grid").kendoGrid({
-                    dataSource: {
-                        data: new_grid,
-                        schema: {
-                            model: {
-                                fields: {
-                                    customerId: { type: "bool" },
-                                    customerName: { type: "bool" },
-                                    customerAddress: { type: "string" },
-                                    deviceId: { type: "bool" },
-                                    meterType: { type: "string" },
-                                    consumption: { type: "string" },
-                                    reading: { type: "string" }
-
-                                }
+                var col = [
+                        {
+                            name: "customerName",
+                            title: "Customer Name",
+                            "formatter": function (value, options, rowData) {
+                                return '<a href="Dashboard?customerid=' + rowData.customerId + '">' + value + '</a>';
                             }
                         },
-                        error: function (e) {
-                            display_kendoui_grid_error(e);
-                            // Cancel the changes
-                            this.cancelChanges();
-                        },
-                        serverPaging: false,
-                        serverFiltering: false,
-                        serverSorting: false,
-                        pageSize: 20
-                    },
-                    pageable: {
-                        refresh: true,
-                        pageSizes: 20,
-                    },
-                    scrollable: true,
-                    sortable: true,
-                    filterable: false,
-                    columns: [
                         {
-                            field: "customerName",
-                            title: "Customer Name",
-                            template: '<a href="Dashboard?customerid=#= customerId#">#= customerName #</a>',
-                            attributes: { style: "text-align:center" },
-                            width: 300
-                        },
-                        {
-                            field: "customerAddress",
+                            name: "customerAddress",
                             title: "Address",
-                            template: '#= customerAddress #',
-                            attributes: { style: "text-align:center" },
-                            width: 300
+                            breakpoints: "lg md",
                         },
                         {
-                            field: "deviceId",
+                            name: "deviceId",
                             title: "Device ID",
-                            template: '#= deviceId #',
-                            attributes: { style: "text-align:center" },
-                            width: 300
+                            breakpoints: "lg md",
                         },
                         {
-                            field: "consumption",
+                            "name": "customerId",
+                            "title": "Never seen but always around",
+                            "visible": false,
+                            "filterable": false
+                        },
+                        {
+                            name: "consumption",
                             title: "Consumption",
-                            template: '#= consumption #',
-                            attributes: { style: "text-align:center" },
-                            width: 300
+                            breakpoints: "xs",
                         },
                         {
-                            field: "reading",
+                            name: "reading",
                             title: "Reading",
-                            template: '#= reading #',
-                            attributes: { style: "text-align:center" },
-                            width: 300
+                            breakpoints: "xs",
                         },
                         {
-                            field: "meterType",
+                            name: "meterType",
                             title: "Meter Type",
-                            template: '#= meterType #',
-                            attributes: { style: "text-align:center" },
-                            width: 300
+                            breakpoints: "xs sm",
                         },
 
 
 
 
-                    ]
-                });
+                ]
+                    $('.table').footable({
+                        "columns": col,
+                        "rows": new_grid
+                    });
+                //$("#customers-grid").kendoGrid({
+                //    dataSource: {
+                //        data: new_grid,
+                //        schema: {
+                //            model: {
+                //                fields: {
+                //                    customerId: { type: "bool" },
+                //                    customerName: { type: "bool" },
+                //                    customerAddress: { type: "string" },
+                //                    deviceId: { type: "bool" },
+                //                    meterType: { type: "string" },
+                //                    consumption: { type: "string" },
+                //                    reading: { type: "string" }
+
+                //                }
+                //            }
+                //        },
+                //        error: function (e) {
+                //            display_kendoui_grid_error(e);
+                //            // Cancel the changes
+                //            this.cancelChanges();
+                //        },
+                //        serverPaging: false,
+                //        serverFiltering: false,
+                //        serverSorting: false,
+                //        pageSize: 20
+                //    },
+                //    pageable: {
+                //        refresh: true,
+                //        pageSizes: 20,
+                //    },
+                //    scrollable: false,
+                //    sortable: true,
+                //    filterable: false,
+                //    columns: [
+                //        {
+                //            field: "customerName",
+                //            title: "Customer Name",
+                //            template: '<a href="Dashboard?customerid=#= customerId#">#= customerName #</a>',
+                //            attributes: { style: "text-align:center" },
+                //            width: 300
+                //        },
+                //        {
+                //            field: "customerAddress",
+                //            title: "Address",
+                //            template: '#= customerAddress #',
+                //            attributes: { style: "text-align:center" },
+                //            width: 300
+                //        },
+                //        {
+                //            field: "deviceId",
+                //            title: "Device ID",
+                //            template: '#= deviceId #',
+                //            attributes: { style: "text-align:center" },
+                //            width: 300
+                //        },
+                //        {
+                //            field: "consumption",
+                //            title: "Consumption",
+                //            template: '#= consumption #',
+                //            attributes: { style: "text-align:center" },
+                //            width: 300
+                //        },
+                //        {
+                //            field: "reading",
+                //            title: "Reading",
+                //            template: '#= reading #',
+                //            attributes: { style: "text-align:center" },
+                //            width: 300
+                //        },
+                //        {
+                //            field: "meterType",
+                //            title: "Meter Type",
+                //            template: '#= meterType #',
+                //            attributes: { style: "text-align:center" },
+                //            width: 300
+                //        },
+
+
+
+
+                //    ]
+                //});
             }
         </script>
     </div>
