@@ -98,7 +98,6 @@ namespace Nop.Web.Controllers
         [Route("api/heatmap")]
         public IHttpActionResult GetHeatMapData(SmartMeterLogHeatMapModel heatMapModel)
         {
-            if (heatMapModel == null) return BadRequest();
             var data = GetCustomerLogsByLocation(heatMapModel);
             var allCustomers = data.Select(c => c.CustomerId).ToArray();
             var customersObjs = _customerService.GetCustomersByIds(allCustomers);
