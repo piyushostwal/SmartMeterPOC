@@ -130,6 +130,7 @@
     <Compile Include="Domain\Customers\CustomerProductDetails.cs" />
     <Compile Include="Domain\Customers\Events.cs" />
     <Compile Include="Domain\Customers\RewardPointsActivatingDelayPeriod.cs" />
+    <Compile Include="Domain\SmartMeterLogs\SmartMeterLogsByLocation.cs" />
     <Compile Include="Domain\Discounts\RequirementGroupInteractionType.cs" />
     <Compile Include="Domain\Directory\RoundingType.cs" />
     <Compile Include="Domain\Forums\ForumPostVote.cs" />
