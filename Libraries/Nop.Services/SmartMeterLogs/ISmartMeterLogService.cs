@@ -18,5 +18,7 @@ namespace Nop.Services.SmartMeterLogs
         IPagedList<SmartMeterLogByTimeInterval> GetMeterlogsByCustomerId(int timeInterval, int customerId, int month, int year, DateTime? date = null,
             int pageIndex = 0, int pageSize = int.MaxValue);
         IPagedList<SmartMeterLogsByLocation> GetMeterlogsByLocation(string minLatitude = "", string minLogitude = "", string maxLatitude = "", string maxLogitude = "", DateTime? startDate = null, DateTime? endDate = null, int? metertypeId = null, string customerIds = "", string weekEnd = "", string holiday = "", int pageIndex = 0, int pageSize = int.MaxValue);
+        IPagedList<SmartMeterLogsByDeviceId> GetMeterlogsByDeviceIdAndParameters(Guid deviceId, int? timeInterval, DateTime? startDate = null,
+          DateTime? endDate = null, string weekEnd = "", string holiday = "", int pageIndex = 0, int pageSize = int.MaxValue);
     }
 }
