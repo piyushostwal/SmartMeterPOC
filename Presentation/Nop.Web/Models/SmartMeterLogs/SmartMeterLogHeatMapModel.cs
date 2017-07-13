@@ -13,8 +13,9 @@ namespace Nop.Web.Models.SmartMeterLogs
         public string MinLongitude { get; set; }
         public string MaxLongitude { get; set; }
         public string Filter { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public int CustomerType { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int? CustomerType { get; set; }
+        public int? MeterTypeId { get; set; }
     }
 }

@@ -231,52 +231,60 @@ namespace Nop.Services.SmartMeterLogs
             return customers;
         }
 
-        public virtual IPagedList<SmartMeterLogsByLocation> GetMeterlogsByLocation(string minLatitude, string minLogitude,
-            string maxLatitude, string maxLogitude, DateTime startDate, DateTime endDate, string weekEnd = "", string holiday = "",
-            int pageIndex = 0, int pageSize = int.MaxValue)
+        public virtual IPagedList<SmartMeterLogsByLocation> GetMeterlogsByLocation(string minLatitude = "", string minLogitude = "", string maxLatitude = "", string maxLogitude = "", DateTime? startDate = null, DateTime? endDate = null, int? metertypeId = null, string customerIds = "", string weekEnd = "", string holiday = "", int pageIndex = 0, int pageSize = int.MaxValue)
         {
 
 
             //prepare parameters
             var MinLatitude = _dataProvider.GetParameter();
             MinLatitude.ParameterName = "MinLatitude";
-            MinLatitude.Value = minLatitude;
+            MinLatitude.Value = string.IsNullOrEmpty(minLatitude) ? System.Data.SqlTypes.SqlString.Null : minLatitude;
             MinLatitude.DbType = DbType.String;
 
             var MinLogitude = _dataProvider.GetParameter();
             MinLogitude.ParameterName = "MinLongitude";
-            MinLogitude.Value = minLogitude;
+            MinLogitude.Value = string.IsNullOrEmpty(minLogitude) ? System.Data.SqlTypes.SqlString.Null : minLogitude;
             MinLogitude.DbType = DbType.String;
 
             var MaxLatitude = _dataProvider.GetParameter();
             MaxLatitude.ParameterName = "MaxLatitude";
-            MaxLatitude.Value = maxLatitude;
+            MaxLatitude.Value = string.IsNullOrEmpty(maxLatitude) ? System.Data.SqlTypes.SqlString.Null : maxLatitude;
             MaxLatitude.DbType = DbType.String;
 
             var MaxLogitude = _dataProvider.GetParameter();
             MaxLogitude.ParameterName = "MaxLongitude";
-            MaxLogitude.Value = maxLogitude;
+            MaxLogitude.Value = string.IsNullOrEmpty(maxLogitude) ? System.Data.SqlTypes.SqlString.Null : maxLogitude;
             MaxLogitude.DbType = DbType.String;
 
             var StartDate = _dataProvider.GetParameter();
             StartDate.ParameterName = "StartDate";
-            StartDate.Value = startDate;
+            StartDate.Value = startDate != null && startDate != DateTime.MinValue ? Convert.ToDateTime(startDate.Value) : System.Data.SqlTypes.SqlDateTime.Null;
             StartDate.DbType = DbType.DateTime;
 
             var EndDate = _dataProvider.GetParameter();
             EndDate.ParameterName = "EndDate";
-            EndDate.Value = endDate;
+            EndDate.Value = endDate != null && endDate != DateTime.MinValue ? Convert.ToDateTime(endDate.Value) : System.Data.SqlTypes.SqlDateTime.Null;
             EndDate.DbType = DbType.DateTime;
 
             var WeekEnd = _dataProvider.GetParameter();
             WeekEnd.ParameterName = "WeekEnd";
-            WeekEnd.Value = !string.IsNullOrEmpty(weekEnd) ? weekEnd : string.Empty;
+            WeekEnd.Value = !string.IsNullOrEmpty(weekEnd) ? weekEnd : System.Data.SqlTypes.SqlString.Null;
             WeekEnd.DbType = DbType.String;
 
             var Holiday = _dataProvider.GetParameter();
             Holiday.ParameterName = "Holiday";
-            Holiday.Value = !string.IsNullOrEmpty(holiday) ? holiday : string.Empty;
+            Holiday.Value = !string.IsNullOrEmpty(holiday) ? holiday : System.Data.SqlTypes.SqlString.Null;
             Holiday.DbType = DbType.String;
+
+            var MeterTypeId = _dataProvider.GetParameter();
+            MeterTypeId.ParameterName = "MeterTypeId";
+            MeterTypeId.Value = metertypeId != null ? metertypeId.Value : System.Data.SqlTypes.SqlInt32.Null;
+            MeterTypeId.DbType = DbType.Int32;
+
+            var CustomerIds = _dataProvider.GetParameter();
+            CustomerIds.ParameterName = "CustomerIds";
+            CustomerIds.Value = !string.IsNullOrEmpty(customerIds) ? customerIds : System.Data.SqlTypes.SqlString.Null;
+            CustomerIds.DbType = DbType.String;
 
             var totalRecordsParameter = _dataProvider.GetParameter();
             totalRecordsParameter.ParameterName = "TotalRecords";
@@ -285,8 +293,8 @@ namespace Nop.Services.SmartMeterLogs
 
             //invoke stored procedure
             var smartMeterLogs = _dbContext.ExecuteStoredProcedureList<SmartMeterLogsByLocation>(
-                "UspSelectSmartmeterLogByLocation", MinLatitude, MinLogitude, MaxLatitude, MaxLogitude, StartDate, EndDate,
-                WeekEnd, Holiday, totalRecordsParameter);
+                "UspSelectSmartmeterLogByLocationandParameters", MinLatitude, MinLogitude, MaxLatitude, MaxLogitude, StartDate, EndDate,
+                WeekEnd, Holiday, MeterTypeId, CustomerIds, totalRecordsParameter);
 
             var totalRecords = (totalRecordsParameter.Value != DBNull.Value) ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
