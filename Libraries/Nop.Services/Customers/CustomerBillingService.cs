@@ -65,7 +65,7 @@ namespace Nop.Services.Customers
         public virtual IPagedList<CustomerBilling> GetCustomerPreviousBills(Guid deviceId, int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _customerBilling.Table;
-            query = query.Where(m => m.DeviceId == deviceId).Where(m=>m.IsCurrentBill==false);
+            query = query.Where(m => m.DeviceId == deviceId).Where(m => m.IsCurrentBill == false);
             query = query.OrderByDescending(c => c.Id);
             var customers = new PagedList<CustomerBilling>(query, pageIndex, pageSize);
             return customers;
@@ -103,13 +103,22 @@ namespace Nop.Services.Customers
         public virtual void UpdateCustomerPayment(int id)
         {
             var customerBill = GetCustomerBillById(id);
-            if(customerBill!=null)
+            if (customerBill != null)
             {
                 customerBill.IsBillPaid = true;
                 customerBill.BillPaymentDate = DateTime.Now;
                 _customerBilling.Update(customerBill);
                 _eventPublisher.EntityUpdated(customerBill);
             }
+        }
+
+        public virtual IPagedList<CustomerBilling> GetCustomerPreviousBills(List<Guid> deviceId, int pageIndex = 0, int pageSize = int.MaxValue)
+        {
+            var query = _customerBilling.Table;
+            query = query.Where(m => deviceId.Contains(m.DeviceId)).Where(m => m.IsCurrentBill == false);
+            query = query.OrderByDescending(c => c.Id);
+            var customers = new PagedList<CustomerBilling>(query, pageIndex, pageSize);
+            return customers;
         }
         #endregion
     }

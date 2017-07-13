@@ -16,5 +16,6 @@ namespace Nop.Services.Customers
 
         CustomerBilling GetCustomerBillById(int id);
         void UpdateCustomerPayment(int id);
+        IPagedList<CustomerBilling> GetCustomerPreviousBills(List<Guid> deviceId, int pageIndex = 0, int pageSize = int.MaxValue);
     }
 }
