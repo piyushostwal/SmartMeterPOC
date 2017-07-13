@@ -109,7 +109,7 @@ namespace Nop.Web.Controllers
                 DeviceId = d.DeviceID,
                 Lattitude = d.Lattitude,
                 Longitude = d.Lattitude,
-                MeterType = d.MeterType,
+                MeterType = d.Consumption > 100000 ? d.MeterType + " - High Consumption" : d.MeterType,
                 Reading = d.Reading,
                 CustomerName = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.name).FirstOrDefault(),
                 CustomerAddress = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.address).FirstOrDefault(),
@@ -190,7 +190,7 @@ namespace Nop.Web.Controllers
                     return null;
             }
         }
-        
+
         #endregion
     }
 }
