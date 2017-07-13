@@ -17,8 +17,8 @@ namespace Nop.Web.Models.SmartMeterLogs
         public int CustomerId { get; set; }
         public string CustomerAddress { get; set; }
         public string MeterType { get; set; }
-        public int SolarGeneratedUnits { get; set; }
-        public int TimeInterval { get; set; }
-        public DateTime LoggingTime { get; set; }
+        //public int SolarGeneratedUnits { get; set; }
+        //public int TimeInterval { get; set; }
+        //public DateTime LoggingTime { get; set; }
     }
 }
