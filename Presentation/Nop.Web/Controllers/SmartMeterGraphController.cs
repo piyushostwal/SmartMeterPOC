@@ -190,47 +190,7 @@ namespace Nop.Web.Controllers
                     return null;
             }
         }
-
-        private List<SmartMeterHeatMapResponseModel> GetHeatMapSampleData()
-        {
-            List<SmartMeterHeatMapResponseModel> data = new List<SmartMeterHeatMapResponseModel>() {
-                new SmartMeterHeatMapResponseModel(){
-                    DeviceId=new Guid("03f00e0a-4661-4ba9-b6d5-0524c963da6c"),
-                    Lattitude="18.531007",
-                    Longitude="73.830409",
-                    Consumption=9623,
-                    Reading=962300,
-                    CustomerName="Aslam Shrimali",
-                    CustomerId=12,
-                    CustomerAddress="test address",
-                    MeterType="1",
-                },
-                new SmartMeterHeatMapResponseModel(){
-                    DeviceId=new Guid("322da26e-cddd-43fb-bc38-3296ffcb6845"),
-                    Lattitude="18.583008",
-                    Longitude="73.782570",
-                    Consumption=2718,
-                    Reading=271800,
-                    CustomerName="James Pan",
-                    CustomerId=4,
-                    CustomerAddress="test address 1",
-                    MeterType="2",
-                },
-                new SmartMeterHeatMapResponseModel(){
-                    DeviceId=new Guid("C56A2690-F588-4758-A874-BADDDA23C166"),
-                    Lattitude="18.553661",
-                    Longitude="73.806960",
-                    Consumption=3687,
-                    Reading=368700,
-                    CustomerName="Piyush Ostwal",
-                    CustomerId=15,
-                    CustomerAddress="test address 2",
-                    MeterType="1",
-                }
-            };
-
-            return data;
-        }
+        
         #endregion
     }
 }
