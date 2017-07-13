@@ -355,6 +355,23 @@ namespace Nop.Services.Customers
         }
 
         /// <summary>
+        /// Gets set of customer by Customer type
+        /// </summary>
+        /// <param name="customerId">Customer Type identifier</param>
+        /// <returns>A customer</returns>
+        public virtual IList<Customer> GetCustomerByCustomerTypeId(int CustomerTypeId)
+        {
+            
+            var query = from c in _customerRepository.Table
+                        where c.CustomerType==CustomerTypeId && c.Email != null 
+                        select c;
+            var customers = query.ToList();
+
+
+            return customers;
+        }
+
+        /// <summary>
         /// Get customers by identifiers
         /// </summary>
         /// <param name="customerIds">Customer identifiers</param>

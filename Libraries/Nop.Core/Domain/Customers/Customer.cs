@@ -15,6 +15,7 @@ namespace Nop.Core.Domain.Customers
         private ICollection<ShoppingCartItem> _shoppingCartItems;
         private ICollection<ReturnRequest> _returnRequests;
         private ICollection<Address> _addresses;
+        private ICollection<CustomerType> _customerType;
 
         /// <summary>
         /// Ctor
@@ -179,6 +180,13 @@ namespace Nop.Core.Domain.Customers
         /// </summary>
         public virtual Address ShippingAddress { get; set; }
 
+
+        /// <summary>
+        /// Customer Type 
+        /// </summary>
+        public virtual int CustomerType { get; set; }
+
+
         /// <summary>
         /// Gets or sets customer addresses
         /// </summary>
@@ -186,6 +194,12 @@ namespace Nop.Core.Domain.Customers
         {
             get { return _addresses ?? (_addresses = new List<Address>()); }
             protected set { _addresses = value; }            
+        }
+
+        public virtual ICollection<CustomerType> CustomerTypeName
+        {
+            get { return _customerType ?? (_customerType = new List<CustomerType>()); }
+            protected set { _customerType = value; }
         }
         
         #endregion

@@ -147,6 +147,10 @@ namespace Nop.Services.Customers
         int DeleteGuestCustomers(DateTime? createdFromUtc, DateTime? createdToUtc, bool onlyWithoutShoppingCart);
 
         IPagedList<Customer> SearchCustomer(string searchString, int pageIndex = 0, int pageSize = int.MaxValue);
+
+
+
+        IList<Customer> GetCustomerByCustomerTypeId(int CustomerTypeId);
         #endregion
 
         #region Customer roles
