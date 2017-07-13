@@ -587,7 +587,7 @@
             {
                 field: "isBillPaid",
                 title: "Bill Paid",
-                //template:'# MeterId #',
+                template: '# if(isBillPaid) {# Paid  #} else {# Unpaid#} #',
                 attributes: { style: "text-align:center" },
                 width: 300
             }

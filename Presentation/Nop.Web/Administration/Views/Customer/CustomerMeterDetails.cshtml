@@ -279,7 +279,7 @@
 
             var customerMeterDetails = firebase.database().ref('smartmeterslogs/@Model.meterId/');
             customerMeterDetails.on('value', function (snapshot) {
-                alert(' Refresh Values');
+                $('.bg-light-blue').trigger('click');
             });
                             </script>
                         </div>
