@@ -431,7 +431,8 @@
                 var period = $(this).attr('data-chart-period');
                 osCurrentPeriod = period;
                 changeOsPeriod(period,$(this).attr('data-meter-id'),$(this).attr('data-device-id'));
-                $('#@(prefix)-box button[data-chart-role="toggle-chart"]').removeClass('bg-light-blue');
+                
+                $('button[data-chart-role="toggle-chart"][data-meter-id="'+$(this).attr('data-meter-id')+'"] ').removeClass('bg-light-blue');
                 $(this).addClass('bg-light-blue');
             });
 
