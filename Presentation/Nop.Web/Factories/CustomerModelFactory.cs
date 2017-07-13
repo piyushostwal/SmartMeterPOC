@@ -575,6 +575,23 @@ namespace Nop.Web.Factories
 
             model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
             {
+                RouteName = "Dashboard",
+                Title = "Dashboard",
+                Tab = CustomerNavigationEnum.Dashboard,
+                ItemClass = "customer-dashboard"
+            });
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "CustomerMeters",
+                Title = "My Meters",
+                Tab = CustomerNavigationEnum.MyMeters,
+                ItemClass = "customer-meters"
+            });
+            
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
                 RouteName = "CustomerInfo",
                 Title = _localizationService.GetResource("Account.CustomerInfo"),
                 Tab = CustomerNavigationEnum.Info,
@@ -596,20 +613,7 @@ namespace Nop.Web.Factories
                 Tab = CustomerNavigationEnum.Orders,
                 ItemClass = "customer-orders"
             });
-            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
-            {
-                RouteName = "CustomerMeters",
-                Title = "My Meters",
-                Tab = CustomerNavigationEnum.MyMeters,
-                ItemClass = "customer-meters"
-            });
-            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
-            {
-                RouteName = "Dashboard",
-                Title = "Dashboard",
-                Tab = CustomerNavigationEnum.Dashboard,
-                ItemClass = "customer-dashboard"
-            });
+            
 
             //if (_orderSettings.ReturnRequestsEnabled &&
             //    _returnRequestService.SearchReturnRequests(_storeContext.CurrentStore.Id,
