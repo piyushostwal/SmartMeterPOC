@@ -3813,7 +3813,7 @@
                     }
                 });
                 marker['infowindow'] = new google.maps.InfoWindow({
-                    content: '<b>Customer Name: </b> ' + data_new[i].customerName + '<br/><b>Consumption:  </b> ' + data_new[i].consumption + '<br/><b>Reading: </b> ' + data_new[i].reading
+                content: '<b>Customer Name: </b> ' + data_new[i].customerName + '<br/><b>Consumption:  </b> ' + data_new[i].consumption + '<br/><b>Reading: </b> ' + data_new[i].reading+'<br/><b>Solar: </b> ' + data_new[i].solarGeneratedConsumption
                 });
                 google.maps.event.addListener(marker, 'mouseover', function () {
                     this['infowindow'].open(map, this);
@@ -4022,15 +4022,28 @@
                     alert("Pease select Start and end date");
                     return
                 }
+                console.log(data_post)
                 $.ajax({
                     url: "/api/customerdetailconsumption",
-                    type: 'post',
-                    data: data_post,
+                    type: 'POST',
+                    dataType: "json",
+                    headers: {
+                        "content-type": "application/json",
+                        "cache-control": "no-cache",
+                    },
+                    data: JSON.stringify(data_post),
                     success: function (result) {
                         var aaa = result;
                         var html = "";
                         html = html + "<h3>" + aaa[0].customerName + "</h3>"
                         aaa.forEach(function (element) {
+                            if (element.holidayName != "") {
+                                html = html + "<b> " + element.holidayName + " - </b>"
+                            }
+
+                            if (element.weekendName != "") {
+                                html = html + "<b> " + element.weekendName + " - </b>"
+                            }
                             html = html +
                                 "<b>Date : </b>" + element.loggingTime.slice(0, 10).replace(/-/g, "/") + "<br/>" +
                              "<b>Solar Consumption : </b>" + element.solarGeneratedConsumption +
@@ -4056,19 +4069,19 @@
                 var type = $("#type").val()
                 var filter = $("input[name='filter']:checked").val();
                 var metertype = $("#metertype").val();
-                var data_post = {}
+                var data_post = {};
                 if (start.value() != null && end.value() != null) {
                     data_post.StartDate = start.value().toISOString()
                     data_post.EndDate = end.value().toISOString()
                 }
                 if (!type == "") {
-                    data_post.CustomerType = type
+                    data_post.CustomerType = type;
                 }
                 if (!filter == "") {
-                    data_post.Filter = filter
+                    data_post.Filter = filter;
                 }
                 if (!metertype == "") {
-                    data_post.MeterTypeId = metertype
+                    data_post.MeterTypeId = metertype;
                 }
                 if ((start.value() == null || end.value() == null) && !filter == "") {
                     alert("Pease select Start and end date");
@@ -4076,9 +4089,14 @@
                 }
                 if (!$.isEmptyObject(data_post)) {
                     $.ajax({
-                        url: "/api/heatmap",
+                        url: '/api/heatmap',
                         type: 'post',
-                        data: data_post,
+                        dataType: 'json',
+                        headers: {
+                            "content-type": "application/json",
+                            "cache-control": "no-cache",
+                        },
+                        data: JSON.stringify(data_post),
                         success: function (result) {
                             data = result;
                             console.log(data);
