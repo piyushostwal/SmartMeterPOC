@@ -15,12 +15,14 @@ namespace Nop.Data.Mapping.SmartMeterLogs
             this.HasKey(c => c.Id);
             this.Property(u => u.DeviceID);
             this.Property(u => u.Consumption);
-            this.Property(u => u.Reading);            
+            this.Property(u => u.Reading);
             this.Property(u => u.CustomerId);
-            this.Property(u => u.Lattitude);
-            this.Property(u => u.Longitude);
-            this.Property(u => u.MeterType);
-            this.Property(u=>u.SolarGeneratedUnits);            
+            //this.Property(u => u.Lattitude);
+            //this.Property(u => u.Longitude);
+            //this.Property(u => u.MeterType);
+            this.Property(u => u.SolarGeneratedUnits);
+            this.Property(u => u.LoggingTime);
+
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Nop.Core.Domain.SmartMeterLogs
         public string MeterType { get; set; }
         public int Consumption { get; set; }
         public int Reading { get; set; }
-        
-        //public int SolarGeneratedUnits { get; set; }
+
+        public int SolarGeneratedUnits { get; set; }
     }
 }
