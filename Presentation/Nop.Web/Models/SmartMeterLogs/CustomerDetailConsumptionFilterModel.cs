@@ -9,8 +9,9 @@ namespace Nop.Web.Models.SmartMeterLogs
     public class CustomerDetailConsumptionFilterModel : BaseNopModel
     {
         public Guid DeviceID { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public string Filter { get; set; }
+        public int? TimeInterval { get; set; }
     }
 }
