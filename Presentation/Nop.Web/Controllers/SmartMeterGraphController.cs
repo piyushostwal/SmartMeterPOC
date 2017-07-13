@@ -81,6 +81,7 @@ namespace Nop.Web.Controllers
         [Route("api/customer/graph")]
         public IHttpActionResult GetCustomerGraphData(SmartMeterLogCustomerGraphModel filterModel)
         {
+            if (filterModel == null) return BadRequest();
             IPagedList<SmartMeterLogByTimeInterval> meterlogs = GetCustomerLogsFromService(filterModel.TimeInterval, filterModel.CustomerID, filterModel.TimeIntervalDate);
             var formattedList = meterlogs.GroupBy(l => l.DeviceID, (key, g) =>
                 new
@@ -97,6 +98,7 @@ namespace Nop.Web.Controllers
         [Route("api/heatmap")]
         public IHttpActionResult GetHeatMapData(SmartMeterLogHeatMapModel heatMapModel)
         {
+            if (heatMapModel == null) return BadRequest();
             var data = GetCustomerLogsByLocation(heatMapModel);
             var allCustomers = data.Select(c => c.CustomerId).ToArray();
             var customersObjs = _customerService.GetCustomersByIds(allCustomers);
@@ -122,6 +124,7 @@ namespace Nop.Web.Controllers
         [Route("api/customerdetailconsumption")]
         public IHttpActionResult GetCustomerdetailconsumption(CustomerDetailConsumptionFilterModel filterModel)
         {
+            if (filterModel == null) return BadRequest();
             var data = GetCustomerLogsByDeviceId(filterModel);
             var allCustomers = data.Select(c => c.CustomerId).ToArray();
             var customersObjs = _customerService.GetCustomersByIds(allCustomers);
