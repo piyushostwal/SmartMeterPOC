@@ -86,8 +86,8 @@ namespace Nop.Web.Controllers
                 new
                 {
                     deviceId = key,
-                    consumptionList = g.Select(l => new ConsumptionList() { Consumption = l.Consumption, LoggingTime = l.LoggingTime }),
-                    solarGeneratedUnitsList = g.Select(l => new SolarGeneratedUnitsList() { LoggingTime = l.LoggingTime, SolarGeneratedUnits = l.SolarGeneratedUnits })
+                    consumptionList = g.Select(l => new ConsumptionList() { Consumption = l.Consumption, LoggingTime = l.LoggingTime }).OrderBy(l => l.LoggingTime),
+                    solarGeneratedUnitsList = g.Select(l => new SolarGeneratedUnitsList() { LoggingTime = l.LoggingTime, SolarGeneratedUnits = l.SolarGeneratedUnits }).OrderBy(l => l.LoggingTime)
                 }).ToList();
 
             return Ok(formattedList);
@@ -109,7 +109,7 @@ namespace Nop.Web.Controllers
                 DeviceId = d.DeviceID,
                 Lattitude = d.Lattitude,
                 Longitude = d.Lattitude,
-                MeterType = d.MeterType,
+                MeterType = d.Consumption > 100000 ? d.MeterType + " - High Consumption" : d.MeterType,
                 Reading = d.Reading,
                 CustomerName = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.name).FirstOrDefault(),
                 CustomerAddress = customerFiltered.Where(c => c.customerId == d.CustomerId).Select(c => c.address).FirstOrDefault(),
@@ -117,32 +117,13 @@ namespace Nop.Web.Controllers
             return Ok(formattedData);
         }
 
-        // GET api/smartmetergraph
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpPost]
+        //[Route("api/customerdetailconsumption")]
+        //public IHttpActionResult GetCustomerdetailconsumption(CustomerDetailConsumptionFilterModel filterModel)
+        //{
 
-        // GET api/smartmetergraph/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/smartmetergraph
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/smartmetergraph/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/smartmetergraph/5
-        public void Delete(int id)
-        {
-        }
+        //    return Ok();
+        //}
 
         #region private methods
 
@@ -190,7 +171,7 @@ namespace Nop.Web.Controllers
                     return null;
             }
         }
-        
+
         #endregion
     }
 }
